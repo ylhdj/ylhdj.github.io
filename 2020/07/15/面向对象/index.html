@@ -92,6 +92,8 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
     }
 }
 &lt;!--￼<span class="number">0</span>--&gt;
+
+
 </code></pre>
 </li>
 </ul>
@@ -112,6 +114,8 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
     }
 })
 &lt;!--￼<span class="number">1</span>--&gt;
+
+
 </code></pre>
 </li>
 </ul>
@@ -127,6 +131,8 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
 变量.value  <span class="comment">// 1</span>
 变量.enumerable  <span class="comment">// false</span>
 &lt;!--￼<span class="number">2</span>--&gt;
+
+
 </code></pre>
 </li>
 </ul>
@@ -146,6 +152,8 @@ person1.constructor == Person <span class="comment">//true</span>
 person1 <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span>
 person1 <span class="keyword">instanceof</span> Person <span class="comment">// true</span>
 &lt;!--￼<span class="number">3</span>--&gt;
+
+
 </code></pre>
 </li>
 </ul>
@@ -160,6 +168,8 @@ Person.prototype.sayName=<span class="function"><span class="keyword">function</
 <span class="keyword">var</span> person1=<span class="keyword">new</span> Person()
 person1.sayName() <span class="comment">// 'a'</span>
 &lt;!--￼<span class="number">4</span>--&gt;
+
+
 </code></pre>
 </li>
 </ul>
@@ -217,6 +227,8 @@ newObj.newItemB = <span class="string">'newItemB'</span>
 <span class="keyword">var</span> result = <span class="built_in">Object</span>.getOwnPropertyNames(newObj)
 <span class="built_in">console</span>.log(result) <span class="comment">// ['newItemA','newItemB']</span>
 &lt;!--￼<span class="number">5</span>--&gt;
+
+
 </code></pre>
 </li>
 </ul>
@@ -237,6 +249,8 @@ Person.prototype={
 a.name <span class="comment">// 在旧原型上寻找  'a'</span>
 a.sayName() <span class="comment">// 报错</span>
 &lt;!--￼<span class="number">6</span>--&gt;
+
+
 </code></pre>
 </li>
 </ul>
@@ -254,6 +268,8 @@ Person.prototype={
 }
 <span class="keyword">var</span> p1=<span class="keyword">new</span> Person(<span class="string">''</span>,<span class="number">2</span>)
 &lt;!--￼<span class="number">7</span>--&gt;
+
+
 </code></pre>
 </li>
 </ul>
@@ -273,6 +289,8 @@ Person.prototype={
 a <span class="keyword">instanceof</span> Person <span class="comment">//false</span>
 a.prototype==Person.prototype <span class="comment">// false</span>
 &lt;!--￼<span class="number">8</span>--&gt;
+
+
 </code></pre>
 </li>
 </ul>
@@ -306,6 +324,8 @@ alert(instance.getSuperValue()); <span class="comment">// true</span>
 
 <span class="comment">// 给原型添加的代码一定要放在替换原型的语句之后</span>
 &lt;!--￼<span class="number">9</span>--&gt;
+
+
 </code></pre>
 </li>
 </ul>
@@ -341,6 +361,8 @@ alert(instance2.colors); <span class="comment">//"red,blue,green" </span>
 instance2.sayName(); <span class="comment">//"Greg"; </span>
 instance2.sayAge(); <span class="comment">//27</span>
 &lt;!--￼<span class="number">10</span>--&gt;
+
+
 </code></pre>
 </li>
 </ul>
