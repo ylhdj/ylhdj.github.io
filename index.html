@@ -517,16 +517,18 @@ SuperType.prototype.sayName = <span class="function"><span class="keyword">funct
     alert(<span class="keyword">this</span>.name);
 }; 
 <span class="function"><span class="keyword">function</span> <span class="title">SubType</span>(<span class="params">name, age</span>)</span>{ 
-    <span class="comment">//继承属性</span>
-    SuperType.call(<span class="keyword">this</span>, name); 
+    <span class="comment">// 继承属性</span>
+    SuperType.call(<span class="keyword">this</span>, name);  
      <span class="keyword">this</span>.age = age; 
 } 
-<span class="comment">//继承方法</span>
+<span class="comment">// 继承方法 产生联系（constructor prototype）</span>
 SubType.prototype = <span class="keyword">new</span> SuperType(); 
 SubType.prototype.constructor = SubType; 
+<span class="comment">// 添加自己独有的方法</span>
 SubType.prototype.sayAge = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{ 
     alert(<span class="keyword">this</span>.age); 
 }; 
+<span class="comment">// 创建两个实例验证</span>
 <span class="keyword">var</span> instance1 = <span class="keyword">new</span> SubType(<span class="string">"Nicholas"</span>, <span class="number">29</span>); 
 instance1.colors.push(<span class="string">"black"</span>); 
 alert(instance1.colors); <span class="comment">//"red,blue,green,black" </span>
@@ -549,6 +551,7 @@ instance2.sayAge(); <span class="comment">//27</span>
     }
     <span class="keyword">return</span> clone; <span class="comment">// 返回这个对象</span>
 }
+<span class="comment">// 继承了传入对象的属性与方法 并且为其添加了新的属性或方法</span>
 &lt;!--￼<span class="number">11</span>--&gt;
 
 
