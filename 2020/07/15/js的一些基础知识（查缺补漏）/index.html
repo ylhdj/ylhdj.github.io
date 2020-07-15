@@ -123,13 +123,14 @@
 <span class="comment">// 使用 Object.assign(对象1,对象2,...)  返回合并后的对象1 将后面的对象的所有可枚举属性复制到对象1中  如果有同名对象 以后面的对象为准 如果不是对象 会转成对象返回 </span>
 <span class="keyword">const</span> food = { <span class="attr">beef</span>: <span class="string">'牛排'</span>, <span class="attr">bacon</span>: <span class="string">'咸肉'</span> }
 <span class="keyword">const</span> cloneFood = <span class="built_in">Object</span>.assign({}, food);
-&lt;!--￼<span class="number">2</span>--&gt;
-
-
-</code></pre>
+&lt;!--￼<span class="number">2</span>--&gt;</code></pre>
+</li>
+<li><p>属性和方法相同  但没有关联</p>
 </li>
 </ul>
 <h2 id="this指向"><a href="#this指向" class="headerlink" title="this指向"></a>this指向</h2><h3 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h3><ul>
+<li><p>回调函数或直接调用</p>
+</li>
 <li><pre><code class="javascript"><span class="comment">// 一般发生在回调函数中或函数直接调用</span>
 <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>{
     <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//window 或 严格模式下是undefined</span>
@@ -150,6 +151,8 @@ arr.forEach(<span class="function"><span class="keyword">function</span>(<span c
 </li>
 </ul>
 <h3 id="显示绑定（call-apply-bind）"><a href="#显示绑定（call-apply-bind）" class="headerlink" title="显示绑定（call,apply,bind）"></a>显示绑定（call,apply,bind）</h3><ul>
+<li><p>指定this</p>
+</li>
 <li><pre><code class="javascript">    <span class="keyword">const</span> obj1 = {
         name:<span class="string">'joy'</span>,
         getName(){
@@ -180,6 +183,8 @@ arr.forEach(<span class="function"><span class="keyword">function</span>(<span c
 </li>
 </ul>
 <h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><ul>
+<li><p>箭头函数中this的特点</p>
+</li>
 <li><pre><code class="javascript">    <span class="built_in">window</span>.name = <span class="string">'win'</span>;
     <span class="keyword">const</span> obj1 = {
         name: <span class="string">'joy'</span>,

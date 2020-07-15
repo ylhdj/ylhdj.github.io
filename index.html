@@ -115,13 +115,14 @@
 <span class="comment">// 使用 Object.assign(对象1,对象2,...)  返回合并后的对象1 将后面的对象的所有可枚举属性复制到对象1中  如果有同名对象 以后面的对象为准 如果不是对象 会转成对象返回 </span>
 <span class="keyword">const</span> food = { <span class="attr">beef</span>: <span class="string">'牛排'</span>, <span class="attr">bacon</span>: <span class="string">'咸肉'</span> }
 <span class="keyword">const</span> cloneFood = <span class="built_in">Object</span>.assign({}, food);
-&lt;!--￼<span class="number">2</span>--&gt;
-
-
-</code></pre>
+&lt;!--￼<span class="number">2</span>--&gt;</code></pre>
+</li>
+<li><p>属性和方法相同  但没有关联</p>
 </li>
 </ul>
 <h2 id="this指向"><a href="#this指向" class="headerlink" title="this指向"></a>this指向</h2><h3 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h3><ul>
+<li><p>回调函数或直接调用</p>
+</li>
 <li><pre><code class="javascript"><span class="comment">// 一般发生在回调函数中或函数直接调用</span>
 <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>{
     <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//window 或 严格模式下是undefined</span>
@@ -142,6 +143,8 @@ arr.forEach(<span class="function"><span class="keyword">function</span>(<span c
 </li>
 </ul>
 <h3 id="显示绑定（call-apply-bind）"><a href="#显示绑定（call-apply-bind）" class="headerlink" title="显示绑定（call,apply,bind）"></a>显示绑定（call,apply,bind）</h3><ul>
+<li><p>指定this</p>
+</li>
 <li><pre><code class="javascript">    <span class="keyword">const</span> obj1 = {
         name:<span class="string">'joy'</span>,
         getName(){
@@ -172,6 +175,8 @@ arr.forEach(<span class="function"><span class="keyword">function</span>(<span c
 </li>
 </ul>
 <h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><ul>
+<li><p>箭头函数中this的特点</p>
+</li>
 <li><pre><code class="javascript">    <span class="built_in">window</span>.name = <span class="string">'win'</span>;
     <span class="keyword">const</span> obj1 = {
         name: <span class="string">'joy'</span>,
@@ -222,17 +227,16 @@ arr.forEach(<span class="function"><span class="keyword">function</span>(<span c
         <p>[TOC]</p>
 <h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><ul>
 <li><code>JSON</code>的语法可以表示为以下三种类型的值</li>
-<li>简单值：使用与<code>JavaScript</code>相同的语法  可以再JSON中表示字符串、数值、布尔值、<code>null</code>  但<code>JSON</code>不支持<code>undefined</code></li>
+<li>简单值：使用与<code>JavaScript</code>相同的语法  可以在<code>JSON</code>中表示字符串、数值、布尔值、<code>null</code>  但<code>JSON</code>不支持<code>undefined</code></li>
 <li>对象：对象表示一组无序的键值对  每个键对应的值可以是简单值  也可以是复杂的数据类型</li>
 <li>数组：数组表示一组有序的值的列表  可以通过数值索引来访问其中的值  数组的值也可以是任意类型</li>
 <li>JSON不支持变量、函数、对象实例  它是一种表示结构化数据的格式</li>
 </ul>
 <h4 id="简单值"><a href="#简单值" class="headerlink" title="简单值"></a>简单值</h4><ul>
 <li><pre><code class="json">'hello' 1 
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 对象</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;json</span><br><span class="line">  &#x2F;&#x2F; JSON没有变量声明  没有分号  对象的属性必须加双引号  同一个对象不可以出现两个同名属性</span><br><span class="line">  &#123;</span><br><span class="line">      &quot;name&quot;: &quot;a&quot;,</span><br><span class="line">      &quot;age&quot;: 10,</span><br><span class="line">      &quot;school&quot;: &#123;</span><br><span class="line">          &quot;name&quot;: &quot;nhzx&quot;,</span><br><span class="line">          &quot;location&quot;: &quot;nh&quot;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-</code></pre>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- 字符串、数值、布尔值、&#96;null&#96;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#### 对象</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;json</span><br><span class="line">  &#x2F;&#x2F; JSON没有变量声明  没有分号  </span><br><span class="line">  &#123;</span><br><span class="line">      &quot;name&quot;: &quot;a&quot;,</span><br><span class="line">      &quot;age&quot;: 10,</span><br><span class="line">      &quot;school&quot;: &#123;</span><br><span class="line">          &quot;name&quot;: &quot;nhzx&quot;,</span><br><span class="line">          &quot;location&quot;: &quot;nh&quot;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></code></pre>
+</li>
+<li><p>对象的属性必须加双引号  同一个对象不可以出现两个同名属性</p>
 </li>
 </ul>
 <h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><ul>
@@ -241,7 +245,7 @@ arr.forEach(<span class="function"><span class="keyword">function</span>(<span c
     {},
     ...
 ]
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 解析与序列化</span><br><span class="line"></span><br><span class="line">- &#96;JSON&#96;可以解析为JavaScript对象  可以简单地提取数据</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; JSON.stringify(序列化的对象,过滤器,选项) 将对象序列化为JSON字符串</span><br><span class="line">  &#x2F;&#x2F; 过滤器可以是数组（结果只返回数组中列出且对象中有的属性）  也可以是函数（详见下例）</span><br><span class="line">  &#x2F;&#x2F; 选项可以是数值（代表缩进的空格数 先换行后缩进）  也可以是字符串（字符串内可以是制表符或多段- 该字符会替代空格作为缩进前的字符）</span><br><span class="line">  &#x2F;&#x2F; 在序列化js对象时 所有函数、原型成员、值为undefined的属性都会被忽略  </span><br><span class="line">  var 序列化对象&#x3D;&#123;</span><br><span class="line">      &quot;属性1&quot;: 值1，</span><br><span class="line">      &quot;属性2&quot;: 值2</span><br><span class="line">  &#125;</span><br><span class="line">  var 变量&#x3D;JSON.stringify(序列化的对象,function(key,value)&#123;</span><br><span class="line">      switch(key)&#123;</span><br><span class="line">          case &quot;属性1&quot;:</span><br><span class="line">              return 值3;</span><br><span class="line">          case &quot;属性2&quot;:</span><br><span class="line">              return 值4;</span><br><span class="line">          ...</span><br><span class="line">          &#x2F;&#x2F; 遍历对象 每次遍历调用该函数</span><br><span class="line">          &#x2F;&#x2F; key为序列化对象的键名  value为键对应的值</span><br><span class="line">          &#x2F;&#x2F; 当次的返回值为对应键的值</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(变量) &#x2F;&#x2F; &#123;&quot;属性1&quot;: 值3，&quot;属性2&quot;: 值4&#125;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; toJSON()  可以在序列化对象中定义一个toJSON的方法  当序列化该对象时 只会调用toJSON方法  该方法的返回值为结果</span><br><span class="line">  var 序列化对象&#x3D;&#123;</span><br><span class="line">      toJSON: function()&#123;</span><br><span class="line">          return &#39;a&#39;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  var 变量&#x3D;JSON.stringify(序列化对象)</span><br><span class="line">  console.log(变量) &#x2F;&#x2F; &quot;a&quot;</span><br><span class="line">      </span><br><span class="line">  &#x2F;&#x2F; 序列化对象的顺序  （1）如果存在toJSON()方法且可以返回值  调用该方法 否则返回对象本身</span><br><span class="line">  &#x2F;&#x2F; （2）如果提供了过滤器  将（1）中的返回值传入函数过滤器中或根据数组过滤器进行序列化</span><br><span class="line">  &#x2F;&#x2F; （3）如果为函数过滤器  则对（2）返回的每个值进行序列化</span><br><span class="line">  &#x2F;&#x2F; （4）如果提供第三个参数  执行相应的格式化</span><br><span class="line">      </span><br><span class="line">  &#x2F;&#x2F; JSON.parse(JSON值,函数过滤器)  将JSON字符串解析为原生js值  函数过滤器与上述相同</span><br><span class="line">  var 变量&#x3D;JSON.parse(JSON值,function(key,value)&#123;</span><br><span class="line">      ...</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- 数组的值也可以是任意类型</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 解析与序列化</span><br><span class="line"></span><br><span class="line">- &#96;JSON&#96;可以解析为JavaScript对象  可以简单地提取数据</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; JSON.stringify(序列化的对象,过滤器,选项) 将对象序列化为JSON字符串</span><br><span class="line">  &#x2F;&#x2F; 过滤器可以是数组（结果只返回数组中列出且对象中有的属性）  也可以是函数（详见下例）</span><br><span class="line">  &#x2F;&#x2F; 选项可以是数值（代表缩进的空格数 先换行后缩进）  也可以是字符串（字符串内可以是制表符或多段- 该字符会替代空格作为缩进前的字符）</span><br><span class="line">  &#x2F;&#x2F; 在序列化js对象时 所有函数、原型成员、值为undefined的属性都会被忽略  </span><br><span class="line">  var 序列化对象&#x3D;&#123;</span><br><span class="line">      &quot;属性1&quot;: 值1，</span><br><span class="line">      &quot;属性2&quot;: 值2</span><br><span class="line">  &#125;</span><br><span class="line">  var 变量&#x3D;JSON.stringify(序列化的对象,function(key,value)&#123;</span><br><span class="line">      switch(key)&#123;</span><br><span class="line">          case &quot;属性1&quot;:</span><br><span class="line">              return 值3;</span><br><span class="line">          case &quot;属性2&quot;:</span><br><span class="line">              return 值4;</span><br><span class="line">          ...</span><br><span class="line">          &#x2F;&#x2F; 遍历对象 每次遍历调用该函数</span><br><span class="line">          &#x2F;&#x2F; key为序列化对象的键名  value为键对应的值</span><br><span class="line">          &#x2F;&#x2F; 当次的返回值为对应键的值</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(变量) &#x2F;&#x2F; &#123;&quot;属性1&quot;: 值3，&quot;属性2&quot;: 值4&#125;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; toJSON()  可以在序列化对象中定义一个toJSON的方法  当序列化该对象时 只会调用toJSON方法  该方法的返回值为结果</span><br><span class="line">  var 序列化对象&#x3D;&#123;</span><br><span class="line">      toJSON: function()&#123;</span><br><span class="line">          return &#39;a&#39;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  var 变量&#x3D;JSON.stringify(序列化对象)</span><br><span class="line">  console.log(变量) &#x2F;&#x2F; &quot;a&quot;</span><br><span class="line">      </span><br><span class="line">  &#x2F;&#x2F; 序列化对象的顺序  （1）如果存在toJSON()方法且可以返回值  调用该方法 否则返回对象本身</span><br><span class="line">  &#x2F;&#x2F; （2）如果提供了过滤器  将（1）中的返回值传入函数过滤器中或根据数组过滤器进行序列化</span><br><span class="line">  &#x2F;&#x2F; （3）如果为函数过滤器  则对（2）返回的每个值进行序列化</span><br><span class="line">  &#x2F;&#x2F; （4）如果提供第三个参数  执行相应的格式化</span><br><span class="line">      </span><br><span class="line">  &#x2F;&#x2F; JSON.parse(JSON值,函数过滤器)  将JSON字符串解析为原生js值  函数过滤器与上述相同</span><br><span class="line">  var 变量&#x3D;JSON.parse(JSON值,function(key,value)&#123;</span><br><span class="line">      ...</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
 
 
 </code></pre>
@@ -263,7 +267,7 @@ arr.forEach(<span class="function"><span class="keyword">function</span>(<span c
 
 
 
-  <article id="w-面向对象" class="h-entry w" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-面向对象" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
@@ -304,6 +308,8 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
 </li>
 </ul>
 <h5 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h5><ul>
+<li><p>对象属性的某些性质</p>
+</li>
 <li><pre><code class="javascript"><span class="keyword">var</span> 对象={}
 <span class="built_in">Object</span>.defineProperty(对象,<span class="string">'属性'</span>,{
   <span class="comment">// 表示能否通过delete删除属性 能否修改属性的特性 能否把属性修改为访问器属性  默认 true</span>
@@ -326,6 +332,8 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
 </li>
 </ul>
 <h4 id="读取属性的特性"><a href="#读取属性的特性" class="headerlink" title="读取属性的特性"></a>读取属性的特性</h4><ul>
+<li><p>读取属性的特性</p>
+</li>
 <li><pre><code class="javascript"><span class="keyword">var</span> 对象={}
 <span class="built_in">Object</span>.defineProperties(对象, {
     属性<span class="number">1</span>: {
@@ -343,6 +351,8 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
 </li>
 </ul>
 <h4 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h4><ul>
+<li><p>解决了工厂模式不可以识别对象的问题</p>
+</li>
 <li><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>{
     <span class="keyword">this</span>.name=name
     <span class="keyword">this</span>.age=age
@@ -364,13 +374,15 @@ person1 <span class="keyword">instanceof</span> Person <span class="comment">// 
 </li>
 </ul>
 <h4 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h4><ul>
+<li><p>原型模式解决了构造函数模式创建方法指向不同的问题</p>
+</li>
 <li><pre><code class="javascript"><span class="comment">// 每一个构造函数都有一个prototype属性  这个属性是一个指针  指向一个对象</span>
 <span class="comment">// 原型对像包含了可以由特定类型的所有实例共享的属性和方法</span>
 <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>{}
-Person.prototype.name=<span class="string">'a'</span>
-Person.prototype.sayName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
-    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)
-}
+    Person.prototype.name=<span class="string">'a'</span>
+    Person.prototype.sayName=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+        <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)
+    }
 <span class="keyword">var</span> person1=<span class="keyword">new</span> Person()
 person1.sayName() <span class="comment">// 'a'</span>
 &lt;!--￼<span class="number">4</span>--&gt;
@@ -380,6 +392,8 @@ person1.sayName() <span class="comment">// 'a'</span>
 </li>
 </ul>
 <h5 id="原型与in操作符（包含对象的枚举）"><a href="#原型与in操作符（包含对象的枚举）" class="headerlink" title="原型与in操作符（包含对象的枚举）"></a>原型与in操作符（包含对象的枚举）</h5><ul>
+<li><p>一些性质</p>
+</li>
 <li><pre><code class="javascript"><span class="string">'属性'</span> <span class="keyword">in</span> 对象 <span class="comment">// 只有该对象或原型对象上有该属性（只要通过对象能访问到该属性） 则返回true</span>
 对象.hasOwnProperty(<span class="string">'属性'</span>) <span class="comment">// 只有当该对象上有该属性时 才会返回true</span>
 <span class="comment">// 利用这两个方法  可以判断出 该属性是在原型上还是在实例上或者都没有</span>
@@ -439,6 +453,8 @@ newObj.newItemB = <span class="string">'newItemB'</span>
 </li>
 </ul>
 <h5 id="原型的动态性"><a href="#原型的动态性" class="headerlink" title="原型的动态性"></a>原型的动态性</h5><ul>
+<li><p>创建实例后  修改原型带来的问题</p>
+</li>
 <li><pre><code class="javascript"><span class="comment">// 在创建实例后  为原型增加或删除属性/方法 不会影响实例与原型的关系（同样共享属性方法）</span>
 <span class="comment">// 创建实例后  将原型对象修改为另一个对象 会出现问题（新原型与实例没有任何关系 旧原型仍保持原有的属性与方法 实例指向的是旧原型）</span>
 <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>{
@@ -461,6 +477,8 @@ a.sayName() <span class="comment">// 报错</span>
 </li>
 </ul>
 <h4 id="组合使用构造函数与原型"><a href="#组合使用构造函数与原型" class="headerlink" title="组合使用构造函数与原型"></a>组合使用构造函数与原型</h4><ul>
+<li><p>更好地设置实例属性  共享方法</p>
+</li>
 <li><pre><code class="javascript"><span class="comment">// 正确做法</span>
 <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>{
     <span class="keyword">this</span>.name=name
@@ -480,6 +498,8 @@ Person.prototype={
 </li>
 </ul>
 <h4 id="寄生构造函数模式"><a href="#寄生构造函数模式" class="headerlink" title="寄生构造函数模式"></a>寄生构造函数模式</h4><ul>
+<li><p>除了使用new操作符外  与工厂模式一致</p>
+</li>
 <li><pre><code class="javascript"><span class="comment">// 在可以使用其他模式时不要使用这种模式</span>
 <span class="comment">// 返回的对象与构造函数或者构造函数的原型之间没有关系</span>
 <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>{
@@ -492,7 +512,7 @@ Person.prototype={
     <span class="keyword">return</span> o
 }
 <span class="keyword">var</span> a=<span class="keyword">new</span> Person(<span class="string">''</span>,<span class="number">1</span>)
-a <span class="keyword">instanceof</span> Person <span class="comment">//false</span>
+a <span class="keyword">instanceof</span> Person <span class="comment">// false</span>
 a.prototype==Person.prototype <span class="comment">// false</span>
 &lt;!--￼<span class="number">8</span>--&gt;
 
@@ -505,6 +525,8 @@ a.prototype==Person.prototype <span class="comment">// false</span>
 <li>JavaScript只支持实现继承</li>
 </ul>
 <h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><ul>
+<li><p>实现继承的基础</p>
+</li>
 <li><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>)</span>{ 
     <span class="keyword">this</span>.property = <span class="literal">true</span>; 
 }
@@ -536,6 +558,8 @@ alert(instance.getSuperValue()); <span class="comment">// true</span>
 </li>
 </ul>
 <h4 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h4><ul>
+<li><p>继承属性及方法</p>
+</li>
 <li><pre><code class="JavaScript"><span class="comment">// 常用的继承模式</span>
 <span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params">name</span>)</span>{ 
     <span class="keyword">this</span>.name = name; 
@@ -573,6 +597,8 @@ instance2.sayAge(); <span class="comment">//27</span>
 </li>
 </ul>
 <h4 id="寄生式继承"><a href="#寄生式继承" class="headerlink" title="寄生式继承"></a>寄生式继承</h4><ul>
+<li><p>继承属性及方法  还可以添加新的属性和方法</p>
+</li>
 <li><pre><code class="javascript"><span class="comment">// 创建一种用于封装继承过程的函数  在函数内部以某种方式来增强对象</span>
 <span class="function"><span class="keyword">function</span> <span class="title">createAnother</span>(<span class="params">original</span>)</span>{ 
     <span class="keyword">var</span> clone = <span class="built_in">Object</span>.creat(original); <span class="comment">// 通过调用函数创建一个新对象(可以使用任何能够返回新对象的方式 这里只是一个例子)</span>
