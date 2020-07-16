@@ -7,15 +7,15 @@
   
   <title>js的一些基础知识（查缺补漏） | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] 异步加载 &#x2F;&#x2F; defer  异步加载，但要等到dom文档全部解析完才会被执行 &lt;script type&#x3D;&quot;text&#x2F;javascript&quot; defer&#x3D;&quot;defer&quot;&gt;  &#x2F;&#x2F;代码区 &lt;&#x2F;script&gt;   &#x2F;&#x2F; async  步加载，加载完就执行，async只能加载外部脚本，不能把js写在script 标签里。 &lt;script type&#x3D;&quot;text&#x2F;j">
+  <meta name="description" content="[TOC] 异步加载  &#x2F;&#x2F; defer  异步加载，但要等到dom文档全部解析完才会被执行 &lt;script type&#x3D;&quot;text&#x2F;javascript&quot; defer&#x3D;&quot;defer&quot;&gt;  &#x2F;&#x2F;代码区 &lt;&#x2F;script&gt;   &#x2F;&#x2F; async  步加载，加载完就执行，async只能加载外部脚本，不能把js写在script 标签里。 &lt;script type&#x3D;&quot;text&#x2F;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js的一些基础知识（查缺补漏）">
 <meta property="og:url" content="http://yoursite.com/2020/07/15/js%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%EF%BC%88%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F%EF%BC%89/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[TOC] 异步加载 &#x2F;&#x2F; defer  异步加载，但要等到dom文档全部解析完才会被执行 &lt;script type&#x3D;&quot;text&#x2F;javascript&quot; defer&#x3D;&quot;defer&quot;&gt;  &#x2F;&#x2F;代码区 &lt;&#x2F;script&gt;   &#x2F;&#x2F; async  步加载，加载完就执行，async只能加载外部脚本，不能把js写在script 标签里。 &lt;script type&#x3D;&quot;text&#x2F;j">
+<meta property="og:description" content="[TOC] 异步加载  &#x2F;&#x2F; defer  异步加载，但要等到dom文档全部解析完才会被执行 &lt;script type&#x3D;&quot;text&#x2F;javascript&quot; defer&#x3D;&quot;defer&quot;&gt;  &#x2F;&#x2F;代码区 &lt;&#x2F;script&gt;   &#x2F;&#x2F; async  步加载，加载完就执行，async只能加载外部脚本，不能把js写在script 标签里。 &lt;script type&#x3D;&quot;text&#x2F;">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-07-15T01:47:06.000Z">
-<meta property="article:modified_time" content="2020-07-16T01:19:48.245Z">
+<meta property="article:modified_time" content="2020-07-16T01:37:38.082Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="JavaScript">
 <meta name="twitter:card" content="summary">
@@ -91,14 +91,16 @@
       
         <p>[TOC]</p>
 <h2 id="异步加载"><a href="#异步加载" class="headerlink" title="异步加载"></a>异步加载</h2><ul>
-<li><pre><code class="html">// defer  异步加载，但要等到dom文档全部解析完才会被执行
+<li><pre><code class="html">
+// defer  异步加载，但要等到dom文档全部解析完才会被执行
 <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">defer</span>=<span class="string">"defer"</span>&gt;</span> 
 <span class="actionscript"><span class="comment">//代码区</span></span>
 <span class="tag">&lt;/<span class="name">script</span>&gt;</span> 
 
 // async  步加载，加载完就执行，async只能加载外部脚本，不能把js写在script 标签里。
 <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"demo.js"</span> <span class="attr">async</span>=<span class="string">"async"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> 
-<span class="comment"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- js控制</span><br><span class="line">- &#96;&#96;&#96;JavaScript</span><br><span class="line">  &#x2F;&#x2F; 创建script 插入dom中  加载完毕后callback</span><br><span class="line">  function asyncLoaded(url, callBack) &#123;</span><br><span class="line">          var script &#x3D; document.createElement(&#39;script&#39;);</span><br><span class="line">          script.type &#x3D; &#39;text&#x2F;javascript&#39;;</span><br><span class="line">          if (script.readystate) &#123;&#x2F;&#x2F;兼容IE</span><br><span class="line">              script.onreadystatechange &#x3D; function () &#123;&#x2F;&#x2F;状态改变触发事件</span><br><span class="line">                  if (script.readyState &#x3D;&#x3D; &#39;loaded&#39; || script.readyState &#x3D;&#x3D; &#39;complete&#39;) &#123;</span><br><span class="line">                      callBack();</span><br><span class="line">                      script.onreadystatechange &#x3D; null;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">              script.onload &#x3D; function (e) &#123;</span><br><span class="line">                  callBack();</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          script.src &#x3D; url;</span><br><span class="line">          document.body.appendChild(script);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></span>
+
+<span class="comment"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- js控制</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;JavaScript</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 创建script 插入dom中  加载完毕后callback</span><br><span class="line">  function asyncLoaded(url, callBack) &#123;</span><br><span class="line">          var script &#x3D; document.createElement(&#39;script&#39;);</span><br><span class="line">          script.type &#x3D; &#39;text&#x2F;javascript&#39;;</span><br><span class="line">          if (script.readystate) &#123;&#x2F;&#x2F;兼容IE</span><br><span class="line">              script.onreadystatechange &#x3D; function () &#123;&#x2F;&#x2F;状态改变触发事件</span><br><span class="line">                  if (script.readyState &#x3D;&#x3D; &#39;loaded&#39; || script.readyState &#x3D;&#x3D; &#39;complete&#39;) &#123;</span><br><span class="line">                      callBack();</span><br><span class="line">                      script.onreadystatechange &#x3D; null;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">              script.onload &#x3D; function (e) &#123;</span><br><span class="line">                  callBack();</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          script.src &#x3D; url;</span><br><span class="line">          document.body.appendChild(script);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></span>
 
 
 </code></pre>
@@ -117,7 +119,8 @@
 <li>以异步响应方式处理用户输入，网络事件等。</li>
 </ol>
 <h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><ul>
-<li><pre><code class="javascript"><span class="comment">// 在多人合作中 每个人写的变量名 函数名都各不相同  有可能会造成相互冲突或者污染的问题</span>
+<li><pre><code class="javascript">
+<span class="comment">// 在多人合作中 每个人写的变量名 函数名都各不相同  有可能会造成相互冲突或者污染的问题</span>
 
 <span class="keyword">var</span> 对象=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
     <span class="comment">// 定义变量 方法</span>
@@ -125,6 +128,7 @@
         <span class="comment">// 需要暴露的方法和变量</span>
     }
 }
+
 &lt;!--￼<span class="number">1</span>--&gt;
 
 
@@ -134,7 +138,8 @@
 <h2 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h2><h3 id="浅克隆"><a href="#浅克隆" class="headerlink" title="浅克隆"></a>浅克隆</h3><ul>
 <li><p>= 扩展运算符  Object.create</p>
 </li>
-<li><pre><code class="javascript"><span class="comment">// 使用 = 符号</span>
+<li><pre><code class="javascript">
+<span class="comment">// 使用 = 符号</span>
 <span class="keyword">const</span> obj = {<span class="attr">one</span>: <span class="number">1</span>, <span class="attr">two</span>: <span class="number">2</span>};
 <span class="keyword">const</span> obj2 = obj;
 <span class="comment">// 使用扩展运输符  注意被clone的对象模式（解构赋值可能失败）</span>
@@ -143,6 +148,7 @@
 <span class="comment">// 使用 Object.assign(对象1,对象2,...)  返回合并后的对象1 将后面的对象的所有可枚举属性复制到对象1中  如果有同名对象 以后面的对象为准 如果不是对象 会转成对象返回 </span>
 <span class="keyword">const</span> food = { <span class="attr">beef</span>: <span class="string">'牛排'</span>, <span class="attr">bacon</span>: <span class="string">'咸肉'</span> }
 <span class="keyword">const</span> cloneFood = <span class="built_in">Object</span>.assign({}, food);
+
 &lt;!--￼<span class="number">2</span>--&gt;</code></pre>
 </li>
 <li><p>属性和方法相同  但没有关联</p>
@@ -151,48 +157,64 @@
 <h2 id="this指向"><a href="#this指向" class="headerlink" title="this指向"></a>this指向</h2><h3 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h3><ul>
 <li><p>回调函数或直接调用</p>
 </li>
-<li><p>```javascript<br>// 一般发生在回调函数中或函数直接调用<br>function test() {</p>
-<pre><code>console.log(this); //window 或 严格模式下是undefined</code></pre><p>}</p>
-<p>setTimeout(function () {</p>
-<pre><code>console.log(this); 
-// 都是window</code></pre><p>});</p>
-<p>arr.forEach(function(){</p>
-<pre><code>console.log(this);  //window 或严格模式下是undefined</code></pre><p>});</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">- 注意严格模式与正常模式的不同</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 隐式绑定</span><br><span class="line"></span><br><span class="line">- 作用域</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;JavaScript</span><br><span class="line">  &#x2F;&#x2F; 谁调用就指向谁</span><br><span class="line">  &#x2F;&#x2F; 例1</span><br><span class="line">      const obj &#x3D; &#123;</span><br><span class="line">          name:&#39;joy&#39;,</span><br><span class="line">          getName()&#123;</span><br><span class="line">              console.log(this);  </span><br><span class="line">              console.log(this.name);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      obj.getName(); &#x2F;&#x2F; obj  joy</span><br><span class="line">  &#x2F;&#x2F; 例2</span><br><span class="line">      const obj1 &#x3D; &#123;</span><br><span class="line">          name:&#39;joy&#39;,</span><br><span class="line">          getName()&#123;</span><br><span class="line">              console.log(this); &#x2F;&#x2F;obj</span><br><span class="line">              console.log(this.name); &#x2F;&#x2F;joy</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      const obj2 &#x3D; &#123;</span><br><span class="line">          name:&#39;sam&#39;,</span><br><span class="line">          friend:obj1</span><br><span class="line">      &#125;;</span><br><span class="line">      const obj3 &#x3D; &#123;</span><br><span class="line">          name: &#39;jam&#39;,</span><br><span class="line">          friend:obj2</span><br><span class="line">      &#125;;</span><br><span class="line">      obj3.friend.friend.getName()  &#x2F;&#x2F; obj joy 本质上还是obj1调用的</span><br><span class="line">  &#x2F;&#x2F; 例3</span><br><span class="line">      const obj1 &#x3D; &#123;</span><br><span class="line">          name:&#39;joy&#39;,</span><br><span class="line">          getName()&#123;</span><br><span class="line">              console.log(this); </span><br><span class="line">              console.log(this.name); </span><br><span class="line">          &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">  </span><br><span class="line">      const obj2 &#x3D; &#123;</span><br><span class="line">          name:&#39;sam&#39;,</span><br><span class="line">          getName:obj1.getName</span><br><span class="line">      &#125;;</span><br><span class="line">  </span><br><span class="line">      obj2.getName()  &#x2F;&#x2F; obj2 sam</span><br></pre></td></tr></table></figure></li>
+<li><pre><code class="javascript">
+<span class="comment">// 一般发生在回调函数中或函数直接调用</span>
+<span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>{
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//window 或 严格模式下是undefined</span>
+}
+
+setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>); 
+    <span class="comment">// 都是window</span>
+});
+
+arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">//window 或严格模式下是undefined</span>
+});
+
+&lt;!--￼<span class="number">3</span>--&gt;</code></pre>
+</li>
 <li><p>注意分析是谁调用的</p>
 </li>
 </ul>
 <h3 id="显示绑定（call-apply-bind）"><a href="#显示绑定（call-apply-bind）" class="headerlink" title="显示绑定（call,apply,bind）"></a>显示绑定（call,apply,bind）</h3><ul>
 <li><p>指定this</p>
 </li>
-<li><p>```javascript</p>
-<pre><code>const obj1 = {
-    name:&apos;joy&apos;,
-    getName(){
-        console.log(this); //obj
-        console.log(this.name); //joy
-    }
-};
+<li><pre><code class="javascript">
+    <span class="keyword">const</span> obj1 = {
+        name:<span class="string">'joy'</span>,
+        getName(){
+            <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//obj</span>
+            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name); <span class="comment">//joy</span>
+        }
+    };
 
-const obj2 = {
-    name:&apos;sam&apos;
-};
+    <span class="keyword">const</span> obj2 = {
+        name:<span class="string">'sam'</span>
+    };
 
-obj1.getName.call(obj2); //obj2 sam
-obj1.getName.apply(obj2); //obj2 sam
+    obj1.getName.call(obj2); <span class="comment">//obj2 sam</span>
+    obj1.getName.apply(obj2); <span class="comment">//obj2 sam</span>
 
-const fn = obj1.getName.bind(obj2);
-fn();//obj2 sam</code></pre><p>// call和apply之间就是传参的方式不同</p>
-<pre><code>fn.apply(this,[1,2]); // 不管多少个,都用数组包裹传参
-fn.call(this,1,2); // 一个个参数列出来传</code></pre><p>// call和apply都是即时调用,绑定既是调用,而bind不是,bind会返回绑定后的函数,自行需要的时候再调用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- 在继承时会用到</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### new绑定</span><br><span class="line"></span><br><span class="line">- new</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">      function Vehicle() &#123;</span><br><span class="line">          console.log(this);</span><br><span class="line">      &#125;</span><br><span class="line">      Vehicle(); &#x2F;&#x2F;window</span><br><span class="line">      new Vehicle(); &#x2F;&#x2F; Vehicle这个new出来的对象</span><br></pre></td></tr></table></figure></li>
+    <span class="keyword">const</span> fn = obj1.getName.bind(obj2);
+    fn();<span class="comment">//obj2 sam</span>
+
+<span class="comment">// call和apply之间就是传参的方式不同</span>
+    fn.apply(<span class="keyword">this</span>,[<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">// 不管多少个,都用数组包裹传参</span>
+    fn.call(<span class="keyword">this</span>,<span class="number">1</span>,<span class="number">2</span>); <span class="comment">// 一个个参数列出来传</span>
+
+<span class="comment">// call和apply都是即时调用,绑定既是调用,而bind不是,bind会返回绑定后的函数,自行需要的时候再调用</span>
+
+&lt;!--￼<span class="number">4</span>--&gt;</code></pre>
+</li>
 <li><p>面向对象中有说明new工作的简单过程</p>
 </li>
 </ul>
 <h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><ul>
 <li><p>箭头函数中this的特点</p>
 </li>
-<li><pre><code class="javascript">    <span class="built_in">window</span>.name = <span class="string">'win'</span>;
+<li><pre><code class="javascript">
+    <span class="built_in">window</span>.name = <span class="string">'win'</span>;
     <span class="keyword">const</span> obj1 = {
         name: <span class="string">'joy'</span>,
         getName: <span class="function"><span class="params">()</span> =&gt;</span> {
@@ -203,6 +225,7 @@ fn.call(this,1,2); // 一个个参数列出来传</code></pre><p>// call和apply
     obj1.getName();
 
 <span class="comment">// 当多种方式冲突时 优先级：箭头函数 &gt; new &gt; 显式 &gt; 隐式 &gt; 默认绑定</span>
+
 &lt;!--￼<span class="number">5</span>--&gt;
 </code></pre>
 </li>

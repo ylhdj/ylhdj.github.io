@@ -88,14 +88,16 @@
       
         <p>[TOC]</p>
 <h2 id="异步加载"><a href="#异步加载" class="headerlink" title="异步加载"></a>异步加载</h2><ul>
-<li><pre><code class="html">// defer  异步加载，但要等到dom文档全部解析完才会被执行
+<li><pre><code class="html">
+// defer  异步加载，但要等到dom文档全部解析完才会被执行
 <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">defer</span>=<span class="string">"defer"</span>&gt;</span> 
 <span class="actionscript"><span class="comment">//代码区</span></span>
 <span class="tag">&lt;/<span class="name">script</span>&gt;</span> 
 
 // async  步加载，加载完就执行，async只能加载外部脚本，不能把js写在script 标签里。
 <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"demo.js"</span> <span class="attr">async</span>=<span class="string">"async"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span> 
-<span class="comment"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- js控制</span><br><span class="line">- &#96;&#96;&#96;JavaScript</span><br><span class="line">  &#x2F;&#x2F; 创建script 插入dom中  加载完毕后callback</span><br><span class="line">  function asyncLoaded(url, callBack) &#123;</span><br><span class="line">          var script &#x3D; document.createElement(&#39;script&#39;);</span><br><span class="line">          script.type &#x3D; &#39;text&#x2F;javascript&#39;;</span><br><span class="line">          if (script.readystate) &#123;&#x2F;&#x2F;兼容IE</span><br><span class="line">              script.onreadystatechange &#x3D; function () &#123;&#x2F;&#x2F;状态改变触发事件</span><br><span class="line">                  if (script.readyState &#x3D;&#x3D; &#39;loaded&#39; || script.readyState &#x3D;&#x3D; &#39;complete&#39;) &#123;</span><br><span class="line">                      callBack();</span><br><span class="line">                      script.onreadystatechange &#x3D; null;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">              script.onload &#x3D; function (e) &#123;</span><br><span class="line">                  callBack();</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          script.src &#x3D; url;</span><br><span class="line">          document.body.appendChild(script);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></span>
+
+<span class="comment"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- js控制</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;JavaScript</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 创建script 插入dom中  加载完毕后callback</span><br><span class="line">  function asyncLoaded(url, callBack) &#123;</span><br><span class="line">          var script &#x3D; document.createElement(&#39;script&#39;);</span><br><span class="line">          script.type &#x3D; &#39;text&#x2F;javascript&#39;;</span><br><span class="line">          if (script.readystate) &#123;&#x2F;&#x2F;兼容IE</span><br><span class="line">              script.onreadystatechange &#x3D; function () &#123;&#x2F;&#x2F;状态改变触发事件</span><br><span class="line">                  if (script.readyState &#x3D;&#x3D; &#39;loaded&#39; || script.readyState &#x3D;&#x3D; &#39;complete&#39;) &#123;</span><br><span class="line">                      callBack();</span><br><span class="line">                      script.onreadystatechange &#x3D; null;</span><br><span class="line">                  &#125;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125; else &#123;</span><br><span class="line">              script.onload &#x3D; function (e) &#123;</span><br><span class="line">                  callBack();</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line">          script.src &#x3D; url;</span><br><span class="line">          document.body.appendChild(script);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure></span>
 
 
 </code></pre>
@@ -114,7 +116,8 @@
 <li>以异步响应方式处理用户输入，网络事件等。</li>
 </ol>
 <h2 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h2><ul>
-<li><pre><code class="javascript"><span class="comment">// 在多人合作中 每个人写的变量名 函数名都各不相同  有可能会造成相互冲突或者污染的问题</span>
+<li><pre><code class="javascript">
+<span class="comment">// 在多人合作中 每个人写的变量名 函数名都各不相同  有可能会造成相互冲突或者污染的问题</span>
 
 <span class="keyword">var</span> 对象=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
     <span class="comment">// 定义变量 方法</span>
@@ -122,6 +125,7 @@
         <span class="comment">// 需要暴露的方法和变量</span>
     }
 }
+
 &lt;!--￼<span class="number">1</span>--&gt;
 
 
@@ -131,7 +135,8 @@
 <h2 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h2><h3 id="浅克隆"><a href="#浅克隆" class="headerlink" title="浅克隆"></a>浅克隆</h3><ul>
 <li><p>= 扩展运算符  Object.create</p>
 </li>
-<li><pre><code class="javascript"><span class="comment">// 使用 = 符号</span>
+<li><pre><code class="javascript">
+<span class="comment">// 使用 = 符号</span>
 <span class="keyword">const</span> obj = {<span class="attr">one</span>: <span class="number">1</span>, <span class="attr">two</span>: <span class="number">2</span>};
 <span class="keyword">const</span> obj2 = obj;
 <span class="comment">// 使用扩展运输符  注意被clone的对象模式（解构赋值可能失败）</span>
@@ -140,6 +145,7 @@
 <span class="comment">// 使用 Object.assign(对象1,对象2,...)  返回合并后的对象1 将后面的对象的所有可枚举属性复制到对象1中  如果有同名对象 以后面的对象为准 如果不是对象 会转成对象返回 </span>
 <span class="keyword">const</span> food = { <span class="attr">beef</span>: <span class="string">'牛排'</span>, <span class="attr">bacon</span>: <span class="string">'咸肉'</span> }
 <span class="keyword">const</span> cloneFood = <span class="built_in">Object</span>.assign({}, food);
+
 &lt;!--￼<span class="number">2</span>--&gt;</code></pre>
 </li>
 <li><p>属性和方法相同  但没有关联</p>
@@ -148,48 +154,64 @@
 <h2 id="this指向"><a href="#this指向" class="headerlink" title="this指向"></a>this指向</h2><h3 id="默认绑定"><a href="#默认绑定" class="headerlink" title="默认绑定"></a>默认绑定</h3><ul>
 <li><p>回调函数或直接调用</p>
 </li>
-<li><p>```javascript<br>// 一般发生在回调函数中或函数直接调用<br>function test() {</p>
-<pre><code>console.log(this); //window 或 严格模式下是undefined</code></pre><p>}</p>
-<p>setTimeout(function () {</p>
-<pre><code>console.log(this); 
-// 都是window</code></pre><p>});</p>
-<p>arr.forEach(function(){</p>
-<pre><code>console.log(this);  //window 或严格模式下是undefined</code></pre><p>});</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">- 注意严格模式与正常模式的不同</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 隐式绑定</span><br><span class="line"></span><br><span class="line">- 作用域</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;JavaScript</span><br><span class="line">  &#x2F;&#x2F; 谁调用就指向谁</span><br><span class="line">  &#x2F;&#x2F; 例1</span><br><span class="line">      const obj &#x3D; &#123;</span><br><span class="line">          name:&#39;joy&#39;,</span><br><span class="line">          getName()&#123;</span><br><span class="line">              console.log(this);  </span><br><span class="line">              console.log(this.name);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      obj.getName(); &#x2F;&#x2F; obj  joy</span><br><span class="line">  &#x2F;&#x2F; 例2</span><br><span class="line">      const obj1 &#x3D; &#123;</span><br><span class="line">          name:&#39;joy&#39;,</span><br><span class="line">          getName()&#123;</span><br><span class="line">              console.log(this); &#x2F;&#x2F;obj</span><br><span class="line">              console.log(this.name); &#x2F;&#x2F;joy</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">      const obj2 &#x3D; &#123;</span><br><span class="line">          name:&#39;sam&#39;,</span><br><span class="line">          friend:obj1</span><br><span class="line">      &#125;;</span><br><span class="line">      const obj3 &#x3D; &#123;</span><br><span class="line">          name: &#39;jam&#39;,</span><br><span class="line">          friend:obj2</span><br><span class="line">      &#125;;</span><br><span class="line">      obj3.friend.friend.getName()  &#x2F;&#x2F; obj joy 本质上还是obj1调用的</span><br><span class="line">  &#x2F;&#x2F; 例3</span><br><span class="line">      const obj1 &#x3D; &#123;</span><br><span class="line">          name:&#39;joy&#39;,</span><br><span class="line">          getName()&#123;</span><br><span class="line">              console.log(this); </span><br><span class="line">              console.log(this.name); </span><br><span class="line">          &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">  </span><br><span class="line">      const obj2 &#x3D; &#123;</span><br><span class="line">          name:&#39;sam&#39;,</span><br><span class="line">          getName:obj1.getName</span><br><span class="line">      &#125;;</span><br><span class="line">  </span><br><span class="line">      obj2.getName()  &#x2F;&#x2F; obj2 sam</span><br></pre></td></tr></table></figure></li>
+<li><pre><code class="javascript">
+<span class="comment">// 一般发生在回调函数中或函数直接调用</span>
+<span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>{
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//window 或 严格模式下是undefined</span>
+}
+
+setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>); 
+    <span class="comment">// 都是window</span>
+});
+
+arr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>);  <span class="comment">//window 或严格模式下是undefined</span>
+});
+
+&lt;!--￼<span class="number">3</span>--&gt;</code></pre>
+</li>
 <li><p>注意分析是谁调用的</p>
 </li>
 </ul>
 <h3 id="显示绑定（call-apply-bind）"><a href="#显示绑定（call-apply-bind）" class="headerlink" title="显示绑定（call,apply,bind）"></a>显示绑定（call,apply,bind）</h3><ul>
 <li><p>指定this</p>
 </li>
-<li><p>```javascript</p>
-<pre><code>const obj1 = {
-    name:&apos;joy&apos;,
-    getName(){
-        console.log(this); //obj
-        console.log(this.name); //joy
-    }
-};
+<li><pre><code class="javascript">
+    <span class="keyword">const</span> obj1 = {
+        name:<span class="string">'joy'</span>,
+        getName(){
+            <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">//obj</span>
+            <span class="built_in">console</span>.log(<span class="keyword">this</span>.name); <span class="comment">//joy</span>
+        }
+    };
 
-const obj2 = {
-    name:&apos;sam&apos;
-};
+    <span class="keyword">const</span> obj2 = {
+        name:<span class="string">'sam'</span>
+    };
 
-obj1.getName.call(obj2); //obj2 sam
-obj1.getName.apply(obj2); //obj2 sam
+    obj1.getName.call(obj2); <span class="comment">//obj2 sam</span>
+    obj1.getName.apply(obj2); <span class="comment">//obj2 sam</span>
 
-const fn = obj1.getName.bind(obj2);
-fn();//obj2 sam</code></pre><p>// call和apply之间就是传参的方式不同</p>
-<pre><code>fn.apply(this,[1,2]); // 不管多少个,都用数组包裹传参
-fn.call(this,1,2); // 一个个参数列出来传</code></pre><p>// call和apply都是即时调用,绑定既是调用,而bind不是,bind会返回绑定后的函数,自行需要的时候再调用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- 在继承时会用到</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### new绑定</span><br><span class="line"></span><br><span class="line">- new</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">      function Vehicle() &#123;</span><br><span class="line">          console.log(this);</span><br><span class="line">      &#125;</span><br><span class="line">      Vehicle(); &#x2F;&#x2F;window</span><br><span class="line">      new Vehicle(); &#x2F;&#x2F; Vehicle这个new出来的对象</span><br></pre></td></tr></table></figure></li>
+    <span class="keyword">const</span> fn = obj1.getName.bind(obj2);
+    fn();<span class="comment">//obj2 sam</span>
+
+<span class="comment">// call和apply之间就是传参的方式不同</span>
+    fn.apply(<span class="keyword">this</span>,[<span class="number">1</span>,<span class="number">2</span>]); <span class="comment">// 不管多少个,都用数组包裹传参</span>
+    fn.call(<span class="keyword">this</span>,<span class="number">1</span>,<span class="number">2</span>); <span class="comment">// 一个个参数列出来传</span>
+
+<span class="comment">// call和apply都是即时调用,绑定既是调用,而bind不是,bind会返回绑定后的函数,自行需要的时候再调用</span>
+
+&lt;!--￼<span class="number">4</span>--&gt;</code></pre>
+</li>
 <li><p>面向对象中有说明new工作的简单过程</p>
 </li>
 </ul>
 <h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><ul>
 <li><p>箭头函数中this的特点</p>
 </li>
-<li><pre><code class="javascript">    <span class="built_in">window</span>.name = <span class="string">'win'</span>;
+<li><pre><code class="javascript">
+    <span class="built_in">window</span>.name = <span class="string">'win'</span>;
     <span class="keyword">const</span> obj1 = {
         name: <span class="string">'joy'</span>,
         getName: <span class="function"><span class="params">()</span> =&gt;</span> {
@@ -200,6 +222,7 @@ fn.call(this,1,2); // 一个个参数列出来传</code></pre><p>// call和apply
     obj1.getName();
 
 <span class="comment">// 当多种方式冲突时 优先级：箭头函数 &gt; new &gt; 显式 &gt; 隐式 &gt; 默认绑定</span>
+
 &lt;!--￼<span class="number">5</span>--&gt;
 </code></pre>
 </li>
@@ -251,17 +274,25 @@ fn.call(this,1,2); // 一个个参数列出来传</code></pre><p>// call和apply
 <li>JSON不支持变量、函数、对象实例  它是一种表示结构化数据的格式</li>
 </ul>
 <h4 id="简单值"><a href="#简单值" class="headerlink" title="简单值"></a>简单值</h4><ul>
-<li>```json<br>‘hello’ 1 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">- 字符串、数值、布尔值、&#96;null&#96;</span><br><span class="line"></span><br><span class="line">#### 对象</span><br><span class="line"></span><br><span class="line">- 对象的属性必须加双引号</span><br><span class="line">- &#96;&#96;&#96;json</span><br><span class="line">  &#x2F;&#x2F; JSON没有变量声明  没有分号  </span><br><span class="line">  &#123;</span><br><span class="line">      &quot;name&quot;: &quot;a&quot;,</span><br><span class="line">      &quot;age&quot;: 10,</span><br><span class="line">      &quot;school&quot;: &#123;</span><br><span class="line">          &quot;name&quot;: &quot;nhzx&quot;,</span><br><span class="line">          &quot;location&quot;: &quot;nh&quot;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></li>
-<li>同一个对象不可以出现两个同名属性</li>
+<li><pre><code class="json">
+'hello' 1 
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 字符串、数值、布尔值、&#96;null&#96;</span><br><span class="line"></span><br><span class="line">#### 对象</span><br><span class="line"></span><br><span class="line">- 对象的属性必须加双引号</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;json</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; JSON没有变量声明  没有分号  </span><br><span class="line">  &#123;</span><br><span class="line">      &quot;name&quot;: &quot;a&quot;,</span><br><span class="line">      &quot;age&quot;: 10,</span><br><span class="line">      &quot;school&quot;: &#123;</span><br><span class="line">          &quot;name&quot;: &quot;nhzx&quot;,</span><br><span class="line">          &quot;location&quot;: &quot;nh&quot;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></code></pre>
+</li>
+<li><p>同一个对象不可以出现两个同名属性</p>
+</li>
 </ul>
 <h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><ul>
-<li>数组的值也可以是任意类型</li>
-<li><pre><code class="json">[
+<li><p>数组的值也可以是任意类型</p>
+</li>
+<li><pre><code class="json">
+[
     {},
     {},
     ...
 ]
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- 嵌套的情况也很常见</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 解析与序列化</span><br><span class="line"></span><br><span class="line">- &#96;JSON&#96;可以解析为JavaScript对象  可以简单地提取数据</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; JSON.stringify(序列化的对象,过滤器,选项) 将对象序列化为JSON字符串</span><br><span class="line">  &#x2F;&#x2F; 过滤器可以是数组（结果只返回数组中列出且对象中有的属性）  也可以是函数（详见下例）</span><br><span class="line">  &#x2F;&#x2F; 选项可以是数值（代表缩进的空格数 先换行后缩进）  也可以是字符串（字符串内可以是制表符或多段- 该字符会替代空格作为缩进前的字符）</span><br><span class="line">  &#x2F;&#x2F; 在序列化js对象时 所有函数、原型成员、值为undefined的属性都会被忽略  </span><br><span class="line">  var 序列化对象&#x3D;&#123;</span><br><span class="line">      &quot;属性1&quot;: 值1，</span><br><span class="line">      &quot;属性2&quot;: 值2</span><br><span class="line">  &#125;</span><br><span class="line">  var 变量&#x3D;JSON.stringify(序列化的对象,function(key,value)&#123;</span><br><span class="line">      switch(key)&#123;</span><br><span class="line">          case &quot;属性1&quot;:</span><br><span class="line">              return 值3;</span><br><span class="line">          case &quot;属性2&quot;:</span><br><span class="line">              return 值4;</span><br><span class="line">          ...</span><br><span class="line">          &#x2F;&#x2F; 遍历对象 每次遍历调用该函数</span><br><span class="line">          &#x2F;&#x2F; key为序列化对象的键名  value为键对应的值</span><br><span class="line">          &#x2F;&#x2F; 当次的返回值为对应键的值</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(变量) &#x2F;&#x2F; &#123;&quot;属性1&quot;: 值3，&quot;属性2&quot;: 值4&#125;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; toJSON()  可以在序列化对象中定义一个toJSON的方法  当序列化该对象时 只会调用toJSON方法  该方法的返回值为结果</span><br><span class="line">  var 序列化对象&#x3D;&#123;</span><br><span class="line">      toJSON: function()&#123;</span><br><span class="line">          return &#39;a&#39;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  var 变量&#x3D;JSON.stringify(序列化对象)</span><br><span class="line">  console.log(变量) &#x2F;&#x2F; &quot;a&quot;</span><br><span class="line">      </span><br><span class="line">  &#x2F;&#x2F; 序列化对象的顺序  （1）如果存在toJSON()方法且可以返回值  调用该方法 否则返回对象本身</span><br><span class="line">  &#x2F;&#x2F; （2）如果提供了过滤器  将（1）中的返回值传入函数过滤器中或根据数组过滤器进行序列化</span><br><span class="line">  &#x2F;&#x2F; （3）如果为函数过滤器  则对（2）返回的每个值进行序列化</span><br><span class="line">  &#x2F;&#x2F; （4）如果提供第三个参数  执行相应的格式化</span><br><span class="line">      </span><br><span class="line">  &#x2F;&#x2F; JSON.parse(JSON值,函数过滤器)  将JSON字符串解析为原生js值  函数过滤器与上述相同</span><br><span class="line">  var 变量&#x3D;JSON.parse(JSON值,function(key,value)&#123;</span><br><span class="line">      ...</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">- 嵌套的情况也很常见</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 解析与序列化</span><br><span class="line"></span><br><span class="line">- &#96;JSON&#96;可以解析为JavaScript对象  可以简单地提取数据</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; JSON.stringify(序列化的对象,过滤器,选项) 将对象序列化为JSON字符串</span><br><span class="line">  &#x2F;&#x2F; 过滤器可以是数组（结果只返回数组中列出且对象中有的属性）  也可以是函数（详见下例）</span><br><span class="line">  &#x2F;&#x2F; 选项可以是数值（代表缩进的空格数 先换行后缩进）  也可以是字符串（字符串内可以是制表符或多段- 该字符会替代空格作为缩进前的字符）</span><br><span class="line">  &#x2F;&#x2F; 在序列化js对象时 所有函数、原型成员、值为undefined的属性都会被忽略  </span><br><span class="line">  var 序列化对象&#x3D;&#123;</span><br><span class="line">      &quot;属性1&quot;: 值1，</span><br><span class="line">      &quot;属性2&quot;: 值2</span><br><span class="line">  &#125;</span><br><span class="line">  var 变量&#x3D;JSON.stringify(序列化的对象,function(key,value)&#123;</span><br><span class="line">      switch(key)&#123;</span><br><span class="line">          case &quot;属性1&quot;:</span><br><span class="line">              return 值3;</span><br><span class="line">          case &quot;属性2&quot;:</span><br><span class="line">              return 值4;</span><br><span class="line">          ...</span><br><span class="line">          &#x2F;&#x2F; 遍历对象 每次遍历调用该函数</span><br><span class="line">          &#x2F;&#x2F; key为序列化对象的键名  value为键对应的值</span><br><span class="line">          &#x2F;&#x2F; 当次的返回值为对应键的值</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  console.log(变量) &#x2F;&#x2F; &#123;&quot;属性1&quot;: 值3，&quot;属性2&quot;: 值4&#125;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; toJSON()  可以在序列化对象中定义一个toJSON的方法  当序列化该对象时 只会调用toJSON方法  该方法的返回值为结果</span><br><span class="line">  var 序列化对象&#x3D;&#123;</span><br><span class="line">      toJSON: function()&#123;</span><br><span class="line">          return &#39;a&#39;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  var 变量&#x3D;JSON.stringify(序列化对象)</span><br><span class="line">  console.log(变量) &#x2F;&#x2F; &quot;a&quot;</span><br><span class="line">      </span><br><span class="line">  &#x2F;&#x2F; 序列化对象的顺序  （1）如果存在toJSON()方法且可以返回值  调用该方法 否则返回对象本身</span><br><span class="line">  &#x2F;&#x2F; （2）如果提供了过滤器  将（1）中的返回值传入函数过滤器中或根据数组过滤器进行序列化</span><br><span class="line">  &#x2F;&#x2F; （3）如果为函数过滤器  则对（2）返回的每个值进行序列化</span><br><span class="line">  &#x2F;&#x2F; （4）如果提供第三个参数  执行相应的格式化</span><br><span class="line">      </span><br><span class="line">  &#x2F;&#x2F; JSON.parse(JSON值,函数过滤器)  将JSON字符串解析为原生js值  函数过滤器与上述相同</span><br><span class="line">  var 变量&#x3D;JSON.parse(JSON值,function(key,value)&#123;</span><br><span class="line">      ...</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
 
 
 </code></pre>
@@ -307,7 +338,8 @@ fn.call(this,1,2); // 一个个参数列出来传</code></pre><p>// call和apply
       
         <p>[TOC]</p>
 <h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h3 id="理解对象"><a href="#理解对象" class="headerlink" title="理解对象"></a>理解对象</h3><ul>
-<li><pre><code class="javascript"><span class="comment">// 两种创建对象的简单方法</span>
+<li><pre><code class="javascript">
+<span class="comment">// 两种创建对象的简单方法</span>
 <span class="comment">// 第一种</span>
 <span class="keyword">var</span> person=<span class="keyword">new</span> <span class="built_in">Object</span>()
 person.name=<span class="string">''</span>
@@ -323,6 +355,7 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
         <span class="built_in">console</span>.log(<span class="string">'hello'</span>)
     }
 }
+
 &lt;!--￼<span class="number">0</span>--&gt;
 
 
@@ -332,7 +365,8 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
 <h5 id="访问器属性"><a href="#访问器属性" class="headerlink" title="访问器属性"></a>访问器属性</h5><ul>
 <li><p>对象属性的某些性质</p>
 </li>
-<li><pre><code class="javascript"><span class="keyword">var</span> 对象={}
+<li><pre><code class="javascript">
+<span class="keyword">var</span> 对象={}
 <span class="built_in">Object</span>.defineProperty(对象,<span class="string">'属性'</span>,{
   <span class="comment">// 表示能否通过delete删除属性 能否修改属性的特性 能否把属性修改为访问器属性  默认 true</span>
     configurable: bool,
@@ -347,6 +381,7 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
 
     }
 })
+
 &lt;!--￼<span class="number">1</span>--&gt;
 
 
@@ -356,7 +391,8 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
 <h4 id="读取属性的特性"><a href="#读取属性的特性" class="headerlink" title="读取属性的特性"></a>读取属性的特性</h4><ul>
 <li><p>读取属性的特性</p>
 </li>
-<li><pre><code class="javascript"><span class="keyword">var</span> 对象={}
+<li><pre><code class="javascript">
+<span class="keyword">var</span> 对象={}
 <span class="built_in">Object</span>.defineProperties(对象, {
     属性<span class="number">1</span>: {
         value: <span class="number">1</span>,
@@ -366,6 +402,7 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
 <span class="keyword">var</span> 变量=<span class="built_in">Object</span>.getOwnPropertyDescriptor(对象, <span class="string">'属性1'</span>)
 变量.value  <span class="comment">// 1</span>
 变量.enumerable  <span class="comment">// false</span>
+
 &lt;!--￼<span class="number">2</span>--&gt;
 
 
@@ -375,7 +412,8 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
 <h4 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h4><ul>
 <li><p>解决了工厂模式不可以识别对象的问题</p>
 </li>
-<li><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>{
+<li><pre><code class="javascript">
+<span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>{
     <span class="keyword">this</span>.name=name
     <span class="keyword">this</span>.age=age
 }
@@ -389,6 +427,7 @@ person.sayHello=<span class="function"><span class="keyword">function</span>(<sp
 person1.constructor == Person <span class="comment">//true</span>
 person1 <span class="keyword">instanceof</span> <span class="built_in">Object</span> <span class="comment">// true</span>
 person1 <span class="keyword">instanceof</span> Person <span class="comment">// true</span>
+
 &lt;!--￼<span class="number">3</span>--&gt;
 
 
@@ -398,7 +437,8 @@ person1 <span class="keyword">instanceof</span> Person <span class="comment">// 
 <h4 id="原型模式"><a href="#原型模式" class="headerlink" title="原型模式"></a>原型模式</h4><ul>
 <li><p>原型模式解决了构造函数模式创建方法指向不同的问题</p>
 </li>
-<li><pre><code class="javascript"><span class="comment">// 每一个构造函数都有一个prototype属性  这个属性是一个指针  指向一个对象</span>
+<li><pre><code class="javascript">
+<span class="comment">// 每一个构造函数都有一个prototype属性  这个属性是一个指针  指向一个对象</span>
 <span class="comment">// 原型对像包含了可以由特定类型的所有实例共享的属性和方法</span>
 <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>{}
     Person.prototype.name=<span class="string">'a'</span>
@@ -407,6 +447,7 @@ person1 <span class="keyword">instanceof</span> Person <span class="comment">// 
     }
 <span class="keyword">var</span> person1=<span class="keyword">new</span> Person()
 person1.sayName() <span class="comment">// 'a'</span>
+
 &lt;!--￼<span class="number">4</span>--&gt;
 
 
@@ -416,7 +457,8 @@ person1.sayName() <span class="comment">// 'a'</span>
 <h5 id="原型与in操作符（包含对象的枚举）"><a href="#原型与in操作符（包含对象的枚举）" class="headerlink" title="原型与in操作符（包含对象的枚举）"></a>原型与in操作符（包含对象的枚举）</h5><ul>
 <li><p>一些性质</p>
 </li>
-<li><pre><code class="javascript"><span class="string">'属性'</span> <span class="keyword">in</span> 对象 <span class="comment">// 只有该对象或原型对象上有该属性（只要通过对象能访问到该属性） 则返回true</span>
+<li><pre><code class="javascript">
+<span class="string">'属性'</span> <span class="keyword">in</span> 对象 <span class="comment">// 只有该对象或原型对象上有该属性（只要通过对象能访问到该属性） 则返回true</span>
 对象.hasOwnProperty(<span class="string">'属性'</span>) <span class="comment">// 只有当该对象上有该属性时 才会返回true</span>
 <span class="comment">// 利用这两个方法  可以判断出 该属性是在原型上还是在实例上或者都没有</span>
 
@@ -468,6 +510,7 @@ newObj.newItemB = <span class="string">'newItemB'</span>
 })
 <span class="keyword">var</span> result = <span class="built_in">Object</span>.getOwnPropertyNames(newObj)
 <span class="built_in">console</span>.log(result) <span class="comment">// ['newItemA','newItemB']</span>
+
 &lt;!--￼<span class="number">5</span>--&gt;
 
 
@@ -477,7 +520,8 @@ newObj.newItemB = <span class="string">'newItemB'</span>
 <h5 id="原型的动态性"><a href="#原型的动态性" class="headerlink" title="原型的动态性"></a>原型的动态性</h5><ul>
 <li><p>创建实例后  修改原型带来的问题</p>
 </li>
-<li><pre><code class="javascript"><span class="comment">// 在创建实例后  为原型增加或删除属性/方法 不会影响实例与原型的关系（同样共享属性方法）</span>
+<li><pre><code class="javascript">
+<span class="comment">// 在创建实例后  为原型增加或删除属性/方法 不会影响实例与原型的关系（同样共享属性方法）</span>
 <span class="comment">// 创建实例后  将原型对象修改为另一个对象 会出现问题（新原型与实例没有任何关系 旧原型仍保持原有的属性与方法 实例指向的是旧原型）</span>
 <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>{
 
@@ -492,6 +536,7 @@ Person.prototype={
 }
 a.name <span class="comment">// 在旧原型上寻找  'a'</span>
 a.sayName() <span class="comment">// 报错</span>
+
 &lt;!--￼<span class="number">6</span>--&gt;
 
 
@@ -501,7 +546,8 @@ a.sayName() <span class="comment">// 报错</span>
 <h4 id="组合使用构造函数与原型"><a href="#组合使用构造函数与原型" class="headerlink" title="组合使用构造函数与原型"></a>组合使用构造函数与原型</h4><ul>
 <li><p>更好地设置实例属性  共享方法</p>
 </li>
-<li><pre><code class="javascript"><span class="comment">// 正确做法</span>
+<li><pre><code class="javascript">
+<span class="comment">// 正确做法</span>
 <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>{
     <span class="keyword">this</span>.name=name
     <span class="keyword">this</span>.age=age
@@ -513,6 +559,7 @@ Person.prototype={
     }
 }
 <span class="keyword">var</span> p1=<span class="keyword">new</span> Person(<span class="string">''</span>,<span class="number">2</span>)
+
 &lt;!--￼<span class="number">7</span>--&gt;
 
 
@@ -522,7 +569,8 @@ Person.prototype={
 <h4 id="寄生构造函数模式"><a href="#寄生构造函数模式" class="headerlink" title="寄生构造函数模式"></a>寄生构造函数模式</h4><ul>
 <li><p>除了使用new操作符外  与工厂模式一致</p>
 </li>
-<li><pre><code class="javascript"><span class="comment">// 在可以使用其他模式时不要使用这种模式</span>
+<li><pre><code class="javascript">
+<span class="comment">// 在可以使用其他模式时不要使用这种模式</span>
 <span class="comment">// 返回的对象与构造函数或者构造函数的原型之间没有关系</span>
 <span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name,age</span>)</span>{
     <span class="keyword">var</span> o=<span class="keyword">new</span> <span class="built_in">Object</span>()
@@ -536,6 +584,7 @@ Person.prototype={
 <span class="keyword">var</span> a=<span class="keyword">new</span> Person(<span class="string">''</span>,<span class="number">1</span>)
 a <span class="keyword">instanceof</span> Person <span class="comment">// false</span>
 a.prototype==Person.prototype <span class="comment">// false</span>
+
 &lt;!--￼<span class="number">8</span>--&gt;
 
 
@@ -549,7 +598,8 @@ a.prototype==Person.prototype <span class="comment">// false</span>
 <h4 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h4><ul>
 <li><p>实现继承的基础</p>
 </li>
-<li><pre><code class="javascript"><span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>)</span>{ 
+<li><pre><code class="javascript">
+<span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params"></span>)</span>{ 
     <span class="keyword">this</span>.property = <span class="literal">true</span>; 
 }
 SuperType.prototype.getSuperValue = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{ 
@@ -573,6 +623,7 @@ alert(instance.getSuperValue()); <span class="comment">// true</span>
 原型对象.isPrototypeof(实例)  
 
 <span class="comment">// 给原型添加的代码一定要放在替换原型的语句之后</span>
+
 &lt;!--￼<span class="number">9</span>--&gt;
 
 
@@ -582,7 +633,8 @@ alert(instance.getSuperValue()); <span class="comment">// true</span>
 <h4 id="组合继承"><a href="#组合继承" class="headerlink" title="组合继承"></a>组合继承</h4><ul>
 <li><p>继承属性及方法</p>
 </li>
-<li><pre><code class="JavaScript"><span class="comment">// 常用的继承模式</span>
+<li><pre><code class="JavaScript">
+<span class="comment">// 常用的继承模式</span>
 <span class="function"><span class="keyword">function</span> <span class="title">SuperType</span>(<span class="params">name</span>)</span>{ 
     <span class="keyword">this</span>.name = name; 
     <span class="keyword">this</span>.colors = [<span class="string">"red"</span>, <span class="string">"blue"</span>, <span class="string">"green"</span>]; 
@@ -612,6 +664,7 @@ instance1.sayAge(); <span class="comment">//29 </span>
 alert(instance2.colors); <span class="comment">//"red,blue,green" </span>
 instance2.sayName(); <span class="comment">//"Greg"; </span>
 instance2.sayAge(); <span class="comment">//27</span>
+
 &lt;!--￼<span class="number">10</span>--&gt;
 
 
@@ -621,7 +674,8 @@ instance2.sayAge(); <span class="comment">//27</span>
 <h4 id="寄生式继承"><a href="#寄生式继承" class="headerlink" title="寄生式继承"></a>寄生式继承</h4><ul>
 <li><p>继承属性及方法  还可以添加新的属性和方法</p>
 </li>
-<li><pre><code class="javascript"><span class="comment">// 创建一种用于封装继承过程的函数  在函数内部以某种方式来增强对象</span>
+<li><pre><code class="javascript">
+<span class="comment">// 创建一种用于封装继承过程的函数  在函数内部以某种方式来增强对象</span>
 <span class="function"><span class="keyword">function</span> <span class="title">createAnother</span>(<span class="params">original</span>)</span>{ 
     <span class="keyword">var</span> clone = <span class="built_in">Object</span>.creat(original); <span class="comment">// 通过调用函数创建一个新对象(可以使用任何能够返回新对象的方式 这里只是一个例子)</span>
     clone.sayHi = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{ <span class="comment">// 以某种方式来增强这个对象</span>
@@ -630,6 +684,7 @@ instance2.sayAge(); <span class="comment">//27</span>
     <span class="keyword">return</span> clone; <span class="comment">// 返回这个对象</span>
 }
 <span class="comment">// 继承了传入对象的属性与方法 并且为其添加了新的属性或方法</span>
+
 &lt;!--￼<span class="number">11</span>--&gt;
 
 
