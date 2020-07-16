@@ -117,47 +117,6 @@ var proxy = new Proxy({}, {
 });
 let obj = Object.create(proxy);
 obj.time // 35
-
-// 支持拦截的操作
-// 拦截对象属性的获取
-get(target,proKey,receiver){}
-
-// 拦截对象属性的设置 返回一个bool
-set(target,proKey,value,receiver){}
-
-// 拦截 proKey in proxy 的操作 返回一个bool
-has(target,proKey){}
-
-// 拦截 delete proxy[proKey] 的操作  返回一个bool
-deleteProperty(target,proKey){}
-
-// 拦截 Object.getOwnPropertyNames(proxy)  Object.getOwnPropertySymbols(proxy)  Object.keys(proxy) 返回一个数组 该方法返回对象自身的所有属性
-ownKeys(target){}
-
-// 拦截 Object.getOwnPropertyDescriptor(target,proKey) 返回属性的描述对象
-getOwnPropertyDescriptor(target,proKey){}
-
-// 拦截Object.defineProperty(proxy,propKey,propDesc） Object.defineProperties(proxy,propDescs)  返回一个布尔值
-defineProperty(target, propKey, propDesc){}
-
-// 拦截Object.preventExtensions(proxy)  返回一个布尔值
-preventExtensions(target){}
-
-// 拦截Object.getPrototypeOf(proxy)  返回一个对象
-getPrototypeOf(target){}
-
-// 拦截Object.isExtensible(proxy)  返回一个布尔值
-isExtensible(target){}
-
-// 拦截Object.setPrototypeOf(proxy, proto)  返回一个布尔值
-setPrototypeOf(target, proto){}
-
-// 如果目标对象是函数 还可以进行以下两种拦截
-// 拦截 Proxy 实例作为函数调用的操作，比如proxy(...args)、proxy.call(object, ...args)、proxy.apply(...)
-apply(target, object, args){}
-
-// 拦截 Proxy 实例作为构造函数调用的操作 比如new proxy(...args)
-construct(target, args){}
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### proxy实例的方法</span><br><span class="line"></span><br><span class="line">##### get</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; 用于拦截某个属性的读取操作</span><br><span class="line">  var person &#x3D; &#123;</span><br><span class="line">    name: &quot;张三&quot;</span><br><span class="line">  &#125;;</span><br><span class="line">  var proxy &#x3D; new Proxy(person, &#123;</span><br><span class="line">    get: function(target, property,receiver) &#123;</span><br><span class="line">        &#x2F;&#x2F; 遍历 property为当前属性  target为传入的对象  receiver 为proxy实例本身（即this关键字指向的那个对象）</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  &#x2F;&#x2F; get方法可以继承  即读取对象继承而来的属性时 会被拦截</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; 如果一个属性不可配置（configurable）和不可写（writable）则该属性不能被代理 通过proxy对象访问该属性会报错</span><br></pre></td></tr></table></figure>
 
 </code></pre>
