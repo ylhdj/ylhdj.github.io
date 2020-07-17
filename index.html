@@ -117,6 +117,47 @@ var proxy = new Proxy({}, {
 });
 let obj = Object.create(proxy);
 obj.time // 35
+
+// 支持拦截的操作
+// 拦截对象属性的获取
+get(target,proKey,receiver){}
+
+// 拦截对象属性的设置 返回一个bool
+set(target,proKey,value,receiver){}
+
+// 拦截 proKey in proxy 的操作 返回一个bool
+has(target,proKey){}
+
+// 拦截 delete proxy[proKey] 的操作  返回一个bool
+deleteProperty(target,proKey){}
+
+// 拦截 Object.getOwnPropertyNames(proxy)  Object.getOwnPropertySymbols(proxy)  Object.keys(proxy) 返回一个数组 该方法返回对象自身的所有属性
+ownKeys(target){}
+
+// 拦截 Object.getOwnPropertyDescriptor(target,proKey) 返回属性的描述对象
+getOwnPropertyDescriptor(target,proKey){}
+
+// 拦截Object.defineProperty(proxy,propKey,propDesc） Object.defineProperties(proxy,propDescs)  返回一个布尔值
+defineProperty(target, propKey, propDesc){}
+
+// 拦截Object.preventExtensions(proxy)  返回一个布尔值
+preventExtensions(target){}
+
+// 拦截Object.getPrototypeOf(proxy)  返回一个对象
+getPrototypeOf(target){}
+
+// 拦截Object.isExtensible(proxy)  返回一个布尔值
+isExtensible(target){}
+
+// 拦截Object.setPrototypeOf(proxy, proto)  返回一个布尔值
+setPrototypeOf(target, proto){}
+
+// 如果目标对象是函数 还可以进行以下两种拦截
+// 拦截 Proxy 实例作为函数调用的操作，比如proxy(...args)、proxy.call(object, ...args)、proxy.apply(...)
+apply(target, object, args){}
+
+// 拦截 Proxy 实例作为构造函数调用的操作 比如new proxy(...args)
+construct(target, args){}
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### proxy实例的方法</span><br><span class="line"></span><br><span class="line">##### get</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; 用于拦截某个属性的读取操作</span><br><span class="line">  var person &#x3D; &#123;</span><br><span class="line">    name: &quot;张三&quot;</span><br><span class="line">  &#125;;</span><br><span class="line">  var proxy &#x3D; new Proxy(person, &#123;</span><br><span class="line">    get: function(target, property,receiver) &#123;</span><br><span class="line">        &#x2F;&#x2F; 遍历 property为当前属性  target为传入的对象  receiver 为proxy实例本身（即this关键字指向的那个对象）</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  &#x2F;&#x2F; get方法可以继承  即读取对象继承而来的属性时 会被拦截</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; 如果一个属性不可配置（configurable）和不可写（writable）则该属性不能被代理 通过proxy对象访问该属性会报错</span><br></pre></td></tr></table></figure>
 
 </code></pre>
@@ -242,6 +283,19 @@ proxy.foo // 123 revoke(); proxy.foo // TypeError: Revoked
 <li>目的（4）：<code>reflect</code>对象的方法和<code>proxy</code>对象的方法一一对应  让<code>proxy</code>可以方便地调用对于<code>reflect</code>方法</li>
 </ul>
 <h4 id="静态方法"><a class="header-anchor" href="#静态方法">¶</a>静态方法</h4>
+<h5 id="Reflect-apply-target-thisArg-args"><a class="header-anchor" href="#Reflect-apply-target-thisArg-args">¶</a>Reflect.apply(target, thisArg, args)</h5>
+<ul>
+<li>
+<pre><code class="language-javascript">// 等同于function.prototype.apply.call(func,thisArg,args)
+// 绑定一个函数的this对象 可以使用 fn.apply(this对象,参数数组) 如果函数定义了自己的apply方法  就只能写成上面的形式
+
+// 不知道上面在说啥  反正以后为函数绑定this对象直接像下面一样用就行了
+Reflect.apply(函数,this对象,参数数组)
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### Reflect.construct(target, args) </span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; Reflect.construct(target,args) 相当于 new target(args)</span><br><span class="line">  &#x2F;&#x2F; 提供了一种不使用new 来调用构造函数的方法</span><br><span class="line">  function Greeting(name) &#123;</span><br><span class="line">      this.name &#x3D; name; </span><br><span class="line">  &#125;</span><br><span class="line">  &#x2F;&#x2F; new 的写法 </span><br><span class="line">  const instance &#x3D; new Greeting(&#39;张三&#39;); </span><br><span class="line">  &#x2F;&#x2F; Reflect.construct 的写法 </span><br><span class="line">  const instance &#x3D; Reflect.construct(Greeting, [&#39;张三&#39;]);</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
 <h5 id="Reflect-get-target-name-receiver"><a class="header-anchor" href="#Reflect-get-target-name-receiver">¶</a>Reflect.get(target, name, receiver)</h5>
 <ul>
 <li>
@@ -265,17 +319,79 @@ Reflect.get(myObject, 'baz', myReceiverObject) // 8
 </code></pre>
 </li>
 </ul>
-<h5 id="Reflect-deleteProperty-target-name"><a class="header-anchor" href="#Reflect-deleteProperty-target-name">¶</a>Reflect.deleteProperty(target, name)</h5>
+<h5 id="Reflect-defineProperty-target-name-desc"><a class="header-anchor" href="#Reflect-defineProperty-target-name-desc">¶</a>Reflect.defineProperty(target, name, desc)</h5>
 <ul>
 <li>
-<pre><code class="language-javascript">// 相当于delete  返回一个bool 如果成功或被删除的属性不存在 返回true 删除失败 返回false
-const myObj = { foo: 'bar' }; 
-// 旧写法 
-delete myObj.foo; 
-// 新写法 
-Reflect.deleteProperty(myObj, 'foo');
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### Reflect.has(target, name) </span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; 相当于in运算符  如果第一个参数不是对象 报错</span><br><span class="line">  var myObject &#x3D; &#123; foo: 1, &#125;;</span><br><span class="line">  &#x2F;&#x2F; 旧写法 </span><br><span class="line">  &#39;foo&#39; in myObject &#x2F;&#x2F; true </span><br><span class="line">  &#x2F;&#x2F; 新写法 </span><br><span class="line">  Reflect.has(myObject, &#39;foo&#39;) &#x2F;&#x2F; true</span><br></pre></td></tr></table></figure>
+<pre><code class="language-javascript">// 基本等同于Object.defineProperty 用于定义对象属性
+Reflect.defineProperty(对象,'属性',{
+    // 配置 即数据属性 访问器属性的特性
+})
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### Reflect.deleteProperty(target, name) </span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; 相当于delete  返回一个bool 如果成功或被删除的属性不存在 返回true 删除失败 返回false</span><br><span class="line">  const myObj &#x3D; &#123; foo: &#39;bar&#39; &#125;; </span><br><span class="line">  &#x2F;&#x2F; 旧写法 </span><br><span class="line">  delete myObj.foo; </span><br><span class="line">  &#x2F;&#x2F; 新写法 </span><br><span class="line">  Reflect.deleteProperty(myObj, &#39;foo&#39;);</span><br></pre></td></tr></table></figure>
 
+</code></pre>
+</li>
+</ul>
+<h5 id="Reflect-has-target-name"><a class="header-anchor" href="#Reflect-has-target-name">¶</a>Reflect.has(target, name)</h5>
+<ul>
+<li>
+<pre><code class="language-javascript">// 相当于in运算符  如果第一个参数不是对象 报错
+var myObject = { foo: 1, };
+// 旧写法 
+'foo' in myObject // true 
+// 新写法 
+Reflect.has(myObject, 'foo') // true
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### Reflect.ownKeys(target) </span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; 返回对象的所有属性（包括symbol属性）</span><br><span class="line">  var myObject &#x3D; &#123; </span><br><span class="line">      foo: 1, </span><br><span class="line">      bar: 2, </span><br><span class="line">      [Symbol.for(&#39;baz&#39;)]: 3, </span><br><span class="line">      [Symbol.for(&#39;bing&#39;)]: 4, </span><br><span class="line">  &#125;;</span><br><span class="line">  &#x2F;&#x2F; 旧写法 </span><br><span class="line">  Object.getOwnPropertyNames(myObject) &#x2F;&#x2F; [&#39;foo&#39;, &#39;bar&#39;] </span><br><span class="line">  Object.getOwnPropertySymbols(myObject) &#x2F;&#x2F;[Symbol(baz), Symbol(bing)] </span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; 新写法 </span><br><span class="line">  Reflect.ownKeys(myObject) &#x2F;&#x2F; [&#39;foo&#39;, &#39;bar&#39;, Symbol(baz), Symbol(bing)]</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<h5 id="Reflect-isExtensible-target"><a class="header-anchor" href="#Reflect-isExtensible-target">¶</a>Reflect.isExtensible(target)</h5>
+<ul>
+<li>
+<pre><code class="language-javascript">// 返回一个bool 表示对象是否可扩展
+const myObject = {}; 
+// 旧写法 
+Object.isExtensible(myObject) // true 
+// 新写法 
+Reflect.isExtensible(myObject) // true
+// 如果不是对象 旧写法返回false 新写法报错
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### Reflect.preventExtensions(target) </span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; 用于将一个对象变为不可扩展  返回一个bool 表示是否操作成功</span><br><span class="line">  var myObject &#x3D; &#123;&#125;; </span><br><span class="line">  &#x2F;&#x2F; 旧写法 </span><br><span class="line">  Object.preventExtensions(myObject) &#x2F;&#x2F; Object &#123;&#125; </span><br><span class="line">  &#x2F;&#x2F; 新写法 </span><br><span class="line">  Reflect.preventExtensions(myObject) &#x2F;&#x2F; true</span><br><span class="line">  &#x2F;&#x2F; 如果不是参数不是对象 es5环境中旧写法报错  es6中旧写法返回传入参数  新写法报错</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<h5 id="Reflect-getOwnPropertyDescriptor-target-name"><a class="header-anchor" href="#Reflect-getOwnPropertyDescriptor-target-name">¶</a>Reflect.getOwnPropertyDescriptor(target, name)</h5>
+<ul>
+<li>
+<pre><code class="language-javascript">// 等同于Object.getOwnPropertyDescriptor  得到指定属性的描述对象
+var myObject = {}; 
+Object.defineProperty(myObject, 'hidden', {
+    value: true, 
+    enumerable: false, 
+}); 
+// 旧写法 
+var theDescriptor = Object.getOwnPropertyDescriptor(对象, '属性'); 
+// 新写法 
+var theDescriptor = Reflect.getOwnPropertyDescriptor(对象, '属性');
+// 返回第三个参数
+
+// 如果第一个参数不是对象旧写法返回undefined  新写法报错
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### Reflect.getPrototypeOf(target) </span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; 读取对象的__proto__属性（ 即Object.getPrototypeOf(obj) ）</span><br><span class="line">  const myObj &#x3D; new FancyThing(); </span><br><span class="line">  &#x2F;&#x2F; 旧写法 </span><br><span class="line">  Object.getPrototypeOf(myObj) &#x3D;&#x3D;&#x3D; FancyThing.prototype; </span><br><span class="line">  &#x2F;&#x2F; 新写法 </span><br><span class="line">  Reflect.getPrototypeOf(myObj) &#x3D;&#x3D;&#x3D; FancyThing.prototype;</span><br><span class="line">  &#x2F;&#x2F; 两个方法的区别：如果参数不是对象 Object.getPrototypeOf(obj)会将这个参数转为对象  而Reflect.getPrototypeOf(target) 会报错</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<h5 id="Reflect-setPrototypeOf-target-prototype"><a class="header-anchor" href="#Reflect-setPrototypeOf-target-prototype">¶</a>Reflect.setPrototypeOf(target, prototype)</h5>
+<ul>
+<li>
+<pre><code class="language-javascript">// 用于设置对象的__proto__属性  返回第一个参数对象
+const myObj = new FancyThing(); 
+// 旧写法 
+Object.setPrototypeOf(对象, 原型); 
+// 新写法 
+Reflect.setPrototypeOf(对象, 原型);
+// 如果第一个参数不是对象， Object.setPrototypeOf 会返回第一个参 数本身，而 Reflect.setPrototypeOf 会报错
+// 如果第一个参数 是 undefined 或 null ， Object.setPrototypeOf 和 Reflect.set PrototypeOf 都会报错
 </code></pre>
 </li>
 </ul>
