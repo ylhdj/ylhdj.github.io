@@ -1,93 +1,73 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   
+  <title>JSON | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="[TOC]
+¶JSON
+¶语法
+
+JSON的语法可以表示为以下三种类型的值
+简单值：使用与JavaScript相同的语法  可以在JSON中表示字符串、数值、布尔值、null  但JSON不支持undefined
+对象：对象表示一组无序的键值对  每个键对应的值可以是简单值  也可以是复杂的数据类型">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JSON"/>
+  <meta property="og:site_name" content="Hexo"/>
 
   
-  <title>JSON | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="[TOC] ¶JSON ¶语法  JSON的语法可以表示为以下三种类型的值 简单值：使用与JavaScript相同的语法  可以在JSON中表示字符串、数值、布尔值、null  但JSON不支持undefined 对象：对象表示一组无序的键值对  每个键对应的值可以是简单值  也可以是复杂的数据类型 数组：数组表示一组有序的值的列表  可以通过数值索引来访问其中的值  数组的值也可以是任意类型 J">
-<meta property="og:type" content="article">
-<meta property="og:title" content="JSON">
-<meta property="og:url" content="http://yoursite.com/2020/07/15/JSON/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="[TOC] ¶JSON ¶语法  JSON的语法可以表示为以下三种类型的值 简单值：使用与JavaScript相同的语法  可以在JSON中表示字符串、数值、布尔值、null  但JSON不支持undefined 对象：对象表示一组无序的键值对  每个键对应的值可以是简单值  也可以是复杂的数据类型 数组：数组表示一组有序的值的列表  可以通过数值索引来访问其中的值  数组的值也可以是任意类型 J">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-07-15T01:45:50.000Z">
-<meta property="article:modified_time" content="2020-07-18T15:05:49.989Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="JavaScript">
-<meta name="twitter:card" content="summary">
+    <meta property="og:image" content=""/>
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
 <link rel="stylesheet" href="/css/style.css">
 
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
 <meta name="generator" content="Hexo 4.2.1"></head>
 
+
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
 </header>
-      <div class="outer">
-        <section id="main"><article id="post-JSON" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2020/07/15/JSON/" class="article-date">
-  <time datetime="2020-07-15T01:45:50.000Z" itemprop="datePublished">2020-07-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-JSON" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
-    <h1 class="article-title" itemprop="name">
-      JSON
-    </h1>
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2020-07-15T01:45:50.000Z"><a href="/2020/07/15/JSON/">2020-07-15</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">JSON</h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
       
         <p>[TOC]</p>
 <h2 id="JSON"><a class="header-anchor" href="#JSON">¶</a>JSON</h2>
@@ -125,144 +105,119 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/07/15/JSON/" data-id="ckco90n88000028vp1rhw1ga0" class="article-share-link">Share</a>
+    <footer>
       
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li></ul>
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/JavaScript/">JavaScript</a>
+  </div>
 
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
     </footer>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2020/07/15/js%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%EF%BC%88%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          js的一些基础知识（查缺补漏）
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2020/07/15/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">面向对象</div>
-    </a>
-  
-</nav>
-
-  
 </article>
 
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2020/07/15/JSON/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
 </section>
-        
-          <aside id="sidebar">
-  
-    
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/" rel="tag">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
-    </div>
-  </div>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="as_sitesearch" value="yoursite.com">
+  </form>
+</div>
 
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 10px;">git</a>
-    </div>
-  </div>
 
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li></ul>
-    </div>
-  </div>
-
-
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/07/18/Iterator%E5%92%8Cfor-of%E5%BE%AA%E7%8E%AF/">Iterator和for...of循环</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/16/%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%B0%84/">代理与反射</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/15/js%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%EF%BC%88%E6%9F%A5%E7%BC%BA%E8%A1%A5%E6%BC%8F%EF%BC%89/">js的一些基础知识（查缺补漏）</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/15/JSON/">JSON</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/15/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">面向对象</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>3</small></li>
   
+    <li><a href="/tags/es6/">es6</a><small>2</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+  </ul>
+</div>
+
 </aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
+    <div class="clearfix"></div>
   </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
+  <footer id="footer" class="inner"><div class="alignleft">
   
-    <a href="/" class="mobile-nav-link">Home</a>
+  &copy; 2020 John Doe
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+</div>
+<div class="clearfix"></div></footer>
   
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/jquery-3.4.1.min.js"></script>
 
 
-  
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-  
+
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
 
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
 </body>
 </html>
