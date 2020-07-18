@@ -64,6 +64,267 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Iterator和for-of循环" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/07/18/Iterator%E5%92%8Cfor-of%E5%BE%AA%E7%8E%AF/" class="article-date">
+  <time datetime="2020-07-18T13:51:35.000Z" itemprop="datePublished">2020-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/07/18/Iterator%E5%92%8Cfor-of%E5%BE%AA%E7%8E%AF/">Iterator和for...of循环</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h2 id="Iterator和for…of循环"><a class="header-anchor" href="#Iterator和for…of循环">¶</a>Iterator和for…of循环</h2>
+<h3 id="Iterator"><a class="header-anchor" href="#Iterator">¶</a>Iterator</h3>
+<ul>
+<li>为各种不同的数据结构提供统一的访问机制</li>
+<li>任何数据结构只要部署<code>Iterator</code>接口  就可以完成遍历操作（依次处理该数据结构的所有成员）</li>
+<li>作用（1）为各种数据结构提供一个统一的、简便的访问接口</li>
+<li>（2）使数据结构的成员能够按某种次序排列</li>
+<li>（3）<code>for...of</code>循环</li>
+</ul>
+<h4 id="遍历过程"><a class="header-anchor" href="#遍历过程">¶</a>遍历过程</h4>
+<ol>
+<li>创建一个指针对象  指向当前数据结构的起始位（遍历器对象本质上就是一个指针对象）</li>
+<li>第一次调用指针对象的<code>next</code>方法  可以将指针指向数据结构的第一个成员</li>
+<li>第二次调用指针对象的<code>next</code>方法 指针指向第二个成员</li>
+<li>不断调用指针对象的<code>next</code>方法  直到它指向数据结构的结束位置</li>
+</ol>
+<ul>
+<li>
+<p>每一次调用<code>next</code>方法  都会返回数据结构当前成员的信息（返回一个包含<code>value</code>和<code>done</code>两个属性的对象）</p>
+</li>
+<li>
+<p><code>value</code>属性使当前成员的值  <code>done</code>属性是一个布尔值  表示遍历是否结束</p>
+</li>
+<li>
+<pre><code class="language-javascript">// 一个模拟遍历器的函数
+function makeIterator(array) { 
+    var nextIndex = 0; 
+    return { 
+        next: function() { 
+            return nextIndex &lt; array.length ? 
+                {value: array[nextIndex++], done: false} : 
+            	{value: undefined, done: true}
+        } 
+    }
+}
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 遍历器与它所遍历的那个数据结构实际上是分开的   所有可以用遍历器模拟出数据结构</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; 使用typescript的写法  遍历器接口(iterable) 指针对象(iterator) </span><br><span class="line">  interface Iterable &#123; </span><br><span class="line">      [Symbol.iterator]() : Iterator </span><br><span class="line">  &#125;</span><br><span class="line">  interface Iterator &#123;</span><br><span class="line">      next(value?: any) : IterationResult, </span><br><span class="line">  &#125;        </span><br><span class="line">  interface IterationResult &#123; </span><br><span class="line">      value: any, </span><br><span class="line">      done: boolean</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<h4 id="默认Iterator接口"><a class="header-anchor" href="#默认Iterator接口">¶</a>默认Iterator接口</h4>
+<ul>
+<li>
+<p>当使用<code>for...of</code>循环遍历某种数据结构时  该循环会自动寻找<code>Iterator</code>接口</p>
+</li>
+<li>
+<p>一种数据只要部署了<code>Iterator</code>接口  就称这种数据结构是可遍历的</p>
+</li>
+<li>
+<p>默认的<code>Iterator</code>接口部署在<code>Symbol.iterator</code>属性（本身是一个函数  执行函数就好返回一个遍历器）</p>
+</li>
+<li>
+<p>属性名<code>Symbol.iterator</code>是一个表达式  返回<code>Symbol</code> 对象的 <code>iterator</code> 属性</p>
+</li>
+<li>
+<pre><code class="language-javascript">const obj = { 
+    [Symbol.iterator] : function () { 
+        return { 
+            next: function () { 
+                return { 
+                    value: 1, 
+                    done: true 
+                } 
+            } 
+        } 
+    }
+}
+
+// es6中有些数据结构原生具备Iterator接口（不用任何处理就可以被for...of循环遍历）
+// Array Map Set String TypedArray 函数的arguments对象 NodeList对象
+
+// 为对象添加Iterator接口
+let obj = {
+    data: ['hello', 'world'],
+    [Symbol.iterator]() {
+        const self = this;
+        let index = 0;
+        return {
+            next() {
+                if (index &lt; self.data.length) {
+                    return {
+                        value: self.data[index++],
+                        done: false
+                    }
+                } else {
+                    return {
+                        value: undefined,
+                        done: true
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 对于类数组对象（存在数值键名和length属性）可以引用数组的Iterator接口来部署
+NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator]; 
+// 或者 
+NodeList.prototype[Symbol.iterator] = [][Symbol.iterator]
+[...document.querySelectorAll('div')] 
+
+// 如果Symbol.iterator 方法对应的不是遍历器生成函数（即会返回一 个遍历器对象）会报错
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 因为对象属性的遍历顺序是不确定的  所有没有部署接口  Map部署了接口  对象实际上被当作Map结构使用</span><br><span class="line"></span><br><span class="line">- 在下列几个场合中会默认调用&#96;Iterator&#96;接口</span><br><span class="line"></span><br><span class="line">1. 解构赋值（对数组和set结构进行解构赋值时）</span><br><span class="line"></span><br><span class="line">2. 扩展运算符（任何部署了Iterator接口的数据结构 可以通过扩展运算符转成数组）</span><br><span class="line"></span><br><span class="line">3. &#96;&#96;&#96;javascript</span><br><span class="line">   &#x2F;&#x2F; yield* 可遍历的结构 </span><br><span class="line">   let generator &#x3D; function* () &#123; </span><br><span class="line">       yield 1; </span><br><span class="line">       yield* [2,3,4]; </span><br><span class="line">       yield 5; </span><br><span class="line">   &#125;;</span><br><span class="line">   var iterator &#x3D; generator(); </span><br><span class="line">   iterator.next() &#x2F;&#x2F; &#123; value: 1, done: false &#125; </span><br><span class="line">   iterator.next() &#x2F;&#x2F; &#123; value: 2, done: false &#125; </span><br><span class="line">   iterator.next() &#x2F;&#x2F; &#123; value: 3, done: false &#125; </span><br><span class="line">   iterator.next() &#x2F;&#x2F; &#123; value: 4, done: false &#125; </span><br><span class="line">   iterator.next() &#x2F;&#x2F; &#123; value: 5, done: false &#125; </span><br><span class="line">   iterator.next() &#x2F;&#x2F; &#123; value: undefined, done: true &#125;</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<ol start="4">
+<li>
+<pre><code class="language-javascript">// 由于数组的遍历会调用遍历器接口  所有任何接收数组作为参数的场合都调用了遍历器接口
+// 例如  for...of  Aarray.from()  Map()  Set()  WeakMap() WeakSet() Promise.all() Promise.race()
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### 字符串的Iterator接口</span><br><span class="line"></span><br><span class="line">- 字符串是一个类似数组的对象  也原生具有Iterator接口</span><br><span class="line"></span><br><span class="line">- 可以通过覆盖原生的&#96;Symbol.iterator&#96;方法  达到修改遍历器行为的目的</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  var str &#x3D; new String(&quot;hi&quot;); </span><br><span class="line">  [...str] &#x2F;&#x2F; [&quot;h&quot;, &quot;i&quot;] </span><br><span class="line">  </span><br><span class="line">  str[Symbol.iterator] &#x3D; function() &#123;</span><br><span class="line">      return &#123; </span><br><span class="line">          next: function() &#123;</span><br><span class="line">              if (this._first) &#123;</span><br><span class="line">                  this._first &#x3D; false;</span><br><span class="line">                  return &#123; </span><br><span class="line">                      value: &quot;bye&quot;, </span><br><span class="line">                      done: false </span><br><span class="line">                  &#125; </span><br><span class="line">              &#125; else &#123; </span><br><span class="line">                  return &#123; </span><br><span class="line">                      done: true </span><br><span class="line">                  &#125; </span><br><span class="line">              &#125; </span><br><span class="line">          &#125;,</span><br><span class="line">          _first: true </span><br><span class="line">      &#125; </span><br><span class="line">  &#125;</span><br><span class="line">  [...str] &#x2F;&#x2F; [&quot;bye&quot;] str &#x2F;&#x2F; &quot;hi&quot;</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ol>
+<h5 id="Iterator接口与Generator函数"><a class="header-anchor" href="#Iterator接口与Generator函数">¶</a>Iterator接口与Generator函数</h5>
+<ul>
+<li>
+<p><code>Symbol.iterator</code>方法的最简单实现是使用<code>Generator</code>函数</p>
+</li>
+<li>
+<pre><code class="language-javascript">var myIterable = {}; 
+myIterable[Symbol.iterator] = function* () { 
+    yield 1; 
+    yield 2; 
+    yield 3; 
+};
+[...myIterable] // [1, 2, 3] 
+// 或者采用下面的简洁写法 
+let obj = {
+    * [Symbol.iterator]() { 
+        yield 'hello'; 
+        yield 'world'; 
+    } 
+};
+for (let x of obj) { 
+    console.log(x); 
+}
+// hello // world
+
+// 上面代码中， Symbol.iterator 方法几乎不用部署任何代码，只要用 yield命令给出每一步的返回值即可
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### 遍历器对象的return()  throw()</span><br><span class="line"></span><br><span class="line">- 遍历器对象还具有return方法和throw方法  next方法是必须部署的  return方法和throw方法可以选择</span><br><span class="line"></span><br><span class="line">###### return</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; 如果for...of 循环提前退出（通常是因为出错或有break或continue语句）就会调用return方法  如果一个对象在完成遍历前  需要清理或释放资源  就可以部署return方法</span><br><span class="line">  &#x2F;&#x2F; return方法必须返回一个对象</span><br><span class="line">  function readLinesSync(file) &#123; </span><br><span class="line">      return &#123; </span><br><span class="line">          next() &#123; </span><br><span class="line">              return &#123; </span><br><span class="line">                  done: false </span><br><span class="line">              &#125;; </span><br><span class="line">          &#125;,</span><br><span class="line">          return() &#123;</span><br><span class="line">              file.close();</span><br><span class="line">              return &#123; </span><br><span class="line">                  done: true </span><br><span class="line">              &#125;; </span><br><span class="line">          &#125;, </span><br><span class="line">      &#125;; </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; 下列的三种情况都会触发return方法</span><br><span class="line">  &#x2F;&#x2F; 情况一 for </span><br><span class="line">  (let line of readLinesSync(fileName)) &#123; </span><br><span class="line">      console.log(line); </span><br><span class="line">      break;   &#x2F;&#x2F; 在执行完break前的语句 就会执行return方法  关闭这个文件</span><br><span class="line">  &#125;</span><br><span class="line">  &#x2F;&#x2F; 情况二 </span><br><span class="line">  for (let line of readLinesSync(fileName)) &#123; </span><br><span class="line">      console.log(line); </span><br><span class="line">      continue;  &#x2F;&#x2F; 在执行所有代码后  执行return方法  关闭文件</span><br><span class="line">  &#125;</span><br><span class="line">  &#x2F;&#x2F; 情况三 </span><br><span class="line">  for (let line of readLinesSync(fileName)) &#123; </span><br><span class="line">      console.log(line); </span><br><span class="line">      throw new Error();  &#x2F;&#x2F; 会执行完return方法后  再抛出错误</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<h3 id="for…of循环"><a class="header-anchor" href="#for…of循环">¶</a>for…of循环</h3>
+<ul>
+<li>一个数据结构只要部署了 <code>Symbol.iterator</code> 属性就被视为具有<code>iterator</code>接口，就可以用 for…of 循环遍历它的成员。</li>
+<li>也就是说   <code>for...of</code> 循环内部调用的是数据结构的 <code>Symbol.iterator</code> 方法</li>
+<li><code>for...of</code> 循环可以使用的范围包括数组、<code>Set</code> 和 <code>Map</code> 结构、某些类似 数组的对象（比如 <code>arguments</code> 对象、<code>DOM NodeList</code> 对象）、后文的<code>Generator</code> 对象，以及字符串</li>
+</ul>
+<h4 id="数组"><a class="header-anchor" href="#数组">¶</a>数组</h4>
+<ul>
+<li>
+<pre><code class="language-javascript">const arr = ['red', 'green', 'blue']; 
+for(let v of arr) { 
+    console.log(v); // red green blue 
+}
+
+// 空对象部署了数组得Symbol.iterator属性  产生了一样的结果
+const obj = {}; 
+obj[Symbol.iterator] = arr[Symbol.iterator].bind(arr); 
+for(let v of obj) { 
+    console.log(v); // red green blue 
+}
+
+// for...of循环可以替代数组实例得forEach方法
+// for...in循环只能获得对象的键名  不能直接获取键值  for...of循环允许遍历获得键值
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### set和map结构</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  var engines &#x3D; new Set([&quot;Gecko&quot;, &quot;Trident&quot;, &quot;Webkit&quot;, &quot;Webkit&quot;]); </span><br><span class="line">  for (var e of engines) &#123; </span><br><span class="line">      console.log(e); </span><br><span class="line">  &#125; &#x2F;&#x2F; Gecko &#x2F;&#x2F; Trident &#x2F;&#x2F; Webkit </span><br><span class="line">  var es6 &#x3D; new Map(); </span><br><span class="line">  es6.set(&quot;edition&quot;, 6); </span><br><span class="line">  es6.set(&quot;committee&quot;, &quot;TC39&quot;); </span><br><span class="line">  es6.set(&quot;standard&quot;, &quot;ECMA-262&quot;); </span><br><span class="line">  for (var [name, value] of es6) &#123; </span><br><span class="line">      console.log(name + &quot;: &quot; + value); </span><br><span class="line">  &#125; &#x2F;&#x2F; edition: 6 &#x2F;&#x2F; committee: TC39 &#x2F;&#x2F; standard: ECMA-262</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; 遍历的顺序是按照各个成员被添加进数据结构的顺序</span><br><span class="line">  &#x2F;&#x2F; set结构遍历时 返回的是一个值  map结构遍历时  返回的是一个数组  数组的两个成员分别是键名和键值</span><br><span class="line">  </span><br><span class="line">  let map &#x3D; new Map().set(&#39;a&#39;, 1).set(&#39;b&#39;, 2); </span><br><span class="line">  for (let pair of map) &#123; </span><br><span class="line">      console.log(pair); </span><br><span class="line">  &#125;</span><br><span class="line">  &#x2F;&#x2F; [&#39;a&#39;, 1] </span><br><span class="line">  &#x2F;&#x2F; [&#39;b&#39;, 2] </span><br><span class="line">  for (let [key, value] of map) &#123; </span><br><span class="line">      console.log(key + &#39; : &#39; + value); </span><br><span class="line">  &#125;</span><br><span class="line">  &#x2F;&#x2F; a : 1 </span><br><span class="line">  &#x2F;&#x2F; b : 2</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<h4 id="计算生成的数据结构"><a class="header-anchor" href="#计算生成的数据结构">¶</a>计算生成的数据结构</h4>
+<ul>
+<li>
+<pre><code class="language-javascript">// 有些数据结构是在现有数据结构的基础上计算生成的  es6在数组 set map都部署了三个方法调用后都返回遍历器对象
+// entries() 返回一个遍历器对象，用来遍历 [键名, 键值] 组成的 数组。对于数组，键名就是索引值；对于 Set，键名与键值相同  Map 结构的 Iterator 接口，默认就是调用 entries 方法。
+// keys() 返回一个遍历器对象，用来遍历所有的键名
+// values() 返回一个遍历器对象，用来遍历所有的键值
+
+// 三个方法调用后生成遍历器对象  所遍历的都是计算生成的数据结构
+
+let arr = ['a', 'b', 'c']; 
+for (let pair of arr.entries()) { 
+    console.log(pair); 
+}
+// [0, 'a'] 
+// [1, 'b'] 
+// [2, 'c']
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 类数组对象</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; 字符串  for...of循环可以正确识别32位字符</span><br><span class="line">  let str &#x3D; &quot;hello&quot;; </span><br><span class="line">  for (let s of str) &#123; </span><br><span class="line">      console.log(s); &#x2F;&#x2F; h e l l o </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; DOM NodeList对象 </span><br><span class="line">  let paras &#x3D; document.querySelectorAll(&quot;p&quot;); </span><br><span class="line">  for (let p of paras) &#123; </span><br><span class="line">      p.classList.add(&quot;test&quot;); </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; arguments对象 </span><br><span class="line">  function printArgs() &#123; </span><br><span class="line">      for (let x of arguments) &#123; </span><br><span class="line">          console.log(x); </span><br><span class="line">      &#125; </span><br><span class="line">  &#125;</span><br><span class="line">  printArgs(&#39;a&#39;, &#39;b&#39;); &#x2F;&#x2F; &#39;a&#39; &#x2F;&#x2F; &#39;b&#39;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; 可以用Array.from方法转为数组的方法解决类数组对象没有接口的问题</span><br><span class="line">  let arrayLike &#x3D; &#123; length: 2, 0: &#39;a&#39;, 1: &#39;b&#39; &#125;; </span><br><span class="line">  &#x2F;&#x2F; 报错 </span><br><span class="line">  for (let x of arrayLike) &#123; </span><br><span class="line">      console.log(x); </span><br><span class="line">  &#125;</span><br><span class="line">  &#x2F;&#x2F; 正确 </span><br><span class="line">  for (let x of Array.from(arrayLike)) &#123; </span><br><span class="line">      console.log(x); </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+</code></pre>
+</li>
+</ul>
+<h4 id="对像"><a class="header-anchor" href="#对像">¶</a>对像</h4>
+<ul>
+<li>
+<pre><code class="language-javascript">// 对于普通的对象  for...in循环可以遍历键名  for...of循环会报错
+// 一种解决办法是使用Object.keys方法将对象的键名生成一个数组  然后遍历这个数组
+// 另一个方法是使用Generator函数将对象重新包装
+function* entries(obj) { 
+    for (let key of Object.keys(obj)) { 
+        yield [key, obj[key]]; 
+    } 
+}
+for (let [key, value] of entries(obj)) { 
+    console.log(key, '-&gt;', value); 
+}
+// a -&gt; 1 
+// b -&gt; 2 
+// c -&gt; 3
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### 与其他遍历方法比较</span><br><span class="line"></span><br><span class="line">- &#96;&#96;&#96;javascript</span><br><span class="line">  &#x2F;&#x2F; for循环</span><br><span class="line">  for (var index &#x3D; 0; index &lt; myArray.length; index++) &#123; 							console.log(myArray[index]); </span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; 数组的forEach  问题：无法中途跳出forEach循环  break或return不能奏效</span><br><span class="line">  myArray.forEach(function (value) &#123; </span><br><span class="line">      console.log(value); </span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; for...in遍历键名</span><br><span class="line">  for (var index in myArray) &#123; </span><br><span class="line">      console.log(myArray[index]); </span><br><span class="line">  &#125;</span><br><span class="line">  &#x2F;&#x2F; 问题：for...in 循环不仅遍历键名，还会遍历手动添加的其他键， 甚至包括原型链上的键</span><br><span class="line">  &#x2F;&#x2F; 某些情况下  for...in循环会以任意顺序遍历键名</span><br><span class="line">  </span><br><span class="line">  &#x2F;&#x2F; for...of</span><br><span class="line">  for (let value of myArray) &#123; </span><br><span class="line">      console.log(value); </span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</code></pre>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/07/18/Iterator%E5%92%8Cfor-of%E5%BE%AA%E7%8E%AF/" data-id="ckcrpo1fr0000agvpag4789va" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/" rel="tag">es6</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-代理与反射" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/07/16/%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%B0%84/" class="article-date">
@@ -1341,7 +1602,7 @@ A---B---D---E---C'---F'   test, master
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/git/" style="font-size: 10px;">git</a>
+      <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 10px;">git</a>
     </div>
   </div>
 
@@ -1363,6 +1624,10 @@ A---B---D---E---C'---F'   test, master
       <ul>
         
           <li>
+            <a href="/2020/07/18/Iterator%E5%92%8Cfor-of%E5%BE%AA%E7%8E%AF/">Iterator和for...of循环</a>
+          </li>
+        
+          <li>
             <a href="/2020/07/16/%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%B0%84/">代理与反射</a>
           </li>
         
@@ -1376,10 +1641,6 @@ A---B---D---E---C'---F'   test, master
         
           <li>
             <a href="/2020/07/15/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">面向对象</a>
-          </li>
-        
-          <li>
-            <a href="/2020/07/13/git%E5%88%9D%E5%AD%A6/">git初学</a>
           </li>
         
       </ul>
