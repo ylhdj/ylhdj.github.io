@@ -46,17 +46,76 @@
 </header>
   <div id="content" class="inner">
     <div id="main-col" class="alignleft"><div id="wrapper">
-  <article id="post-14、async函数" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-12、promise对象" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2020-07-21T13:58:00.000Z"><a href="/2020/07/21/14、async函数/">2020-07-21</a></time>
+        <time class="dt-published" datetime="2020-07-22T02:52:41.000Z"><a href="/2020/07/22/12、promise对象/">2020-07-22</a></time>
       
       
   
-    <h1 class="title"><a href="/2020/07/21/14、async函数/">async函数</a></h1>
+    <h1 class="title"><a href="/2020/07/22/12、promise对象/">12、promise对象</a></h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h2 id="promise对象"><a class="header-anchor" href="#promise对象">¶</a>promise对象</h2>
+<ul>
+<li>保存着某个未来才会结束的事件（通常是异步操作）的结果  从它可以获取异步操作的消息</li>
+<li>promise对象状态不受外界影响（三种状态 pending进行中  fulfilled已成功  rejected已失败）</li>
+<li>状态一旦改变  就不会再变  任何时候都可以得到这个结果</li>
+<li>无法取消promise  一旦新建就会立即执行  如果不设置回调函数  错误不会反应到外部</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在promise对象中调用resolve函数会将状态变成成功  调用reject会将状态变成失败  不调用则一直是进行中</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> 函数名(<span class="params">参数</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">    	<span class="comment">// some code</span></span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123; </span><br><span class="line">    <span class="comment">// ... some code </span></span><br><span class="line">    <span class="keyword">if</span> (<span class="comment">/* 异步操作成功 */</span>)&#123; </span><br><span class="line">        resolve(value); </span><br><span class="line">	&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">     	reject(error); </span><br><span class="line">	&#125; </span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 当在一个promise对象中使用另一个promise对象作为resolve或reject函数的参数</span></span><br><span class="line"><span class="keyword">var</span> p1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        reject(<span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'fail'</span>))</span><br><span class="line">    &#125;, <span class="number">3000</span>)</span><br><span class="line">&#125;) </span><br><span class="line"><span class="keyword">var</span> p2 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        resolve(p1)</span><br><span class="line">    &#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;) </span><br><span class="line">p2.then(<span class="function"><span class="params">result</span> =&gt;</span> <span class="built_in">console</span>.log(result)).catch(<span class="function"><span class="params">error</span> =&gt;</span> <span class="built_in">console</span>.log(error))</span><br><span class="line"><span class="comment">// Error: fail</span></span><br><span class="line"><span class="comment">// 因为p2返回了p1 所以p2的状态由p1决定</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用resolve或reject函数并不会终结函数的执行  resolve和reject会在函数执行完成后再调用  最好在调用这两个函数是使用return   return resolve()</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    resolve(<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;).then(<span class="function"><span class="params">r</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(r);</span><br><span class="line">&#125;); </span><br><span class="line"><span class="comment">// 2 </span></span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<h3 id="方法"><a class="header-anchor" href="#方法">¶</a>方法</h3>
+<h4 id="then"><a class="header-anchor" href="#then">¶</a>then</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">promise对象或函数(参数).then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// resolve函数</span></span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// reject函数</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 链式操作</span></span><br><span class="line">promise对象或函数(参数).then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// resolve函数</span></span><br><span class="line">    <span class="comment">// 返回一个promise对象</span></span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// reject函数</span></span><br><span class="line">    <span class="comment">// 返回一个promise对象</span></span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">value</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// resolve函数</span></span><br><span class="line">&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">error</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// reject函数</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="catch"><a class="header-anchor" href="#catch">¶</a>catch</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对象.catch(reject) 相当于 对象.then(null,reject) </span></span><br><span class="line"><span class="comment">// 在链式操作的最后使用</span></span><br><span class="line"><span class="comment">// 捕捉错误   如果状态变成成功 不能抛出错误</span></span><br><span class="line"><span class="keyword">var</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'test'</span>);</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        reject(e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">promise.catch(<span class="function"><span class="keyword">function</span> (<span class="params">error</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(error);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// promise对象的错误具有冒泡性质 会一直向后传递  直到被捕获为止</span></span><br></pre></td></tr></table></figure>
+<h4 id="all"><a class="header-anchor" href="#all">¶</a>all</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="built_in">Promise</span>.all([p1, p2, p3])</span><br><span class="line"><span class="comment">// 都是promise实例  如果不是会调用promise.resolve将数组中的元素转化为实例</span></span><br><span class="line"><span class="comment">// 参数可以不是数组 但必须有Iterator接口 且返回的每个成员都是promise实例</span></span><br><span class="line"><span class="comment">// 只有p1  p2  p3的状态都成功 p才会变成成功  三者返回值组成数组传递给resolve回调</span></span><br><span class="line"><span class="comment">// 如果有一个失败 则p失败  第一个被rejected的实例返回值传递给reject回调</span></span><br></pre></td></tr></table></figure>
+<h4 id="race"><a class="header-anchor" href="#race">¶</a>race</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="built_in">Promise</span>.race([p1, p2, p3])</span><br><span class="line"><span class="comment">// 只要其中一个的状态改变 p跟着改变（无论是成功还是失败） 返回值传递给对应的回调</span></span><br></pre></td></tr></table></figure>
+<h4 id="resolve"><a class="header-anchor" href="#resolve">¶</a>resolve</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果参数是promise实例  原封不动地返回该实例</span></span><br><span class="line"><span class="comment">// 如果参数是具有then方法的对象  将该对象转为promise对象</span></span><br><span class="line"><span class="comment">// 不是对象或没有then方法的对象 返回一个promise对象 状态为resolve 像下面一样</span></span><br><span class="line"><span class="built_in">Promise</span>.resolve(参数)</span><br><span class="line"><span class="comment">// 等价于</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve</span>)</span>&#123;</span><br><span class="line">    resolve(参数)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 不带参数 同上但没有参数</span></span><br></pre></td></tr></table></figure>
+<h4 id="reject"><a class="header-anchor" href="#reject">¶</a>reject</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = <span class="built_in">Promise</span>.reject(参数); </span><br><span class="line"><span class="comment">// 等同于 </span></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">    reject(参数)</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 无论传递什么都是这样 原封不动传递给reject回调</span></span><br></pre></td></tr></table></figure>
+<h4 id="done"><a class="header-anchor" href="#done">¶</a>done</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 链式操作无论是以then方法还是catch方法结尾  最后一个方法抛出错误都有可能捕捉不到</span></span><br><span class="line"><span class="comment">// 定义一个done方法总处于尾端 保证抛出错误</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现</span></span><br><span class="line"><span class="built_in">Promise</span>.prototype.done = <span class="function"><span class="keyword">function</span> (<span class="params">onFulfilled, onRejected</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">this</span>.then(onFulfilled, onRejected).catch(<span class="function"><span class="keyword">function</span> (<span class="params">reason</span>) </span>&#123; </span><br><span class="line">        <span class="comment">// 抛出一个全局错误 </span></span><br><span class="line">        setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="keyword">throw</span> reason &#125;, <span class="number">0</span>); </span><br><span class="line">    &#125;); </span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 可以像普通方法一样提供回调函数  也可以不提供回调（一样可以抛出错误）</span></span><br></pre></td></tr></table></figure>
+<h4 id="finally"><a class="header-anchor" href="#finally">¶</a>finally</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 作为结尾  不管promise对象最后状态如何 都会执行的操作 接收一个普通回调函数作为参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现</span></span><br><span class="line"><span class="built_in">Promise</span>.prototype.finally = <span class="function"><span class="keyword">function</span> (<span class="params">callback</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">let</span> P = <span class="keyword">this</span>.constructor; </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.then( </span><br><span class="line">        value =&gt; P.resolve(callback()).then(<span class="function"><span class="params">()</span> =&gt;</span> value), </span><br><span class="line">        reason =&gt; P.resolve(callback()).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123; </span><br><span class="line">            <span class="keyword">throw</span> reason </span><br><span class="line">        &#125;) </span><br><span class="line">    ); </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id=""><a class="header-anchor" href="#">¶</a></h4>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article id="post-15、async函数" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2020-07-21T13:58:00.000Z"><a href="/2020/07/21/15、async函数/">2020-07-21</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2020/07/21/15、async函数/">async函数</a></h1>
   
 
     </header>
@@ -260,17 +319,17 @@
 
 
 
-  <article id="post-13、Generator函数" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-14、Generator函数" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2020-07-19T14:06:09.000Z"><a href="/2020/07/19/13、Generator函数/">2020-07-19</a></time>
+        <time class="dt-published" datetime="2020-07-19T14:06:09.000Z"><a href="/2020/07/19/14、Generator函数/">2020-07-19</a></time>
       
       
   
-    <h1 class="title"><a href="/2020/07/19/13、Generator函数/">Generator函数</a></h1>
+    <h1 class="title"><a href="/2020/07/19/14、Generator函数/">Generator函数</a></h1>
   
 
     </header>
@@ -338,17 +397,17 @@
 
 
 
-  <article id="post-12、Iterator和for-of循环" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-13、Iterator和for-of循环" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   
   <div class="post-content">
     <header>
       
         <div class="icon"></div>
-        <time class="dt-published" datetime="2020-07-18T13:51:35.000Z"><a href="/2020/07/18/12、Iterator和for-of循环/">2020-07-18</a></time>
+        <time class="dt-published" datetime="2020-07-18T13:51:35.000Z"><a href="/2020/07/18/13、Iterator和for-of循环/">2020-07-18</a></time>
       
       
   
-    <h1 class="title"><a href="/2020/07/18/12、Iterator和for-of循环/">Iterator和for...of循环</a></h1>
+    <h1 class="title"><a href="/2020/07/18/13、Iterator和for-of循环/">Iterator和for...of循环</a></h1>
   
 
     </header>
@@ -910,176 +969,11 @@
 
 
 
-  <article id="[post]-git初学" class="h-entry [post]" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time class="dt-published" datetime="2020-07-13T08:38:28.000Z"><a href="/2020/07/13/git初学/">2020-07-13</a></time>
-      
-      
-  
-    <h1 class="title"><a href="/2020/07/13/git初学/">git初学</a></h1>
-  
-
-    </header>
-    <div class="e-content entry" itemprop="articleBody">
-      
-        <p>[TOC]</p>
-<h2 id="git"><a class="header-anchor" href="#git">¶</a>git</h2>
-<h3 id="工作流程"><a class="header-anchor" href="#工作流程">¶</a>工作流程</h3>
-<h4 id="workspace-工作区"><a class="header-anchor" href="#workspace-工作区">¶</a>workspace (工作区)</h4>
-<ul>
-<li>程序员进行开发改动的地方  是你当前看到的  也是最新的</li>
-<li>平常我们进行开发就是拷贝远程仓库中的一个分支  基于该分支进行开发  在开发过程中就是对工作区的操作</li>
-</ul>
-<h4 id="index-stage-暂存区"><a class="header-anchor" href="#index-stage-暂存区">¶</a>index/stage(暂存区)</h4>
-<ul>
-<li>.git目录下的index文件  暂存区会记录<code>git add</code>添加文件的相关信息(文件名、大小、<code>timestamp</code>…)  不报存文件实体  通过<code>id</code>指向每个文件实体</li>
-<li>可以使用<code>git status</code>查看暂存区的状态 暂存区标记了你当前工作区中 哪些内容是被<code>git</code>管理的</li>
-<li>当你完成某个需求或功能后需要提交到远程仓库  那么第一步就是通过<code>git add</code>先提交到暂存区 被<code>git</code>管理</li>
-</ul>
-<h4 id="repository-本地仓库"><a class="header-anchor" href="#repository-本地仓库">¶</a>repository(本地仓库)</h4>
-<ul>
-<li>保存了对象被提交过的各个版本  比起工作区和暂存区的内容  它要更旧些</li>
-<li><code>git commit</code>后同步index的目录树到本地仓库  方便从下一步通过<code>git push</code>同步本地仓库与远程仓库的同步</li>
-</ul>
-<h4 id="remote-远程仓库"><a class="header-anchor" href="#remote-远程仓库">¶</a>remote(远程仓库)</h4>
-<ul>
-<li>远程仓库的内容可能被分布在多个地点的处于协作关系的本地仓库修改  因此它可能与本地仓库同步  也可能不同步  但是它的内容是最旧的</li>
-</ul>
-<h4 id="小结"><a class="header-anchor" href="#小结">¶</a>小结</h4>
-<ul>
-<li>（1）任何对象都是在工作区中诞生和被修改</li>
-<li>（2）任何修改都是从进入<code>index</code>区才开始被版本控制</li>
-<li>（3）只有把修改提交到本地仓库  该修改才能在仓库中留下痕迹</li>
-<li>（4）与协作者分享本地的修改  可以把他们<code>push</code>到远程仓库来共享</li>
-</ul>
-<h3 id="常用git命令"><a class="header-anchor" href="#常用git命令">¶</a>常用git命令</h3>
-<h4 id="HEAD"><a class="header-anchor" href="#HEAD">¶</a>HEAD</h4>
-<ul>
-<li><code>HEAD</code> 它始终指向当前所处分支的最新的提交的</li>
-<li>你所处的分支变化了  或者产生了新的提交点  <code>HEAD</code>就会跟着改变</li>
-</ul>
-<h4 id="add"><a class="header-anchor" href="#add">¶</a>add</h4>
-<ul>
-<li><code>add</code>相关命令主要实现将工作区修改的内容提交到暂存区  交给<code>git</code>管理</li>
-<li><code>git add</code> 添加当前目录的所有文件到暂存区</li>
-<li><code>git add &lt;dir&gt;</code> 添加指定目录到暂存区  包括子目录  例：<code>git add readme.md</code></li>
-<li><code>git add &lt;file1&gt;</code>  添加指定文件到暂存区  例：<code>git add 文件名</code></li>
-</ul>
-<h4 id="commit"><a class="header-anchor" href="#commit">¶</a>commit</h4>
-<ul>
-<li><code>commit</code>相关命令主要实现将暂存区的内容提交到本地仓库  并使当前分支的<code>HEAD</code>向后移动一个提交点</li>
-<li><code>git commit -m &lt;message&gt;</code>  提交暂存区到本地仓库  message说明信息</li>
-<li><code>git commit &lt;file1&gt; -m &lt;message&gt;</code> 提交暂存区的指定文件到本地仓库  例：<code>git commit 文件.后缀 -m &quot;说明&quot;</code></li>
-<li><code>git commit --amend -m &lt;message&gt;</code> 使用一次新的<code>commit</code>  替代上次提交</li>
-</ul>
-<h4 id="branch"><a class="header-anchor" href="#branch">¶</a>branch</h4>
-<ul>
-<li><code>git branch</code>    列出所有本地分支</li>
-<li><code>git branch -r</code>  列出所有远程分支</li>
-<li><code>git branch-a</code>  列出所有本地分支和远程分支</li>
-<li><code>git branch &lt;branch-name&gt;</code>  新建一个分支  但仍停留在当前分支  例：<code>git branch 分支名</code></li>
-<li><code>git checkout -b &lt;branch-name&gt;</code>  新建一个分支并切换到该分支</li>
-<li><code>git branch --track &lt;branch&gt; &lt;remote-branch&gt;</code>  新建一个分支  与指定的远程分支建立追踪关系</li>
-<li><code>git checkout &lt;branch-name&gt;</code>  切换到指定分支并更新工作区</li>
-<li><code>git branch -d &lt;branch-name&gt;</code>  删除分支</li>
-<li><code>git push origin --delete &lt;branch-name&gt;</code>  删除远程分支</li>
-</ul>
-<h4 id="merge"><a class="header-anchor" href="#merge">¶</a>merge</h4>
-<ul>
-<li>merge命令把不同的分支合并起来</li>
-<li><code>git fetch &lt;remote&gt;</code>  <code>merge</code>之前先拉一下远程仓库最新代码</li>
-<li><code>git merge &lt;branch&gt;</code>  合并指定分支到当前分支  例：<code>git merge 分支名</code></li>
-<li>一般在<code>merge</code>之后  会出现<code>conflict</code> 需要针对冲突情况  手动解决冲突  主要是因为两个用户修改了同一文件的同一块区域</li>
-</ul>
-<h4 id="rebase"><a class="header-anchor" href="#rebase">¶</a>rebase</h4>
-<ul>
-<li><code>rebase</code>称为衍合  是合并的另外一种选择</li>
-<li>在开始阶段  我们处于new分支上  执行<code>git rebase dev</code>  那么<code>new</code>分支上新的<code>commit</code>都在<code>master</code>分支上重演一遍  最后<code>checkout </code>切换回<code>new</code>分支  这点和<code>merge</code>是一样的  合并前后所处的分支没有改变</li>
-<li><code>git rebase dev</code> <code>new</code>分支想要站在dev的肩膀上继续下去  <code>rebase</code>  也需要手动解决冲突</li>
-</ul>
-<h5 id="rebase与merge的区别"><a class="header-anchor" href="#rebase与merge的区别">¶</a>rebase与merge的区别</h5>
-<ul>
-<li>
-<pre><code>初始状态
-     D---E test
-     /
-A---B---C---F master
-
-在 master 执行 git merge test 后
-      D--------E
-     /          \
-A---B---C---F----G   test, master
-
-在 master 执行 git rebase test 后
-A---B---D---E---C'---F'   test, master
-</code></pre>
-</li>
-<li>
-<p><code>merge</code>操作会生成一个新的节点  之前的提交分开显示  而<code>rebase</code>不会生成新的节点  是将两个分支融合成一个线性的提交</p>
-</li>
-<li>
-<p>如果想要一个干净 没有<code>merge commit</code>的线性历史树  使用<code>rebase</code></p>
-</li>
-<li>
-<p>如果想要保留完整的历史记录  并且避免重写<code>commit history</code>的风险  使用<code>merge</code></p>
-</li>
-</ul>
-<h4 id="reset"><a class="header-anchor" href="#reset">¶</a>reset</h4>
-<ul>
-<li><code>reset</code>命令把当前分支指向另一个位置  并且相应的变动工作区和暂存区</li>
-<li><code>git reset ——soft &lt;commit&gt;</code>  只改变提交点  暂存区和工作目录的内容都不变</li>
-<li><code>git reset ——mixed &lt;commit&gt;</code> 改变提交点  同时改变暂存区的内容</li>
-<li><code>git reset ——hard &lt;commit&gt;</code> 暂存区 工作区的内容都会被修改到与提交点完全一致的状态</li>
-<li><code>git reset ——hard HEAD</code> 让工作区回到上次提交时的状态</li>
-</ul>
-<h4 id="revert"><a class="header-anchor" href="#revert">¶</a>revert</h4>
-<ul>
-<li><code>git revert</code> 用一个新提交来消除一个历史提交所做的任何修改</li>
-</ul>
-<h5 id="revert和reset的区别"><a class="header-anchor" href="#revert和reset的区别">¶</a>revert和reset的区别</h5>
-<ul>
-<li><code>git revert</code>是用一次新的<code>commit</code>来回滚之前的<code>commit</code> <code>git reset</code>是直接删除指定的<code>commit</code>。</li>
-<li>在回滚这一操作上看，效果差不多。但是在日后继续<code>merge</code>以前的老版本时有区别。因为<code>git revert</code>是用一次逆向的<code>commit</code>中和之前的提交，因此日后合并老的<code>branch</code>时，导致这部分改变不会再次出现，减少冲突。但是<code>git reset</code>是之间把某些<code>commit</code>在某个<code>branch</code>上删除，因而和老的<code>branch</code>再次<code>merge</code>时，这些被回滚的<code>commit</code>应该还会被引入，产生很多冲突。</li>
-<li><code>git reset </code>是把<code>HEAD</code>向后移动了一下，而<code>git revert</code>是<code>HEAD</code>继续前进，只是新的<code>commit</code>的内容和要<code>revert</code>的内容正好相反，能够抵消要被<code>revert</code>的内容。</li>
-</ul>
-<h4 id="push"><a class="header-anchor" href="#push">¶</a>push</h4>
-<ul>
-<li>本地仓库分支到远程仓库分支  实现同步</li>
-<li><code>git push &lt;remote&gt; &lt;branch&gt;</code>  上次本地指定分支到远程仓库</li>
-<li><code>git push &lt;remote&gt; --force</code>  强行推送当前分支到远程仓库  即使有冲突</li>
-<li><code>git push &lt;remote&gt; --all</code> 推送所有分支到远程仓库</li>
-</ul>
-<h4 id="其他命令"><a class="header-anchor" href="#其他命令">¶</a>其他命令</h4>
-<ul>
-<li><code>git status</code> 显示有变更的文件</li>
-<li><code>git log</code> 显示当前分支的版本历史</li>
-<li><code>git diff</code> 显示暂存区和工作区的差异</li>
-<li><code>git diff HEAD</code>  显示工作区与当前分支最新<code>commit</code>之间的差异</li>
-<li><code>git cherry-pick &lt;commit&gt;</code> 选择一个<code>commit</code> 合并进当前分支</li>
-</ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-
-
 
 <nav id="pagination">
   
+  
+    <a href="/page/2/" class="alignright next">Next</a>
   
   <div class="clearfix"></div>
 </nav></div></div>
@@ -1101,7 +995,7 @@ A---B---D---E---C'---F'   test, master
   
     <li><a href="/tags/JavaScript/">JavaScript</a><small>3</small></li>
   
-    <li><a href="/tags/es6/">es6</a><small>6</small></li>
+    <li><a href="/tags/es6/">es6</a><small>7</small></li>
   
     <li><a href="/tags/git/">git</a><small>1</small></li>
   
