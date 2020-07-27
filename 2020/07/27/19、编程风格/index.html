@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>19、编程风格 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="[TOC]
+¶编程风格
+¶块级作用域
+123// （1）let取代var  let没有副作用// （2）全局常量和线程安全  在let和const之间 优先使用const 在全局环境 不应该设置变量 只应设置常量  const有利于提升运行效率  所有函数都应设置为常量
+¶字符串
+123// （1）">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="19、编程风格"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-19、编程风格" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2020-07-27T11:53:24.000Z"><a href="/2020/07/27/19、编程风格/">2020-07-27</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">19、编程风格</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h2 id="编程风格"><a class="header-anchor" href="#编程风格">¶</a>编程风格</h2>
+<h3 id="块级作用域"><a class="header-anchor" href="#块级作用域">¶</a>块级作用域</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// （1）let取代var  let没有副作用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// （2）全局常量和线程安全  在let和const之间 优先使用const 在全局环境 不应该设置变量 只应设置常量  const有利于提升运行效率  所有函数都应设置为常量</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串"><a class="header-anchor" href="#字符串">¶</a>字符串</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// （1）静态字符串一律使用单引号或反引号  不使用双引号  动态字符串使用反引号</span></span><br><span class="line"><span class="keyword">const</span> a = <span class="string">'foobar'</span>  <span class="comment">// 静态字符串 </span></span><br><span class="line"><span class="keyword">const</span> b = <span class="string">`foo<span class="subst">$&#123;a&#125;</span>bar`</span>  <span class="comment">// 动态字符串</span></span><br></pre></td></tr></table></figure>
+<h3 id="解构赋值"><a class="header-anchor" href="#解构赋值">¶</a>解构赋值</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// （1）使用数组成员对变量赋值  优先使用解构赋值</span></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]</span><br><span class="line"><span class="keyword">const</span> [first, second] = arr</span><br><span class="line"></span><br><span class="line"><span class="comment">// （2）函数的参数如果是对象的成员  优先使用解构赋值  如果函数返回多个值  优先使用对象的解构赋值  而不是数组的解构赋值 这样便于以后添加返回值 以及更改返回值的顺序</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFullName</span>(<span class="params">&#123; firstName, lastName &#125;</span>) </span>&#123; </span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">processInput</span>(<span class="params">input</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> &#123; left, right, top, bottom &#125;; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> &#123; left, right &#125; = processInput(input)</span><br></pre></td></tr></table></figure>
+<h3 id="对象"><a class="header-anchor" href="#对象">¶</a>对象</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// （1）单行定义的对象 最后一个成员不以逗号结尾  多行定义的对象 最后一个成员以逗号结尾</span></span><br><span class="line"><span class="keyword">const</span> a = &#123; <span class="attr">k1</span>: v1, <span class="attr">k2</span>: v2 &#125;; </span><br><span class="line"><span class="keyword">const</span> b = &#123; </span><br><span class="line">    k1: v1, </span><br><span class="line">    k2: v2, </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// （2）对象尽量静态化 一旦定义不得随意添加新属性 如果添加属性 不可避免 要使用Object.assign方法</span></span><br><span class="line"><span class="comment">// if reshape unavoidable </span></span><br><span class="line"><span class="keyword">const</span> a = &#123;&#125;; </span><br><span class="line"><span class="built_in">Object</span>.assign(a, &#123; <span class="attr">x</span>: <span class="number">3</span> &#125;); </span><br><span class="line"><span class="comment">// good </span></span><br><span class="line"><span class="keyword">const</span> a = &#123; <span class="attr">x</span>: <span class="literal">null</span> &#125;; </span><br><span class="line">a.x = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// （3）如果对象的属性名是动态的 可以在创造对象的时候 使用属性表达式定义</span></span><br><span class="line"><span class="comment">// good </span></span><br><span class="line"><span class="keyword">const</span> obj = &#123; </span><br><span class="line">    id: <span class="number">5</span>, </span><br><span class="line">    name: <span class="string">'San Francisco'</span>, </span><br><span class="line">    [函数(<span class="string">'enabled'</span>)]: <span class="literal">true</span>, </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// （4）对象的属性和方法 尽量采用简介表达法</span></span><br><span class="line"><span class="keyword">const</span> atom = &#123; </span><br><span class="line">    ref, </span><br><span class="line">    value: <span class="number">1</span>, </span><br><span class="line">    addValue(value) &#123; </span><br><span class="line">        <span class="keyword">return</span> atom.value + value; </span><br><span class="line">    &#125;, </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数组"><a class="header-anchor" href="#数组">¶</a>数组</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// （1）使用扩展运算符拷贝数组</span></span><br><span class="line"><span class="keyword">const</span> itemsCopy = [...items]</span><br><span class="line"></span><br><span class="line"><span class="comment">// （2）使用Array.from方法 将类数组对象转为数组</span></span><br><span class="line"><span class="keyword">const</span> foo = <span class="built_in">document</span>.querySelectorAll(<span class="string">'.foo'</span>); </span><br><span class="line"><span class="keyword">const</span> nodes = <span class="built_in">Array</span>.from(foo)</span><br></pre></td></tr></table></figure>
+<h3 id="函数"><a class="header-anchor" href="#函数">¶</a>函数</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// （1）立即执行函数可以写成箭头函数的形式</span></span><br><span class="line">(<span class="function"><span class="params">()</span> =&gt;</span> &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Welcome to the Internet.'</span>); </span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="comment">// （2）需要使用函数表达式的场合  尽量使用箭头函数代替（绑定了this）</span></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].map(<span class="function"><span class="params">x</span> =&gt;</span> x * x)</span><br><span class="line"></span><br><span class="line"><span class="comment">// （3）箭头函数取代Function.prototype.bind 不应再使用变量绑定this</span></span><br><span class="line"><span class="comment">// bad </span></span><br><span class="line"><span class="keyword">const</span> self = <span class="keyword">this</span>; </span><br><span class="line"><span class="keyword">const</span> boundMethod = <span class="function"><span class="keyword">function</span>(<span class="params">...params</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> method.apply(self, params); </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// acceptable </span></span><br><span class="line"><span class="keyword">const</span> boundMethod = method.bind(<span class="keyword">this</span>); </span><br><span class="line"><span class="comment">// best </span></span><br><span class="line"><span class="keyword">const</span> boundMethod = <span class="function">(<span class="params">...params</span>) =&gt;</span> method.apply(<span class="keyword">this</span>, params)</span><br><span class="line"></span><br><span class="line"><span class="comment">// （4）简单的 单行的 不会复用的函数 建议采用箭头函数 如果函数比较复杂 行数较多 应该采用传统函数的写法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// （5）所有配置项都应该集中在一个对象 放在最后一个参数 布尔值不可以直接作为参数</span></span><br><span class="line"><span class="comment">// bad </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">divide</span>(<span class="params">a, b, option = false </span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// good </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">divide</span>(<span class="params">a, b, &#123; option = false &#125; = &#123;&#125;</span>) </span>&#123; </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// （6）不要在函数体内使用arguments变量 使用rest运算符代替 rest运算符显示表明你想要获取参数 而arguments是一个类数组对象 rest运算符可以提供一个真正的数组</span></span><br><span class="line"><span class="comment">// bad </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">concatenateAll</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">const</span> args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>); </span><br><span class="line">    <span class="keyword">return</span> args.join(<span class="string">''</span>); </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// good </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">concatenateAll</span>(<span class="params">...args</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> args.join(<span class="string">''</span>); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// （7）使用默认值语法设置函数参数的默认值</span></span><br><span class="line"><span class="comment">// bad </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleThings</span>(<span class="params">opts</span>) </span>&#123; </span><br><span class="line">    opts = opts || &#123;&#125;; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// good </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleThings</span>(<span class="params">opts = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ... </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Map结构"><a class="header-anchor" href="#Map结构">¶</a>Map结构</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注意区分Object和Map，只有模拟现实世界的实体对象时，才使用 Object。如果只是需要 key: value 的数据结构，使用Map结构。因为 Map有内建的遍历机制</span></span><br><span class="line"><span class="keyword">let</span> map = <span class="keyword">new</span> <span class="built_in">Map</span>(arr); </span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> map.keys()) &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(key); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> value <span class="keyword">of</span> map.values()) &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(value); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> item <span class="keyword">of</span> map.entries()) &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(item[<span class="number">0</span>], item[<span class="number">1</span>]); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Class"><a class="header-anchor" href="#Class">¶</a>Class</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// （1）总是用Class取代需要prototype的操作 因为Class的写法更简单 更易于理解</span></span><br><span class="line"><span class="comment">// bad </span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Queue</span>(<span class="params">contents = []</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">this</span>._queue = [...contents]; </span><br><span class="line">&#125;</span><br><span class="line">Queue.prototype.pop = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">const</span> value = <span class="keyword">this</span>._queue[<span class="number">0</span>]; </span><br><span class="line">    <span class="keyword">this</span>._queue.splice(<span class="number">0</span>, <span class="number">1</span>); </span><br><span class="line">    <span class="keyword">return</span> value; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// good </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Queue</span> </span>&#123; </span><br><span class="line">    <span class="keyword">constructor</span>(contents = []) &#123; </span><br><span class="line">        <span class="keyword">this</span>._queue = [...contents]; </span><br><span class="line">    &#125;</span><br><span class="line">    pop() &#123; </span><br><span class="line">        <span class="keyword">const</span> value = <span class="keyword">this</span>._queue[<span class="number">0</span>]; </span><br><span class="line">        <span class="keyword">this</span>._queue.splice(<span class="number">0</span>, <span class="number">1</span>); </span><br><span class="line">        <span class="keyword">return</span> value; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// （2）使用extends实现继承 这样不会破坏instanceof运算的危险</span></span><br><span class="line"><span class="comment">// bad </span></span><br><span class="line"><span class="keyword">const</span> inherits = <span class="built_in">require</span>(<span class="string">'inherits'</span>); </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PeekableQueue</span>(<span class="params">contents</span>) </span>&#123; </span><br><span class="line">    Queue.apply(<span class="keyword">this</span>, contents); </span><br><span class="line">&#125;</span><br><span class="line">inherits(PeekableQueue, Queue); </span><br><span class="line">PeekableQueue.prototype.peek = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>._queue[<span class="number">0</span>]; </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// good </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">PeekableQueue</span> <span class="keyword">extends</span> <span class="title">Queue</span> </span>&#123; </span><br><span class="line">    peek() &#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>._queue[<span class="number">0</span>]; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="模块"><a class="header-anchor" href="#模块">¶</a>模块</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// （1）使用import取代require</span></span><br><span class="line"><span class="comment">// bad </span></span><br><span class="line"><span class="keyword">const</span> moduleA = <span class="built_in">require</span>(<span class="string">'moduleA'</span>); </span><br><span class="line"><span class="keyword">const</span> func1 = moduleA.func1; </span><br><span class="line"><span class="keyword">const</span> func2 = moduleA.func2; </span><br><span class="line"><span class="comment">// good </span></span><br><span class="line"><span class="keyword">import</span> &#123; func1, func2 &#125; <span class="keyword">from</span> <span class="string">'moduleA'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// （2）使用export取代module.exports</span></span><br><span class="line"><span class="comment">// commonJS的写法 </span></span><br><span class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>); </span><br><span class="line"><span class="keyword">var</span> Breadcrumbs = React.createClass(&#123; </span><br><span class="line">    render() &#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">nav</span> /&gt;</span></span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;); </span><br><span class="line"><span class="built_in">module</span>.exports = Breadcrumbs; </span><br><span class="line"><span class="comment">// ES6的写法 </span></span><br><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Breadcrumbs</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123; </span><br><span class="line">    render() &#123; </span><br><span class="line">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">nav</span> /&gt;</span></span>; </span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Breadcrumbs;</span><br><span class="line"></span><br><span class="line"><span class="comment">// （3）模块只有一个输出值  使用export default 多个输出值 不使用export default  export default 与普通的export不要同时使用</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// （4）不要在模块中使用通配符 这样可以确保模块中 有一个默认输出</span></span><br><span class="line"><span class="comment">// bad </span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> myObject <span class="keyword">from</span> <span class="string">'./importModule'</span>; </span><br><span class="line"><span class="comment">// good </span></span><br><span class="line"><span class="keyword">import</span> myObject <span class="keyword">from</span> <span class="string">'./importModule'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// （5）在使用默认输出的情况下 如果模块输出一个函数 函数名的首字母应该小写 输出对象 对象名应该大写</span></span><br></pre></td></tr></table></figure>
+<h3 id="ESLint的使用"><a class="header-anchor" href="#ESLint的使用">¶</a>ESLint的使用</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个语法规则和代码风格的检查工具 可以用来保证写出语法正确 风格统一的代码</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// （1）安装</span></span><br><span class="line">npm i -g eslint</span><br><span class="line"></span><br><span class="line"><span class="comment">// （2）安装Airbnb语法规则 以及import ally react插件</span></span><br><span class="line">npm i -g eslint-config-airbnb </span><br><span class="line">npm i -g eslint-plugin-<span class="keyword">import</span> eslint-plugin-jsx-a11y eslint-plugin-react</span><br><span class="line"></span><br><span class="line"><span class="comment">// （3）在项目的根目录下新建一个 .eslintrc 文件 配置ESLint</span></span><br><span class="line">&#123; </span><br><span class="line">    <span class="string">"extends"</span>: <span class="string">"eslint-config-airbnb"</span> </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// （4）当写代码时 会自动检查（像平时一样 但是规范不同）</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/es6/">es6</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2020/07/27/19%E3%80%81%E7%BC%96%E7%A8%8B%E9%A3%8E%E6%A0%BC/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="as_sitesearch" value="yoursite.com">
+  </form>
+</div>
+
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>3</small></li>
+  
+    <li><a href="/tags/es6/">es6</a><small>10</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2020 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
