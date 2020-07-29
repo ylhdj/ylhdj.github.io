@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>5、数值的扩展 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="[TOC]
+¶数值扩展
+¶二进制和八进制表示法
+
+
+使用Number()方法可以将0b和0o前缀的字符串数值转为十进制
+12345678Number(&#39;0b111&#39;)  // 7Number(&#39;0o10&#39;)  // 8// 二进制 使用前缀0b或0B0b111110111 === 503 // tr">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="5、数值的扩展"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-5、数值的扩展" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2020-07-29T13:43:37.000Z"><a href="/2020/07/29/5、数值的扩展/">2020-07-29</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">5、数值的扩展</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h2 id="数值扩展"><a class="header-anchor" href="#数值扩展">¶</a>数值扩展</h2>
+<h3 id="二进制和八进制表示法"><a class="header-anchor" href="#二进制和八进制表示法">¶</a>二进制和八进制表示法</h3>
+<ul>
+<li>
+<p>使用Number()方法可以将<code>0b和0o</code>前缀的字符串数值转为十进制</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>(<span class="string">'0b111'</span>)  <span class="comment">// 7</span></span><br><span class="line"><span class="built_in">Number</span>(<span class="string">'0o10'</span>)  <span class="comment">// 8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 二进制 使用前缀0b或0B</span></span><br><span class="line"><span class="number">0b111110111</span> === <span class="number">503</span> <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 八进制  使用前缀0o或0O（从es5开始 在严格模式中 八进制不再允许使用前缀0表示）</span></span><br><span class="line"><span class="number">0o767</span> === <span class="number">503</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="方法"><a class="header-anchor" href="#方法">¶</a>方法</h3>
+<h4 id="检查一个数值是否有限"><a class="header-anchor" href="#检查一个数值是否有限">¶</a>检查一个数值是否有限</h4>
+<ul>
+<li><code>Number.isFinite(数值)</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.isFinite(<span class="number">15</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isFinite(<span class="number">0.8</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isFinite(<span class="literal">NaN</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isFinite(<span class="literal">Infinity</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isFinite(-<span class="literal">Infinity</span>); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isFinite(其他数据类型); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现函数</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">global</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> global_isFinite = global.isFinite;</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(<span class="built_in">Number</span>, <span class="string">'isFinite'</span>, &#123;</span><br><span class="line">    value: <span class="function"><span class="keyword">function</span> <span class="title">isFinite</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">'number'</span> &amp;&amp; global_isFinite(value);</span><br><span class="line">    &#125;,</span><br><span class="line">    configurable: <span class="literal">true</span>,</span><br><span class="line">    enumerable: <span class="literal">false</span>,</span><br><span class="line">    writable: <span class="literal">true</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="检查是否为NaN"><a class="header-anchor" href="#检查是否为NaN">¶</a>检查是否为NaN</h4>
+<ul>
+<li><code>Number.isNaN(数值)</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.isNaN(<span class="literal">NaN</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isNaN(其他数据类型) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isNaN(<span class="number">9</span>/<span class="literal">NaN</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isNaN(其他数据类型/其他数据类型) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现函数</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">global</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> global_isNaN = global.isNaN;</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(<span class="built_in">Number</span>, <span class="string">'isNaN'</span>, &#123;</span><br><span class="line">    value: <span class="function"><span class="keyword">function</span> <span class="title">isNaN</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">'number'</span> &amp;&amp; global_isNaN(value);</span><br><span class="line">    &#125;,</span><br><span class="line">    configurable: <span class="literal">true</span>,</span><br><span class="line">    enumerable: <span class="literal">false</span>,</span><br><span class="line">    writable: <span class="literal">true</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>它们与传统的全局方法<code>isFinite()</code>和<code>isNaN()</code>的区别在于，传统方法先调用<code>Number()</code>将非数值的值转为数值，再进行判断，而这两个新方法只对数值有效，非数值一律返回<code>false</code>。</li>
+</ul>
+<h4 id="解析字符串-返回整数"><a class="header-anchor" href="#解析字符串-返回整数">¶</a>解析字符串  返回整数</h4>
+<ul>
+<li><code>Number.parseInt(string,radix)</code></li>
+<li><code>radix</code> 可选  要解析的数字基数(2-36之间 即进制)  如果为0或省略 以10解析</li>
+<li>如果以<code>0x或0X</code>开头  以16解析  如果参数小于2或大于36  返回NaN</li>
+<li>如果string为八进制字符串  返回的可能为10进制也可能为8进制</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES6的写法</span></span><br><span class="line"><span class="built_in">Number</span>.parseInt(<span class="string">'12.34'</span>) <span class="comment">// 12</span></span><br><span class="line"><span class="built_in">Number</span>.parseFloat(<span class="string">'123.45#'</span>) <span class="comment">// 123.45</span></span><br></pre></td></tr></table></figure>
+<h4 id="解析字符串-返回浮点数"><a class="header-anchor" href="#解析字符串-返回浮点数">¶</a>解析字符串  返回浮点数</h4>
+<ul>
+<li><code>Number.parseFloat(string)</code></li>
+<li>如果字符串首字符为数字(可以是空格)  对字符串解析  直到末端  不是则返回NaN</li>
+<li>将es5的方法转移到<code>Number</code>对象上   使语言逐步模块化</li>
+</ul>
+<h4 id="判断一个值是否为整数"><a class="header-anchor" href="#判断一个值是否为整数">¶</a>判断一个值是否为整数</h4>
+<ul>
+<li><code>Number.isInteger()</code>  <code>整数.0</code>会被当成整数</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.isInteger(<span class="number">25</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isInteger(<span class="number">25.0</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isInteger(<span class="number">25.1</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isInteger(其他数据类型) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现函数</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">global</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> floor = <span class="built_in">Math</span>.floor,</span><br><span class="line">    <span class="built_in">isFinite</span> = global.isFinite;</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(<span class="built_in">Number</span>, <span class="string">'isInteger'</span>, &#123;</span><br><span class="line">    value: <span class="function"><span class="keyword">function</span> <span class="title">isInteger</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">typeof</span> value === <span class="string">'number'</span> &amp;&amp; <span class="built_in">isFinite</span>(value) &amp;&amp;</span><br><span class="line">        value &gt; <span class="number">-9007199254740992</span> &amp;&amp; value &lt; <span class="number">9007199254740992</span> &amp;&amp;</span><br><span class="line">        floor(value) === value;</span><br><span class="line">    &#125;,</span><br><span class="line">    configurable: <span class="literal">true</span>,</span><br><span class="line">    enumerable: <span class="literal">false</span>,</span><br><span class="line">    writable: <span class="literal">true</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="Number-EPSILON"><a class="header-anchor" href="#Number-EPSILON">¶</a>Number.EPSILON</h4>
+<ul>
+<li>引入一个极小的常量</li>
+<li>浮动数计算是不准确的   如果误差小于<code>Number.EPSILON</code>  则认为得到正确结果</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0.1</span> + <span class="number">0.2</span></span><br><span class="line"><span class="comment">// 0.30000000000000004</span></span><br><span class="line"></span><br><span class="line"><span class="number">0.1</span> + <span class="number">0.2</span> - <span class="number">0.3</span></span><br><span class="line"><span class="comment">// 5.551115123125783e-17</span></span><br><span class="line"></span><br><span class="line"><span class="number">5.551115123125783e-17</span> &lt; <span class="built_in">Number</span>.EPSILON</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 误差检查函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">withinErrorMargin</span> (<span class="params">left, right</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.abs(left - right) &lt; <span class="built_in">Number</span>.EPSILON;</span><br><span class="line">&#125;</span><br><span class="line">withinErrorMargin(<span class="number">0.1</span> + <span class="number">0.2</span>, <span class="number">0.3</span>)</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line">withinErrorMargin(<span class="number">0.2</span> + <span class="number">0.2</span>, <span class="number">0.3</span>)</span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h4 id="安全整数"><a class="header-anchor" href="#安全整数">¶</a>安全整数</h4>
+<ul>
+<li>
+<p>JavaScript能够准确表示的整数范围在<code>-2^53</code>到<code>2^53</code>之间（不含两个端点）超过这个范围，无法精确表示这个值</p>
+</li>
+<li>
+<p>引入<code>Number.MAX_SAFE_INTEGER</code> 和 <code>Number.MIN_SAFE_INTEGER</code> 表示这个范围得上下限</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.MAX_SAFE_INTEGER === <span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">53</span>) - <span class="number">1</span></span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.MIN_SAFE_INTEGER === -<span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">53</span>) + <span class="number">1</span></span><br><span class="line"><span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h4 id="判断一个数是否在极限范围里"><a class="header-anchor" href="#判断一个数是否在极限范围里">¶</a>判断一个数是否在极限范围里</h4>
+<ul>
+<li><code>Number.isSafeInteger()</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Number</span>.isSafeInteger(其他数据类型) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isSafeInteger(<span class="literal">null</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isSafeInteger(<span class="literal">NaN</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isSafeInteger(<span class="literal">Infinity</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isSafeInteger(-<span class="literal">Infinity</span>) <span class="comment">// false</span></span><br><span class="line"><span class="built_in">Number</span>.isSafeInteger(<span class="number">3</span>) <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isSafeInteger(<span class="number">1.2</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现函数</span></span><br><span class="line"><span class="built_in">Number</span>.isSafeInteger = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (<span class="keyword">typeof</span> n === <span class="string">'number'</span> &amp;&amp;</span><br><span class="line">    <span class="built_in">Math</span>.round(n) === n &amp;&amp;</span><br><span class="line">    <span class="built_in">Number</span>.MIN_SAFE_INTEGER &lt;= n &amp;&amp;</span><br><span class="line">    n &lt;= <span class="built_in">Number</span>.MAX_SAFE_INTEGER);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="math对象扩展"><a class="header-anchor" href="#math对象扩展">¶</a>math对象扩展</h3>
+<h4 id="去除小数部分-返回整数部分"><a class="header-anchor" href="#去除小数部分-返回整数部分">¶</a>去除小数部分  返回整数部分</h4>
+<ul>
+<li><code>Math.trunc()</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.trunc(<span class="number">4.9</span>) <span class="comment">// 4</span></span><br><span class="line"><span class="built_in">Math</span>.trunc(<span class="number">-4.1</span>) <span class="comment">// -4</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.trunc(<span class="string">'123.456'</span>)</span><br><span class="line"><span class="comment">// 123</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Math</span>.trunc(<span class="literal">NaN</span>);      <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Math</span>.trunc(非数值字符串或数值);    <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Math</span>.trunc();         <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.trunc = <span class="built_in">Math</span>.trunc || <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> x &lt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(x) : <span class="built_in">Math</span>.floor(x);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="判断一个数是正数、负数、0"><a class="header-anchor" href="#判断一个数是正数、负数、0">¶</a>判断一个数是正数、负数、0</h4>
+<ul>
+<li><code>Math.sign()</code>   正数返回  <code>+1</code>  负数返回 <code>-1</code>  <code>0</code>返回<code>0</code>  <code>-0</code>返回<code>-0</code>  其他值返回<code>NaN</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.sign(<span class="number">-5</span>) <span class="comment">// -1</span></span><br><span class="line"><span class="built_in">Math</span>.sign(<span class="number">5</span>) <span class="comment">// +1</span></span><br><span class="line"><span class="built_in">Math</span>.sign(<span class="number">0</span>) <span class="comment">// +0</span></span><br><span class="line"><span class="built_in">Math</span>.sign(<span class="number">-0</span>) <span class="comment">// -0</span></span><br><span class="line"><span class="built_in">Math</span>.sign(<span class="literal">NaN</span>) <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Math</span>.sign(<span class="string">'foo'</span>); <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现函数</span></span><br><span class="line"><span class="built_in">Math</span>.sign = <span class="built_in">Math</span>.sign || <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  x = +x; <span class="comment">// convert to a number</span></span><br><span class="line">  <span class="keyword">if</span> (x === <span class="number">0</span> || <span class="built_in">isNaN</span>(x)) &#123;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> x &gt; <span class="number">0</span> ? <span class="number">1</span> : <span class="number">-1</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="计算立方根"><a class="header-anchor" href="#计算立方根">¶</a>计算立方根</h4>
+<ul>
+<li><code>Math.cbrt()</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.cbrt(<span class="number">-1</span>) <span class="comment">// -1</span></span><br><span class="line"><span class="built_in">Math</span>.cbrt(<span class="number">0</span>)  <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">Math</span>.cbrt(<span class="string">'8'</span>) <span class="comment">// 2</span></span><br><span class="line"><span class="built_in">Math</span>.cbrt(其他数据结构) <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现函数</span></span><br><span class="line"><span class="built_in">Math</span>.cbrt = <span class="built_in">Math</span>.cbrt || <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> y = <span class="built_in">Math</span>.pow(<span class="built_in">Math</span>.abs(x), <span class="number">1</span>/<span class="number">3</span>);</span><br><span class="line">  <span class="keyword">return</span> x &lt; <span class="number">0</span> ? -y : y;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="返回一个数的32位无符号整数形式有多少个前导0"><a class="header-anchor" href="#返回一个数的32位无符号整数形式有多少个前导0">¶</a>返回一个数的32位无符号整数形式有多少个前导0</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// JavaScript的整数使用32位二进制形式表示  Math.clz32() 返回一个数的32位无符号整数形式有多少个前导0</span></span><br><span class="line"><span class="built_in">Math</span>.clz32(<span class="number">0</span>) <span class="comment">// 32</span></span><br><span class="line"><span class="built_in">Math</span>.clz32(<span class="number">1</span>) <span class="comment">// 31</span></span><br><span class="line"><span class="built_in">Math</span>.clz32(<span class="number">1000</span>) <span class="comment">// 22</span></span><br><span class="line"><span class="built_in">Math</span>.clz32(<span class="number">0b01000000000000000000000000000000</span>) <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">Math</span>.clz32(<span class="number">0b00100000000000000000000000000000</span>) <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对于小数 Math.clz32() 只考虑整数部分（即向下取整后计算）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对于空值或其他类型的值 会先将它们转为数值 然后计算</span></span><br><span class="line"><span class="built_in">Math</span>.clz32() <span class="comment">// 32</span></span><br><span class="line"><span class="built_in">Math</span>.clz32(<span class="literal">NaN</span>) <span class="comment">// 32</span></span><br><span class="line"><span class="built_in">Math</span>.clz32(<span class="literal">Infinity</span>) <span class="comment">// 32</span></span><br><span class="line"><span class="built_in">Math</span>.clz32(<span class="literal">null</span>) <span class="comment">// 32</span></span><br><span class="line"><span class="built_in">Math</span>.clz32(<span class="string">'foo'</span>) <span class="comment">// 32</span></span><br><span class="line"><span class="built_in">Math</span>.clz32([]) <span class="comment">// 32</span></span><br><span class="line"><span class="built_in">Math</span>.clz32(&#123;&#125;) <span class="comment">// 32</span></span><br><span class="line"><span class="built_in">Math</span>.clz32(<span class="literal">true</span>) <span class="comment">// 31</span></span><br></pre></td></tr></table></figure>
+<h4 id="返回两个数以32位带符号整数形式相乘的结果"><a class="header-anchor" href="#返回两个数以32位带符号整数形式相乘的结果">¶</a>返回两个数以32位带符号整数形式相乘的结果</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Math.imul(数值1,数值2)  相当于 数值1*数值2 | 0  即结果超过32位返回0  没有超过返回数值1*数值2</span></span><br><span class="line"><span class="comment">// 返回值也是一个32位带符号的整数</span></span><br><span class="line"><span class="built_in">Math</span>.imul(<span class="number">2</span>, <span class="number">4</span>)   <span class="comment">// 8</span></span><br><span class="line"><span class="built_in">Math</span>.imul(<span class="number">-1</span>, <span class="number">8</span>)  <span class="comment">// -8</span></span><br><span class="line"><span class="built_in">Math</span>.imul(<span class="number">-2</span>, <span class="number">-2</span>) <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+<h4 id="返回一个数的单精度浮点数的形式"><a class="header-anchor" href="#返回一个数的单精度浮点数的形式">¶</a>返回一个数的单精度浮点数的形式</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Math.fround(数值)</span></span><br><span class="line"><span class="built_in">Math</span>.fround(<span class="number">0</span>)     <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">Math</span>.fround(<span class="number">1</span>)     <span class="comment">// 1</span></span><br><span class="line"><span class="built_in">Math</span>.fround(<span class="number">1.337</span>) <span class="comment">// 1.3370000123977661</span></span><br><span class="line"><span class="built_in">Math</span>.fround(<span class="number">1.5</span>)   <span class="comment">// 1.5</span></span><br><span class="line"><span class="built_in">Math</span>.fround(<span class="literal">NaN</span>)   <span class="comment">// NaN</span></span><br><span class="line"><span class="comment">// 整数返回本身  无法用64个二进制位精确表示的小数  该方法会返回最接近这个小数的单精度浮点数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现函数</span></span><br><span class="line"><span class="built_in">Math</span>.fround = <span class="built_in">Math</span>.fround || <span class="function"><span class="keyword">function</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Float32Array</span>([x])[<span class="number">0</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="返回所有参数的平方和的平方根"><a class="header-anchor" href="#返回所有参数的平方和的平方根">¶</a>返回所有参数的平方和的平方根</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 如果不是数值 会先转为数值 只要有一个参数无法转为数值 就会返回NaN</span></span><br><span class="line"><span class="built_in">Math</span>.hypot(<span class="number">3</span>, <span class="number">4</span>);        <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">Math</span>.hypot(<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>);     <span class="comment">// 7.0710678118654755</span></span><br><span class="line"><span class="built_in">Math</span>.hypot();            <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">Math</span>.hypot(<span class="literal">NaN</span>);         <span class="comment">// NaN</span></span><br><span class="line"><span class="built_in">Math</span>.hypot(<span class="number">3</span>, <span class="number">4</span>, <span class="string">'foo'</span>); <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/es6/">es6</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2020/07/29/5%E3%80%81%E6%95%B0%E5%80%BC%E7%9A%84%E6%89%A9%E5%B1%95/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="as_sitesearch" value="yoursite.com">
+  </form>
+</div>
+
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>3</small></li>
+  
+    <li><a href="/tags/es6/">es6</a><small>13</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2020 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
