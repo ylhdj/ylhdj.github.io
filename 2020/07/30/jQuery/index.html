@@ -1,0 +1,217 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>jQuery | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="[TOC]
+jQuery
+12345678910111213// 获取元素  $(&#39;元素&#39;)$(&#39;.class&#39;)$(&#39;#id&#39;)$(&#39;标签&#39;)$(&#39;*&#39;) // 全选// 准备函数$(document).ready(function()&amp;#123;&amp;#125;)// 若$符号使用权冲突 需要释放j">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="jQuery"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-jQuery" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2020-07-30T14:15:56.000Z"><a href="/2020/07/30/jQuery/">2020-07-30</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">jQuery</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h1>jQuery</h1>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取元素  $('元素')</span></span><br><span class="line">$(<span class="string">'.class'</span>)</span><br><span class="line">$(<span class="string">'#id'</span>)</span><br><span class="line">$(<span class="string">'标签'</span>)</span><br><span class="line">$(<span class="string">'*'</span>) <span class="comment">// 全选</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 准备函数</span></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 若$符号使用权冲突 需要释放jQuery对$的使用权</span></span><br><span class="line"><span class="keyword">var</span> 变量=jQuery.noConflict()  <span class="comment">// 释放对$的使用权 并赋给另一个变量  该变量代替了$</span></span><br></pre></td></tr></table></figure>
+<h2 id="选择器与样式"><a class="header-anchor" href="#选择器与样式">¶</a>选择器与样式</h2>
+<h3 id="层级选择器"><a class="header-anchor" href="#层级选择器">¶</a>层级选择器</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 相邻兄弟选择器和一般兄弟选择器所选择到的元素，必须在同一个父元素下</span></span><br><span class="line">$(<span class="string">'parent &gt; child'</span>) <span class="comment">// 子选择器 选定所有指定parent元素的child子元素</span></span><br><span class="line">$(<span class="string">'ancestor descendant'</span>) <span class="comment">// 后代选择器  选择给定祖先元素的所有后代元素</span></span><br><span class="line">$(<span class="string">'prev + next'</span>) <span class="comment">// 相邻兄弟选择器 选择所有在prev后的第一个next元素</span></span><br><span class="line">$(<span class="string">'prev ~ siblings'</span>) <span class="comment">// 选择prev元素后所有siblings兄弟元素</span></span><br></pre></td></tr></table></figure>
+<h3 id="筛选选择器"><a class="header-anchor" href="#筛选选择器">¶</a>筛选选择器</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'selector:first'</span>) <span class="comment">// 匹配第一个元素</span></span><br><span class="line">$(<span class="string">'selector:last'</span>) <span class="comment">// 匹配最后一个元素</span></span><br><span class="line">$(<span class="string">'selector1:not(selector2)'</span>) <span class="comment">// 选择所有selector1中非selector2的元素</span></span><br><span class="line">$(<span class="string">'selector:eq(index)'</span>) <span class="comment">// 在集合中选择索引值为index的元素</span></span><br><span class="line">$(<span class="string">'selector:gt(index)'</span>) <span class="comment">// 选择集合中所有索引大于给定索引值的元素</span></span><br><span class="line">$(<span class="string">'selector:lt(index)'</span>) <span class="comment">// 小于</span></span><br><span class="line">$(<span class="string">'selector:even'</span>) <span class="comment">// 选择索引值为偶数的选择（从0开始计算）</span></span><br><span class="line">$(<span class="string">'selector:odd'</span>) <span class="comment">// 奇数</span></span><br><span class="line">$(<span class="string">':header'</span>) <span class="comment">// 选择所有标题标签</span></span><br><span class="line">$(<span class="string">':lang(language)'</span>) <span class="comment">// 选择所有标题元素（h1、h2等）</span></span><br><span class="line">$(<span class="string">':root'</span>) <span class="comment">// 选择该文档的根元素</span></span><br><span class="line">$(<span class="string">':animated'</span>) <span class="comment">// 选择所有正在执行动画效果的元素</span></span><br></pre></td></tr></table></figure>
+<h3 id="内容选择器"><a class="header-anchor" href="#内容选择器">¶</a>内容选择器</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'selector:contains(text)'</span>) <span class="comment">// 选择所有包含指定文本的元素</span></span><br><span class="line">$(<span class="string">'selector:parent'</span>) <span class="comment">// 选择所有含有子元素或文本的元素</span></span><br><span class="line">$(<span class="string">'selector:empty'</span>) <span class="comment">// 选择没有子元素的元素（包含文本节点）</span></span><br><span class="line">$(<span class="string">'selector:has(selector)'</span>) <span class="comment">// 选择元素中至少包含指定选择器的元素</span></span><br></pre></td></tr></table></figure>
+<h3 id="可见性选择器"><a class="header-anchor" href="#可见性选择器">¶</a>可见性选择器</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'selector:visible'</span>) <span class="comment">// 选择所有显示的元素</span></span><br><span class="line">$(<span class="string">'selector:hidden'</span>) <span class="comment">// 选择所有隐藏的元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 隐藏元素的方法</span></span><br><span class="line"><span class="comment">// （1）css的display的值是none</span></span><br><span class="line"><span class="comment">// （2）type='hidden' 的表单元素</span></span><br><span class="line"><span class="comment">// （3）宽度和高度都是0</span></span><br><span class="line"><span class="comment">// （4）一个元素的祖先元素是隐藏的</span></span><br><span class="line"><span class="comment">// （5）css visiblity的值是hidden</span></span><br><span class="line"><span class="comment">// （6）css的opacity的值是0</span></span><br></pre></td></tr></table></figure>
+<h3 id="属性筛选器"><a class="header-anchor" href="#属性筛选器">¶</a>属性筛选器</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'selector[attribute|='</span>value<span class="string">']'</span>) <span class="comment">// 该属性的属性值前缀为value或值为value</span></span><br><span class="line">$(<span class="string">'selector[attribute*='</span>value<span class="string">']'</span>) <span class="comment">// 属性值包含value</span></span><br><span class="line">$(<span class="string">'selector[attribute~='</span>value<span class="string">']'</span>) <span class="comment">// 属性用空格分隔的属性值中其中一个为value</span></span><br><span class="line">$(<span class="string">'selector[attribute='</span>value<span class="string">']'</span>) <span class="comment">// 等于value</span></span><br><span class="line">$(<span class="string">'selector[attribute!='</span>value<span class="string">']'</span>) <span class="comment">// 不存在指定的属性或属性值不等于value</span></span><br><span class="line">$(<span class="string">'selector[attribute^='</span>value<span class="string">']'</span>) <span class="comment">// 前缀为value 即value-</span></span><br><span class="line">$(<span class="string">'selector[attribute$='</span>value<span class="string">']'</span>) <span class="comment">// 后缀</span></span><br><span class="line">$(<span class="string">'selector[attribute]'</span>) <span class="comment">// 具有给定属性</span></span><br><span class="line">$(<span class="string">'selector[选择器1][选择器2]...'</span>) <span class="comment">// 同时满足多个属性筛选器</span></span><br></pre></td></tr></table></figure>
+<h2 id="DOM"><a class="header-anchor" href="#DOM">¶</a>DOM</h2>
+<h3 id="创建元素"><a class="header-anchor" href="#创建元素">¶</a>创建元素</h3>
+<ul>
+<li><code>$('&lt;标签 类名或id&gt;内容&lt;/标签&gt;')</code></li>
+</ul>
+<h3 id="插入元素"><a class="header-anchor" href="#插入元素">¶</a>插入元素</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在父元素的最后插入子元素</span></span><br><span class="line">$(<span class="string">'父元素'</span>).append(<span class="string">'子元素结构'</span>)</span><br><span class="line">$(<span class="string">'子元素结构'</span>).appendTo($(<span class="string">'父元素'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在父元素的最前面插入子元素</span></span><br><span class="line">$(<span class="string">'父元素'</span>).prepend(<span class="string">'子元素结构'</span>)</span><br><span class="line">$(<span class="string">'子元素结构'</span>).prependTo($(<span class="string">'父元素'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入兄弟元素</span></span><br><span class="line">$(<span class="string">'元素'</span>).before($(<span class="string">'新兄弟元素'</span>)) <span class="comment">// 在兄弟元素前</span></span><br><span class="line">$(<span class="string">'新兄弟元素'</span>).inserBefore($(<span class="string">'元素'</span>))</span><br><span class="line">$(<span class="string">'元素'</span>).after($(<span class="string">'新兄弟元素'</span>)) <span class="comment">// 在兄弟元素后</span></span><br><span class="line">$(<span class="string">'新兄弟元素'</span>).inserAfter($(<span class="string">'元素'</span>))</span><br></pre></td></tr></table></figure>
+<h3 id="删除元素"><a class="header-anchor" href="#删除元素">¶</a>删除元素</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 删除所有</span></span><br><span class="line">$(<span class="string">'元素'</span>).empty()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除元素内的所有内容（不包括元素本身）</span></span><br><span class="line">$(<span class="string">'元素'</span>).remove()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除元素 但保留数据（可以以创建节点的方式复原）</span></span><br><span class="line">$(<span class="string">'元素'</span>).detach()</span><br></pre></td></tr></table></figure>
+<h3 id="节点复制与替换"><a class="header-anchor" href="#节点复制与替换">¶</a>节点复制与替换</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'元素'</span>).clone() <span class="comment">// 可传递true 复制绑定的事件 不传则复制元素   返回元素</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'被替换元素'</span>).replaceWith( 新的html内容 )  <span class="comment">// 用提供的内容替换集合中所有匹配的元素并且返回被删除元素的集合</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'被替换元素'</span>).replaceWith(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;)</span><br><span class="line"></span><br><span class="line">$(<span class="string">'html内容'</span>).replaceAll(被替换元素) <span class="comment">// 用集合的匹配元素替换每个目标元素</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'被包裹元素'</span>).wrap(html内容) <span class="comment">// 在集合中匹配的每个元素周围包裹一个HTML结构</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'被包裹元素'</span>).wrap(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;) <span class="comment">// 一个回调函数，返回用于包裹匹配元素的 HTML 内容或 jQuery 对象</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'子元素'</span>).wrap(父元素) <span class="comment">// 给每一个子元素增加一个父元素</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'元素'</span>).unwrap() <span class="comment">// 将匹配元素集合的父级元素删除，保留自身  在原来的位置</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'元素'</span>).wrapAll(html内容) <span class="comment">// 给集合中匹配的元素增加一个外面包裹HTML结构    包裹所有子元素</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'元素'</span>).wrapAll(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;) <span class="comment">// 一个回调函数，返回用于包裹匹配元素的 HTML 内容或 jQuery 对象  与wrap一样</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'元素'</span>).wrapInner(wrappingElement) <span class="comment">// 给集合中匹配的元素的内部，增加包裹的HTML结构   给元素内的子元素加上父元素</span></span><br></pre></td></tr></table></figure>
+<h3 id="遍历"><a class="header-anchor" href="#遍历">¶</a>遍历</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$(‘父元素’).children() <span class="comment">// 获取该父元素的所有子元素</span></span><br><span class="line"></span><br><span class="line">$(‘父元素’).children(选择器)</span><br><span class="line"></span><br><span class="line">$(<span class="string">"祖先元素"</span>).find(<span class="string">"后代元素"</span>) <span class="comment">// 获取祖先元素的后代元素</span></span><br><span class="line"></span><br><span class="line">$(‘子元素’).parent() <span class="comment">// 获取子元素的父元素</span></span><br><span class="line"></span><br><span class="line">$(‘子元素’).parent(选择器)</span><br><span class="line"></span><br><span class="line">$(‘后代元素’).parents() <span class="comment">// 获取后代元素的祖先元素合集</span></span><br><span class="line"></span><br><span class="line">$(‘后代元素’).parents(选择器)</span><br><span class="line"></span><br><span class="line">$(‘后代元素’).closest() <span class="comment">// 获取后代元素的一个祖先元素</span></span><br><span class="line"></span><br><span class="line">$(‘后代元素’).closest(选择器)</span><br><span class="line"></span><br><span class="line">$(‘元素’).next(选择器) <span class="comment">// 寻找元素后的兄弟元素</span></span><br><span class="line"></span><br><span class="line">$(‘元素’).prev(选择器) <span class="comment">// 寻找元素前的兄弟元素</span></span><br><span class="line"></span><br><span class="line">$(‘元素’).prev(选择器) <span class="comment">// 寻找元素的兄弟元素  两者均可为合集</span></span><br><span class="line"></span><br><span class="line">$(‘元素<span class="number">1</span>’).add(元素<span class="number">2</span>)  <span class="comment">// 将元素1元素2组成一个合集</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'选择器'</span>).each(,<span class="function"><span class="keyword">function</span>(<span class="params">index,ele</span>)</span>&#123;&#125;)  <span class="comment">// 选择器的index位置  选择到的元素 返回false可以结束循环  遍历选中的元素</span></span><br><span class="line"></span><br><span class="line">.map(,<span class="function"><span class="keyword">function</span>(<span class="params">value,index</span>)</span>&#123;&#125;) <span class="comment">// 与each类似</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// map与each区别  each会返回遍历的对象  map可在函数中定义返回值</span></span><br></pre></td></tr></table></figure>
+<h2 id="动画"><a class="header-anchor" href="#动画">¶</a>动画</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 隐藏显示</span></span><br><span class="line">$(<span class="string">'元素'</span>).hide()  <span class="comment">// 直接隐藏</span></span><br><span class="line">$(<span class="string">'元素'</span>).hide(&#123;<span class="attr">duration</span>:值,<span class="attr">complete</span>:&#125;) <span class="comment">// duration值为执行动画的时间  complete为动画结束后的动作</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// show()用法同hide</span></span><br><span class="line">              </span><br><span class="line"><span class="comment">// 如果css样式中有 !important 则方法不起作用需要重写样式   两种方式可叠加使用</span></span><br><span class="line">              </span><br><span class="line"><span class="comment">// 切换</span></span><br><span class="line">$(<span class="string">'元素'</span>).toggle()  <span class="comment">// 切换隐藏显示状态</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'元素'</span>).toggle(&#123;<span class="attr">duration</span>:值,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;&#125;)</span><br><span class="line"></span><br><span class="line">$(<span class="string">'元素'</span>).toggle(参数) <span class="comment">// 参数为hide或show 指定样式</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 下拉上卷</span></span><br><span class="line"><span class="comment">// 下拉 先隐藏</span></span><br><span class="line">$(<span class="string">'元素'</span>).slideDown(值,回调函数)  执行动画的时间  回调函数会在动画执行完触发上卷动画  </span><br><span class="line"><span class="comment">// 上卷 先显示</span></span><br><span class="line">$(<span class="string">'元素'</span>).slideUp(值,回调函数) 可在参数中间添加缓动函数</span><br><span class="line"><span class="comment">// 下拉上卷切换</span></span><br><span class="line">$(<span class="string">'元素'</span>).slideToggle(值,回调函数)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 淡入淡出</span></span><br><span class="line"><span class="comment">// 淡出动画  opacity值0-1</span></span><br><span class="line">$(<span class="string">'元素'</span>).fadeOut(值,回调函数)</span><br><span class="line"><span class="comment">// 淡入动画</span></span><br><span class="line">$(<span class="string">'元素'</span>).fadeIn(值,回调函数)</span><br><span class="line"><span class="comment">// 淡入淡出切换</span></span><br><span class="line">$(<span class="string">'元素'</span>).fadeToggle(值,回调函数)</span><br><span class="line"><span class="comment">// 淡入  修改opacity值 可自定义</span></span><br><span class="line">$(<span class="string">'元素'</span>).fadeTo(值,opacity值,回调函数)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 动画$('元素').animate(&#123;样式:值,...&#125;,时间,缓动函数,回调函数)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// border、margin、padding、width、height、font、left、top、right、bottom、wordSpacing等可以产生动画效果的属性</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'元素'</span>).stop(); <span class="comment">// 停止当前动画，点击在暂停处继续开始 只会停止第一个动画，第二个第三个继续</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'元素'</span>).stop(<span class="literal">true</span>); <span class="comment">// 如果同一元素调用多个动画方法，尚未被执行的动画被放置在元素的效果队列中。这些动画不会开始，直到第一个完成。当调用.stop()的时候，队列中的下一个动画立即开始。如果clearQueue参数提供true值,那么在队列中的动画其余被删除并永远不会运行  停止第一个、第二个和第三个动画</span></span><br><span class="line"></span><br><span class="line">$(<span class="string">'元素'</span>).stop(<span class="literal">true</span>,<span class="literal">true</span>); <span class="comment">// 当前动画将停止，但该元素上的 CSS 属性会被立刻修改成动画的目标值  停止动画，直接跳到第一个动画的最终状态​​</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/jQuery/">jQuery</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2020/07/30/jQuery/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="as_sitesearch" value="yoursite.com">
+  </form>
+</div>
+
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>3</small></li>
+  
+    <li><a href="/tags/es6/">es6</a><small>15</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2020 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

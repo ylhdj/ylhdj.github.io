@@ -1,0 +1,331 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>8、对象的扩展 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="[TOC]
+¶对象扩展
+¶属性的简洁表示法
+
+属性简写   用作函数的返回值
+
+123456var foo = &#39;bar&#39;;var baz = &amp;#123;foo&amp;#125;;baz // &amp;#123;foo: &#34;bar&#34;&amp;#125;// 等同于var baz = &amp;#123;foo: foo&amp;#1">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="8、对象的扩展"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-8、对象的扩展" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2020-07-30T12:56:10.000Z"><a href="/2020/07/30/8、对象的扩展/">2020-07-30</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">8、对象的扩展</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h2 id="对象扩展"><a class="header-anchor" href="#对象扩展">¶</a>对象扩展</h2>
+<h3 id="属性的简洁表示法"><a class="header-anchor" href="#属性的简洁表示法">¶</a>属性的简洁表示法</h3>
+<ul>
+<li>属性简写   用作函数的返回值</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = <span class="string">'bar'</span>;</span><br><span class="line"><span class="keyword">var</span> baz = &#123;foo&#125;;</span><br><span class="line">baz <span class="comment">// &#123;foo: "bar"&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">var</span> baz = &#123;<span class="attr">foo</span>: foo&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法简写   简介写法的属性名总是字符串</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  method() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello!"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> o = &#123;</span><br><span class="line">  <span class="string">'method'</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"Hello!"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="属性名表达式"><a class="header-anchor" href="#属性名表达式">¶</a>属性名表达式</h3>
+<ul>
+<li>es5的写法</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法一</span></span><br><span class="line">obj.foo = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方法二</span></span><br><span class="line">obj[<span class="string">'a'</span> + <span class="string">'bc'</span>] = <span class="number">123</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 大括号形式   不能使用表达式给属性赋值</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  foo: <span class="literal">true</span>,</span><br><span class="line">  abc: <span class="number">123</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>es6     如果属性名表达式是一个对象  会将对象转为字符串<code>[object Object]</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> propKey = <span class="string">'foo'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  [propKey]: <span class="literal">true</span>,</span><br><span class="line">  [<span class="string">'a'</span> + <span class="string">'bc'</span>]: <span class="number">123</span>,</span><br><span class="line">  [<span class="string">'h'</span> + <span class="string">'ello'</span>]() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'hi'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.hello()  <span class="comment">// hi</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 属性名表达式与简介表示法不能同时使用</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="string">'bar'</span>;</span><br><span class="line"><span class="keyword">var</span> bar = <span class="string">'abc'</span>;</span><br><span class="line"><span class="keyword">var</span> baz = &#123; [foo] &#125;;  <span class="comment">// 报错</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="方法的name属性"><a class="header-anchor" href="#方法的name属性">¶</a>方法的name属性</h3>
+<ul>
+<li>与函数的name属性类似</li>
+<li>如果使用了取值函数  会在方法名前加上<code>get</code></li>
+<li>如果使用了存值函数  会在方法名前加上<code>set</code></li>
+<li>如果对象的方法是一个<code>symbol</code>值  会返回这个<code>symbol</code>的描述</li>
+</ul>
+<h3 id="Object的方法"><a class="header-anchor" href="#Object的方法">¶</a>Object的方法</h3>
+<h4 id="比较两个值是否严格相等"><a class="header-anchor" href="#比较两个值是否严格相等">¶</a>比较两个值是否严格相等</h4>
+<ul>
+<li>
+<p><code>Object.is(值1,值2)</code></p>
+</li>
+<li>
+<p>不同之处  <code>+0</code> 不等于 <code>-0</code>    <code>NaN</code>等于自身</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实现</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(<span class="built_in">Object</span>, <span class="string">'is'</span>, &#123;</span><br><span class="line">  value: <span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (x === y) &#123;</span><br><span class="line">      <span class="comment">// 针对+0 不等于 -0的情况</span></span><br><span class="line">      <span class="keyword">return</span> x !== <span class="number">0</span> || <span class="number">1</span> / x === <span class="number">1</span> / y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 针对NaN的情况</span></span><br><span class="line">    <span class="keyword">return</span> x !== x &amp;&amp; y !== y;</span><br><span class="line">  &#125;,</span><br><span class="line">  configurable: <span class="literal">true</span>,</span><br><span class="line">  enumerable: <span class="literal">false</span>,</span><br><span class="line">  writable: <span class="literal">true</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="合并对象"><a class="header-anchor" href="#合并对象">¶</a>合并对象</h4>
+<ul>
+<li>
+<p><code>Object.assign(目标对象,源对象1,源对象2)</code>   返回复制后的目标对象</p>
+</li>
+<li>
+<p>将源对象的所有可枚举属性复制到目标对象上</p>
+</li>
+<li>
+<p>如果有同名属性后面的属性会覆盖掉前面的属性</p>
+</li>
+<li>
+<p>如果只有一个参数  会直接返回该参数</p>
+</li>
+<li>
+<p>目标对象  如果参数不是对象  会转换为对象再返回(<code>undefined</code>和<code>null</code>无法转为对象  会报错)</p>
+</li>
+<li>
+<p>源对象  如果不是对象  会转换为对象  转换不了就跳过(不会报错)</p>
+</li>
+<li>
+<p>该方法实行浅拷贝  如果源对象的某个属性的值是对象  那么目标对象拷贝得到的是这个对象的引用</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> target = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> source1 = &#123; <span class="attr">b</span>: <span class="number">2</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> source2 = &#123; <span class="attr">c</span>: <span class="number">3</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.assign(target, source1, source2);</span><br><span class="line">target <span class="comment">// &#123;a:1, b:2, c:3&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="属性的可枚举性"><a class="header-anchor" href="#属性的可枚举性">¶</a>属性的可枚举性</h4>
+<ul>
+<li>如果可枚举性为false  某些操作会忽略当前属性</li>
+<li><code>for in循环</code>  <code>Object.keys()</code>  <code>JSON.stringify()</code>  <code>Object.assign</code>  会忽略不可枚举的属性</li>
+<li>所有class的原型方法都是不可枚举的</li>
+</ul>
+<h4 id="属性的遍历"><a class="header-anchor" href="#属性的遍历">¶</a>属性的遍历</h4>
+<ol>
+<li><code>for  in循环</code>  遍历对象自身的和继承的可枚举属性(不包含<code>symbol</code>)</li>
+<li><code>Object.keys(obj)</code>  返回一个数组  包括对象自身的(不包含继承的)所有可枚举属性(不包含<code>symbol</code>)</li>
+<li><code>Object.getOwnPropertyNames(obj)</code>  返回一个数组  包含对象自身的所有属性（不含Symbol属性，但是包括不可枚举属性）</li>
+<li><code>Object.getOwnPropertySymbols</code>返回一个数组，包含对象自身的所有Symbol属性</li>
+<li><code>Reflect.ownKeys</code>返回一个数组，包含对象自身的所有属性，不管是属性名是Symbol或字符串，也不管是否可枚举</li>
+</ol>
+<ul>
+<li>遍历遵循的次序规则
+<ul>
+<li>首先遍历所有属性名为数值的属性，按照数字排序</li>
+<li>其次遍历所有属性名为字符串的属性，按照生成时间排序</li>
+<li>最后遍历所有属性名为Symbol值的属性，按照生成时间排序</li>
+</ul>
+</li>
+</ul>
+<h4 id="proto-属性"><a class="header-anchor" href="#proto-属性">¶</a><code>__proto__属性</code></h4>
+<ul>
+<li>
+<p><code>对象.__proto__</code>  用于读取或设置当前对象的<code>prototype</code>属性</p>
+</li>
+<li>
+<p>不建议使用</p>
+</li>
+<li>
+<p>建议使用<code>Object.setPrototypeOf()</code>（写操作）、<code>Object.getPrototypeOf()</code>（读操作）、<code>Object.create()</code>（生成操作）</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// es6的写法</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">  method: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; ... &#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.__proto__ = someOtherObj;</span><br><span class="line"><span class="built_in">console</span>.log(obj.__proto__) <span class="comment">// someOtherObj</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// es5的写法</span></span><br><span class="line"><span class="keyword">var</span> obj = <span class="built_in">Object</span>.create(someOtherObj);</span><br><span class="line">obj.method = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; ... &#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 具体实现</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(<span class="built_in">Object</span>.prototype, <span class="string">'__proto__'</span>, &#123;</span><br><span class="line">  <span class="keyword">get</span>() &#123;</span><br><span class="line">    <span class="keyword">let</span> _thisObj = <span class="built_in">Object</span>(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.getPrototypeOf(_thisObj);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="keyword">set</span>(proto) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> === <span class="literal">undefined</span> || <span class="keyword">this</span> === <span class="literal">null</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!isObject(<span class="keyword">this</span>)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!isObject(proto)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> status = <span class="built_in">Reflect</span>.setPrototypeOf(<span class="keyword">this</span>, proto);</span><br><span class="line">    <span class="keyword">if</span> (!status) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObject</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>(value) === value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="设置一个对象的prototype对象"><a class="header-anchor" href="#设置一个对象的prototype对象">¶</a>设置一个对象的<code>prototype</code>对象</h4>
+<ul>
+<li><code>Object.setPrototypeOf(对象,原型对象)</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 该方法相当于</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params">obj, proto</span>) </span>&#123;</span><br><span class="line">  obj.__proto__ = proto;</span><br><span class="line">  <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 例子</span></span><br><span class="line"><span class="keyword">let</span> proto = &#123;&#125;;</span><br><span class="line"><span class="keyword">let</span> obj = &#123; <span class="attr">x</span>: <span class="number">10</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(obj, proto);</span><br><span class="line"></span><br><span class="line">proto.y = <span class="number">20</span>;</span><br><span class="line">proto.z = <span class="number">40</span>;</span><br><span class="line"></span><br><span class="line">obj.x <span class="comment">// 10</span></span><br><span class="line">obj.y <span class="comment">// 20</span></span><br><span class="line">obj.z <span class="comment">// 40</span></span><br></pre></td></tr></table></figure>
+<h4 id="读取对象的prototype对象"><a class="header-anchor" href="#读取对象的prototype对象">¶</a>读取对象的<code>prototype</code>对象</h4>
+<ul>
+<li><code>Object.getPrototypeOf(对象)</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Rectangle</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> rec = <span class="keyword">new</span> Rectangle();</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(rec) === Rectangle.prototype</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.setPrototypeOf(rec, <span class="built_in">Object</span>.prototype);</span><br><span class="line"><span class="built_in">Object</span>.getPrototypeOf(rec) === Rectangle.prototype</span><br><span class="line"><span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h4 id="创建一个新对象"><a class="header-anchor" href="#创建一个新对象">¶</a>创建一个新对象</h4>
+<ul>
+<li><code>Object.create(原型对象,{属性1:{定义数据属性或访问器属性},属性2:{}})</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">o = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.prototype, &#123;</span><br><span class="line">  <span class="comment">// foo会成为所创建对象的数据属性</span></span><br><span class="line">  foo: &#123;</span><br><span class="line">    writable:<span class="literal">true</span>,</span><br><span class="line">    configurable:<span class="literal">true</span>,</span><br><span class="line">    value: <span class="string">"hello"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// bar会成为所创建对象的访问器属性</span></span><br><span class="line">  bar: &#123;</span><br><span class="line">    configurable: <span class="literal">false</span>,</span><br><span class="line">    <span class="keyword">get</span>: function() &#123; <span class="keyword">return</span> <span class="number">10</span> &#125;,</span><br><span class="line">    <span class="keyword">set</span>: function(value) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">"Setting `o.bar` to"</span>, value);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="遍历键值对"><a class="header-anchor" href="#遍历键值对">¶</a>遍历键值对</h4>
+<ul>
+<li>
+<p><code>Object.values(obj)</code>  返回值数组</p>
+</li>
+<li>
+<p><code>Object.entries(obj)</code>  返回一个包含多个数组(第一个元素键名  第二个元素值)的数组</p>
+</li>
+<li>
+<p><code>Object.keys(obj)</code>  返回键名数组</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">foo</span>: <span class="string">"bar"</span>, <span class="attr">baz</span>: <span class="number">42</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.values(obj)</span><br><span class="line"><span class="comment">// ["bar", 42]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">foo</span>: <span class="string">'bar'</span>, <span class="attr">baz</span>: <span class="number">42</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.entries(obj)</span><br><span class="line"><span class="comment">// [ ["foo", "bar"], ["baz", 42] ]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">foo</span>: <span class="string">"bar"</span>, <span class="attr">baz</span>: <span class="number">42</span> &#125;;</span><br><span class="line"><span class="built_in">Object</span>.keys(obj)</span><br><span class="line"><span class="comment">// ["foo", "baz"]</span></span><br></pre></td></tr></table></figure>
+<h4 id="获取对象属性描述对象"><a class="header-anchor" href="#获取对象属性描述对象">¶</a>获取对象属性描述对象</h4>
+<ul>
+<li>es5  <code>Object.getOwnPrototypeDescripetor(obj,'属性')</code>  返回对象属性的描述对象</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123; <span class="attr">p</span>: <span class="string">'a'</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptor(obj, <span class="string">'p'</span>)</span><br><span class="line"><span class="comment">// Object &#123; value: "a",</span></span><br><span class="line"><span class="comment">//   writable: true,</span></span><br><span class="line"><span class="comment">//   enumerable: true,</span></span><br><span class="line"><span class="comment">//   configurable: true</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>es6  <code>Object.getOwnPrototypeDescriptors(obj)</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">  foo: <span class="number">123</span>,</span><br><span class="line">  <span class="keyword">get</span> bar() &#123; <span class="keyword">return</span> <span class="string">'abc'</span> &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptors(obj)</span><br><span class="line"><span class="comment">// &#123; foo:</span></span><br><span class="line"><span class="comment">//    &#123; value: 123,</span></span><br><span class="line"><span class="comment">//      writable: true,</span></span><br><span class="line"><span class="comment">//      enumerable: true,</span></span><br><span class="line"><span class="comment">//      configurable: true &#125;,</span></span><br><span class="line"><span class="comment">//   bar:</span></span><br><span class="line"><span class="comment">//    &#123; get: [Function: bar],</span></span><br><span class="line"><span class="comment">//      set: undefined,</span></span><br><span class="line"><span class="comment">//      enumerable: true,</span></span><br><span class="line"><span class="comment">//      configurable: true &#125; &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getOwnPropertyDescriptors</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> result = &#123;&#125;;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">of</span> <span class="built_in">Reflect</span>.ownKeys(obj)) &#123;</span><br><span class="line">    result[key] = <span class="built_in">Object</span>.getOwnPropertyDescriptor(obj, key);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/es6/">es6</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2020/07/30/8%E3%80%81%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%89%A9%E5%B1%95/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="as_sitesearch" value="yoursite.com">
+  </form>
+</div>
+
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>3</small></li>
+  
+    <li><a href="/tags/es6/">es6</a><small>15</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2020 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
