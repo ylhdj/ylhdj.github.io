@@ -125,9 +125,9 @@ let 变量=值
 </li>
 <li>
 <p>do{} 返回块级作用域最后执行的表达式的值 (不能使用)</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="keyword">do</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> t = f();</span><br><span class="line">  t * t + <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> x = <span class="keyword">do</span> &#123;</span><br><span class="line"><span class="keyword">let</span> t = f();</span><br><span class="line">t * t + <span class="number">1</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <h3 id="const"><a class="header-anchor" href="#const">¶</a>const</h3>
 <ul>
 <li>
@@ -178,7 +178,6 @@ let 变量=值
 <li>引入global 在所有环境中都可以通过global获取顶层对象</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// commonJS写法</span></span><br><span class="line"><span class="keyword">var</span> global=<span class="built_in">require</span>(<span class="string">'system.global'</span>)()</span><br><span class="line"><span class="comment">// es6模块写法 </span></span><br><span class="line"><span class="keyword">import</span> getGlobal <span class="keyword">from</span> <span class="string">'system.global'</span></span><br><span class="line"><span class="keyword">const</span> global=getGlobal()</span><br></pre></td></tr></table></figure>
-
       
     </div>
     <footer>
@@ -254,7 +253,7 @@ let 变量=值
   
     <li><a href="/tags/JavaScript/">JavaScript</a><small>3</small></li>
   
-    <li><a href="/tags/es6/">es6</a><small>15</small></li>
+    <li><a href="/tags/es6/">es6</a><small>14</small></li>
   
     <li><a href="/tags/git/">git</a><small>1</small></li>
   
