@@ -1,0 +1,197 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  
+  <title>16、class类 | Hexo</title>
+  <meta name="author" content="John Doe">
+  
+  <meta name="description" content="[TOC]
+¶Class
+123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051// 在es6中类没有变量提升  必须先定义类  才能实例化对象// 在类中调用类的属性">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="16、class类"/>
+  <meta property="og:site_name" content="Hexo"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link href="/favicon.png" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Hexo</a></h1>
+  <h2><a href="/"></a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-16、class类" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2020-10-14T12:06:15.000Z"><a href="/2020/10/14/16、class类/">2020-10-14</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">16、class类</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>[TOC]</p>
+<h2 id="Class"><a class="header-anchor" href="#Class">¶</a>Class</h2>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在es6中类没有变量提升  必须先定义类  才能实例化对象</span></span><br><span class="line"><span class="comment">// 在类中调用类的属性和方法时需要加上this.属性或方法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> 类名</span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(参数)&#123;</span><br><span class="line">        <span class="comment">// 类的构造函数</span></span><br><span class="line">        <span class="comment">// constructor方法是类的构造函数  用于传递参数  返回实例对象  通过new命令生成对象实		   例时  自动调用该方法  如果没有显式定义 会自动创建该方法</span></span><br><span class="line">        <span class="comment">// 默认返回this  也可以指定返回另一个对象</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 类的方法</span></span><br><span class="line">    <span class="comment">// 可以通过给类的原型添加方法的方式来给类添加方法</span></span><br><span class="line">    方法<span class="number">1</span>(参数)&#123; <span class="comment">// 方法与方法之间不需要 ，隔开 </span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    方法<span class="number">2</span>(参数)&#123;</span><br><span class="line">        <span class="comment">// 类的所有方法都定义在类的prototype属性上</span></span><br><span class="line">        <span class="comment">// 类中定义的方法是不可枚举的</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过构造函数定义并生成新对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Point</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.x = x;</span><br><span class="line">  <span class="keyword">this</span>.y = y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Point.prototype.toString = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过class定义类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(x, y) &#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  toString() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'('</span> + <span class="keyword">this</span>.x + <span class="string">', '</span> + <span class="keyword">this</span>.y + <span class="string">')'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 均使用new来创建实例对象</span></span><br><span class="line"><span class="keyword">var</span> p = <span class="keyword">new</span> Point(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 类中通过static关键字定义的静态方法不能在类的实例上调用 而应该通过类本身调用</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> method()&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">实例.method() <span class="comment">// 报错</span></span><br><span class="line">A.method() <span class="comment">// this指代该类</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">let</span> b = <span class="keyword">new</span> B();</span><br><span class="line"></span><br><span class="line">b.constructor === B.prototype.constructor <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// class表达式</span></span><br><span class="line"><span class="comment">// 类名为 MyClass  Me只在class的内部代码可用 指代this</span></span><br><span class="line"><span class="keyword">const</span> MyClass = <span class="class"><span class="keyword">class</span> <span class="title">Me</span> </span>&#123;</span><br><span class="line">  getClassName() &#123;</span><br><span class="line">    <span class="keyword">return</span> Me.name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 立即执行的class </span></span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="class"><span class="keyword">class</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>(name) &#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  sayName() &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;(<span class="string">'张三'</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="继承"><a class="header-anchor" href="#继承">¶</a>继承</h3>
+<ul>
+<li>调用方法会向上寻找 (需要注意父类中使用this的情况)</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span></span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span></span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>()&#123;</span><br><span class="line">      <span class="comment">// constructor中的this指向的是创建的实例对象</span></span><br><span class="line">      <span class="keyword">super</span>() <span class="comment">// 调用父类的构造函数</span></span><br><span class="line">      <span class="keyword">super</span>.父类的方法() <span class="comment">// 调用父类的普通函数</span></span><br><span class="line">      <span class="comment">// 在使用super之后再使用this</span></span><br><span class="line">      a=<span class="keyword">this</span>.方法</span><br><span class="line">  &#125;</span><br><span class="line">  方法()&#123;</span><br><span class="line">      <span class="comment">// 谁调用方法 该方法中的this就指向谁</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">a() <span class="comment">// 方法中的this指向a</span></span><br><span class="line"><span class="comment">// 如果需要确保方法中的this永远指向该实例对象  可以在构造函数中使用that来保存this  然后方法中使用that(全局变量)</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/es6/">es6</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://yoursite.com/2020/10/14/16%E3%80%81class%E7%B1%BB/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="as_sitesearch" value="yoursite.com">
+  </form>
+</div>
+
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>3</small></li>
+  
+    <li><a href="/tags/es6/">es6</a><small>16</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tags/jQuery/">jQuery</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2020 John Doe
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
